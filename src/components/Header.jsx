@@ -1,5 +1,21 @@
 import React from "react";
-
+import logo from "../assets/logo.png";
+import SearchBar from "../components/Searchbar";
+import Searchbar from "../components/Searchbar";
+import UserBio from "./UserBio";
+import User from "./User";
 export default function Header() {
-  return <div></div>;
+  return (
+    <div className="flex items-center gap-5 px-4 justify-between xl:gap-x-10 bg-header-bg py-5.5">
+      {/* logo area */}
+      <div className="max-w-41.5">
+        <img src={logo} alt="logo" />
+      </div>
+      <Searchbar />
+      <div className="flex items-center gap-5">
+        <UserBio />
+        <User />
+      </div>
+    </div>
+  );
 }

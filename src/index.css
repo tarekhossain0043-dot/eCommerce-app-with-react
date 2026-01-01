@@ -1,6 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap')
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap")
 layer(base);
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -19,55 +19,60 @@ layer(base);
     border-color: var(--color-gray-200, currentcolor);
   }
 }
-:root{
-  --default-clr : #5A607F;
-  --white : #fff;
-  --black : #131523;
+:root {
+  --default-clr: #5a607f;
+  --white: #fff;
+  --black: #131523;
 }
-@theme{
-  --color-default : #5A607F;
-  --color-white : #fff;
-  --color-blue-clr : #1E5EFF;
-  --color-white-2 : #D7DBEC;
-  --color-gray-400 : #A1A7C4;
-  --color-white-3 : #D9E1EC;
-  --color-black : #131523;
-  --color-blue-2 : #1877F2;
-  --color-blue-3 : #1976D2;
-  --color-primary : #1E2753;
-  --color-secondary : #4CAF50;
-  --color-orange : #FF3D00;
-  --color-yellow : #FFC107;
+@theme {
+  --color-default: #5a607f;
+  --color-white: #fff;
+  --color-blue-clr: #1e5eff;
+  --color-white-2: #d7dbec;
+  --color-gray-400: #a1a7c4;
+  --color-white-3: #d9e1ec;
+  --color-black: #131523;
+  --color-blue-2: #1877f2;
+  --color-blue-3: #1976d2;
+  --color-primary: #1e2753;
+  --color-secondary: #4caf50;
+  --color-orange: #ff3d00;
+  --color-yellow: #ffc107;
+  --color-header-bg: #070b1d;
 }
 
-h3{
+h3 {
   font-size: 32px;
   font-weight: bold;
   line-height: 44px;
   color: var(--black);
 }
-h4{
+h4 {
   font-size: 24px;
   line-height: 36px;
   font-weight: bold;
   color: var(--black);
   text-transform: capitalize;
 }
-p{
+p {
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
   color: var(--default-clr);
 }
-h5{
+h5 {
   font-size: 16px;
   line-height: 24px;
   color: var(--black);
   text-transform: capitalize;
 }
 
-body{
+body {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

@@ -1,0 +1,99 @@
+import {
+  CircleQuestionMark,
+  Folder,
+  House,
+  List,
+  MessageSquareText,
+  Ribbon,
+  Settings,
+  SignalHigh,
+  Star,
+  Tag,
+  User,
+  Users,
+} from "lucide-react";
+
+export const sidebarData = [
+  {
+    id: 1,
+    Icon: House,
+    to: "/",
+    label: "Dashboard",
+  },
+  {
+    id: 2,
+    Icon: List,
+    to: "/orders",
+    label: "Orders",
+    orderNum: 0,
+  },
+  {
+    id: 3,
+    Icon: Tag,
+    to: "/products",
+    label: "Products",
+  },
+  {
+    id: 4,
+    Icon: Folder,
+    to: "/categories",
+    label: "Categories",
+  },
+  {
+    id: 5,
+    Icon: Users,
+    to: "/customers",
+    label: "Customers",
+  },
+  {
+    id: 6,
+    Icon: SignalHigh,
+    to: "/reports",
+    label: "Reports",
+  },
+  {
+    id: 7,
+    Icon: Star,
+    to: "/coupons",
+    label: "Coupons",
+  },
+  {
+    id: 8,
+    Icon: MessageSquareText,
+    to: "/inbox",
+    label: "Inbox",
+  },
+  {
+    id: 9,
+    label: "Other Information",
+  },
+  {
+    id: 10,
+    Icon: CircleQuestionMark,
+    to: "/knowledgeBase",
+    label: "Knowledge Base",
+  },
+  {
+    id: 11,
+    Icon: Ribbon,
+    to: "productUpdates",
+    label: "Product Updates",
+  },
+  {
+    id: 12,
+    to: "/setting",
+    label: "Settings",
+  },
+  {
+    id: 13,
+    Icon: User,
+    to: "personal-settings",
+    label: "Personal Settings",
+  },
+  {
+    id: 14,
+    Icon: Settings,
+    to: "global-settings",
+    label: "Global Settings",
+  },
+];
