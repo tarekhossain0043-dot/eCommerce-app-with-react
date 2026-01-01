@@ -19,3 +19,55 @@ layer(base);
     border-color: var(--color-gray-200, currentcolor);
   }
 }
+:root{
+  --default-clr : #5A607F;
+  --white : #fff;
+  --black : #131523;
+}
+@theme{
+  --color-default : #5A607F;
+  --color-white : #fff;
+  --color-blue-clr : #1E5EFF;
+  --color-white-2 : #D7DBEC;
+  --color-gray-400 : #A1A7C4;
+  --color-white-3 : #D9E1EC;
+  --color-black : #131523;
+  --color-blue-2 : #1877F2;
+  --color-blue-3 : #1976D2;
+  --color-primary : #1E2753;
+  --color-secondary : #4CAF50;
+  --color-orange : #FF3D00;
+  --color-yellow : #FFC107;
+}
+
+h3{
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 44px;
+  color: var(--black);
+}
+h4{
+  font-size: 24px;
+  line-height: 36px;
+  font-weight: bold;
+  color: var(--black);
+  text-transform: capitalize;
+}
+p{
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  color: var(--default-clr);
+}
+h5{
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--black);
+  text-transform: capitalize;
+}
+
+body{
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
