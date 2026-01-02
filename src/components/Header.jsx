@@ -6,7 +6,7 @@ import UserBio from "./UserBio";
 import User from "./User";
 export default function Header() {
   return (
-    <div className="flex items-center gap-5 px-4 justify-between xl:gap-x-10 bg-header-bg py-5.5">
+    <div className="flex fixed top-0 left-0 w-full items-center gap-5 px-4 justify-between xl:gap-x-10 bg-header-bg py-5.5">
       {/* logo area */}
       <div className="max-w-41.5">
         <img src={logo} alt="logo" />

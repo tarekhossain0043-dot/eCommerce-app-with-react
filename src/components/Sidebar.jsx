@@ -4,9 +4,8 @@ import { sidebarData } from "../assets/assets";
 import sidebarImg from "../assets/sidebar-img.png";
 import { Link } from "react-router-dom";
 
-export default function Sidebar() {
+export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   const [currentMenu, setCurrentMenu] = useState(sidebarData[0].label);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const handleMenu = (id) => {
     setCurrentMenu(id);
   };
@@ -24,11 +23,11 @@ export default function Sidebar() {
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [setIsCollapsed]);
   return (
     <div
       className={`${!isCollapsed ? "w-62.5" : "w-20"} flex flex-col pb-10 
-      } transition-all duration-500 ease-in-out overflow-y-scroll bg-primary h-screen p-4 border-r border-slate-100 relative`}
+      } transition-all duration-500 ease-in-out fixed top-[91px] left-0 bg-primary min-h-screen p-4 border-r border-slate-100`}
     >
       <span
         onClick={handleSidebarToggle}

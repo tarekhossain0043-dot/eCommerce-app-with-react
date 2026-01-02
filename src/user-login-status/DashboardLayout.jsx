@@ -7,12 +7,13 @@ import DashboardHeader from "../components/DashboardHeader";
 export default function DashboardLayout() {
   const [headerTitle, setHeaderTitle] = useState("Dashboard");
   const [headerBtns, setHeaderBtns] = useState(null);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   return (
-    <div className="">
+    <div className="min-h-screen h-full">
       <Header />
-      <div className="flex">
-        <Sidebar />
-        <main className="py-6.5 flex-1 px-10 py-6 h-screen">
+      <div className={`${isCollapsed ? "ml-20" : "ml-62.5"} flex`}>
+        <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+        <main className="py-6.5 px-10 py-6 flex-1 mt-22.75">
           <DashboardHeader headerTitle={headerTitle} headerBtns={headerBtns} />
           <Outlet context={{ setHeaderTitle, setHeaderBtns }} />
           {/* i think ekhane Dashboard er page gula show korbe default hisabe home page */}
