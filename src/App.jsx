@@ -12,6 +12,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { setUser } from "./features/authSlice/authSlice";
 import Order from "./components/Order";
+import Products from "./components/Products";
+import AddProduct from "./components/AddProduct";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -53,6 +55,8 @@ export default function App() {
           <Route element={<DashboardLayout />}>
             <Route path="/" element={<DashboardHome />} />
             <Route path="/orders" element={<Order />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/add-poroduct" element={<AddProduct />} />
           </Route>
         </Route>
       </Routes>
