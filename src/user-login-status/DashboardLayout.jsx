@@ -12,7 +12,7 @@ export default function DashboardLayout() {
       <Header />
       <div className="flex">
         <Sidebar />
-        <main className="py-6.5 flex-1 px-10 py-6">
+        <main className="py-6.5 flex-1 px-10 py-6 h-screen">
           <DashboardHeader headerTitle={headerTitle} headerBtns={headerBtns} />
           <Outlet context={{ setHeaderTitle, setHeaderBtns }} />
           {/* i think ekhane Dashboard er page gula show korbe default hisabe home page */}

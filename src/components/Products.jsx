@@ -8,7 +8,7 @@ export default function Products() {
   const { setHeaderTitle, setHeaderBtns } = useOutletContext();
   const navigate = useNavigate();
   useEffect(() => {
-    setHeaderTitle("Orders");
+    setHeaderTitle("Products");
     setHeaderBtns(
       <div className="flex items-center gap-3">
         <button className="text-blue-clr px-5 py-2.5 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
@@ -27,7 +27,7 @@ export default function Products() {
       setHeaderTitle("");
       setHeaderBtns(null);
     };
-  }, [setHeaderTitle, setHeaderBtns]);
+  }, [navigate, setHeaderTitle, setHeaderBtns]);
   return (
     <div className="mt-4">
       <thead className="flex items-center justify-between border-b-2 border-slate-100 py-3">
