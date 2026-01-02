@@ -1,6 +1,7 @@
 import { Search, Settings } from "lucide-react";
 import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+import OverviewCards from "../components/OverviewCards";
 
 // import DashboardHeader from "../components/DashboardHeader";
 
@@ -23,5 +24,9 @@ export default function DashboardHome() {
       setHeaderBtns(null);
     };
   }, [setHeaderTitle, setHeaderBtns]);
-  return <div className="mb-6"></div>;
+  return (
+    <div className="mb-6">
+      <OverviewCards />
+    </div>
+  );
 }
