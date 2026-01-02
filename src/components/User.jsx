@@ -29,7 +29,7 @@ export default function User() {
             openProfile
               ? "flex transform translate-y-0 transition-all duration-500 ease-in-out"
               : "hidden"
-          } top-10 flex flex-col p-4 translte-y-5 items-start gap-4 right-0 rounded-sm max-w-62.5 w-full text-slate-900 z-99999 bg-slate-100 shadow-sm shadow-sm`}
+          } top-10 flex flex-col p-4 translte-y-5 items-start gap-4 right-0 rounded-sm w-62.5 w-full text-slate-900 z-99999 bg-slate-100 shadow-sm shadow-sm`}
         >
           <Link to="/profile" className="flex items-center gap-3">
             <User2 />
