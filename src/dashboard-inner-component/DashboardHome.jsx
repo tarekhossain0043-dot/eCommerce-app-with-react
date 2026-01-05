@@ -84,11 +84,28 @@ export default function DashboardHome() {
               </div>
               <div className="flex items-center gap-1">
                 <span className="w-4 h-4 rounded-sm bg-blue-clr"></span>
-                <span className="text-default text-[14px] font-normal leading-5"></span>
+                <span className="text-default text-[14px] font-normal leading-5">
+                  May 22
+                </span>
               </div>
             </div>
           </div>
           <MainAnalytsChart />
+        </div>
+        {/* small green chart */}
+        <div className="bg-white rounded-sm shadow p-7 flex flex-col gap-6">
+          <span>Last 7 Days Sales</span>
+          <div className="flex flex-col items-start gap-1">
+            <p className="mb-0">1,259</p>
+            <span className="text-[14px] leading-5 text-default">
+              Items Sold
+            </span>
+          </div>
+          <div className="flex flex-col items-start gap-1">
+            <p className="mb-0">$12,546</p>
+            <span className="text-[14px] leading-5 text-default">Revenue</span>
+          </div>
+          <hr className="my-7.5 w-full-h-0.5 bg-[#E6E9F4]" />
         </div>
       </div>
     </div>

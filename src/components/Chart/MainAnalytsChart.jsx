@@ -12,7 +12,7 @@ import {
 const CustomTooltip = ({ active, payload }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-[#333752] text-white p-2.5 relative flex flex-col after:absolute after:-top-1 after:left-1/2 after:transform after:-translate-x-1/2 after:w-3 after:h-3 after:bg-[#333752] after:rotate-45 after:content-[''] gap-0.5 rounded-sm shadow-md text-center">
+      <div className="bg-[#333752] text-white p-2.5 relative flex flex-col after:absolute after:w-4 after:h-4 after:bg-[#333752] after:rotate-45 after:content-[''] gap-0.5 after:-top-1 after:left-1 rounded-sm shadow-md text-center">
         <span className="font-bold mb-0 text-[12px] leading-4.5">{`${payload[0].value} Orders`}</span>
         <span className="text-xs text-gray-400">May 22, 8:00AM</span>
       </div>
@@ -60,7 +60,11 @@ export default function MainAnalytsChart() {
             tickLine={false}
             tick={{ fill: "#94a3b8", fontSize: 12 }}
           />
-          <Tooltip content={<CustomTooltip />} />
+          <Tooltip
+            content={<CustomTooltip />}
+            cursor={false}
+            // position={{ y: 50 }}
+          />
           <Line
             type="monotone"
             dataKey="previous"
