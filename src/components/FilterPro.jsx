@@ -3,7 +3,7 @@ import Pagination from "./Pagination";
 
 export default function FilterPro() {
   return (
-    <div className="mt-4 max-[900px]:overflow-x-scroll max-[900px]:w-200">
+    <div className="mt-4 max-[600px]:overflow-x-scroll max-[600px]:w-100">
       <thead className="flex items-center justify-between border-b-2 border-slate-100 py-3">
         <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
           <input

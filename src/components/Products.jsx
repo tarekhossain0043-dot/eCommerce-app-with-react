@@ -30,7 +30,7 @@ export default function Products() {
   }, [navigate, setHeaderTitle, setHeaderBtns]);
   return (
     <div className="mt-4">
-      <thead className="flex items-center justify-between border-b-2 border-slate-100 py-3">
+      {/* <thead className="flex items-center justify-between border-b-2 border-slate-100 py-3">
         <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
           <input
             type="checkbox"
@@ -235,7 +235,74 @@ export default function Products() {
             </span>
           </td>
         </tr>
-      </tbody>
+      </tbody> */}
+      <div class="w-full">
+        <div class="grid md:grid-cols-12 grid-cols-1 gap-4 border-b py-3 font-semibold text-gray-600">
+          {/* <div class="pl-4">Checkbox</div> */}
+          <div className="col-span-1 lg:col-span-4">
+            <input
+              type="checkbox"
+              name="checkbox-label"
+              id="checkbox-label"
+              className="w-3 h-3 mr-4 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
+            />
+            <label htmlFor="checkbox-label">Product</label>
+          </div>
+          <div className="md:col-span-2 col-span-1">Inventory</div>
+          <div className="md:col-span-2 col-span-1">Color</div>
+          <div className="md:col-span-2 col-span-1">Price</div>
+          <div className="md:col-span-2 col-span-1">Rating</div>
+        </div>
+
+        <div class="grid md:grid-cols-12 col-span-1 gap-4 border-b py-4 items-center">
+          <div class="flex items-center gap-2 md:col-span-4 col-span-1">
+            <div>
+              <input
+                type="checkbox"
+                className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
+              />
+            </div>
+            <img src={pro_1} class="w-10 h-10 rounded" />
+            <div>
+              <p class="font-bold">Men Grey Hoodie</p>
+              <p class="text-sm text-gray-400">Hoodies</p>
+            </div>
+          </div>
+
+          <div className="md:col-span-2 col-span-1">96 In Stock</div>
+          <div className="md:col-span-2 col-span-1">Black</div>
+          <div class="bg-green-100 col-span-1 md:col-span-2 text-green-700 px-2 py-1 rounded w-fit">
+            $49.90
+          </div>
+          <div class="bg-orange-500 col-span-1 md:col-span-2 text-white px-3 py-1 rounded w-fit text-sm">
+            5.0 (32 Votes)
+          </div>
+        </div>
+        <div class="grid md:grid-cols-12 col-span-1 gap-4 border-b py-4 items-center">
+          <div class="flex items-center gap-2 md:col-span-4 col-span-1">
+            <div>
+              <input
+                type="checkbox"
+                className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
+              />
+            </div>
+            <img src={pro_1} class="w-10 h-10 rounded" />
+            <div>
+              <p class="font-bold">Men Grey Hoodie</p>
+              <p class="text-sm text-gray-400">Hoodies</p>
+            </div>
+          </div>
+
+          <div className="md:col-span-2 col-span-1">96 In Stock</div>
+          <div className="md:col-span-2 col-span-1">Black</div>
+          <div class="bg-green-100 col-span-1 md:col-span-2 text-green-700 px-2 py-1 rounded w-fit">
+            $49.90
+          </div>
+          <div class="bg-orange-500 col-span-1 md:col-span-2 text-white px-3 py-1 rounded w-fit text-sm">
+            5.0 (32 Votes)
+          </div>
+        </div>
+      </div>
       {/* pagination area */}
       <Pagination />
     </div>
