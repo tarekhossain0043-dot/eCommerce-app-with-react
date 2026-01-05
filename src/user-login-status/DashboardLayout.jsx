@@ -13,7 +13,7 @@ export default function DashboardLayout() {
       <Header />
       <div className={`${isCollapsed ? "ml-20" : "ml-62.5"} flex`}>
         <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
-        <main className="py-6.5 px-10 py-6 flex-1 mt-22.75 max-[600px]:w-130">
+        <main className="py-6.5 px-10 py-6 flex-1 mt-22.75 max-[600px]:w-130 bg-slate-100">
           <DashboardHeader headerTitle={headerTitle} headerBtns={headerBtns} />
           <Outlet context={{ setHeaderTitle, setHeaderBtns }} />
           {/* i think ekhane Dashboard er page gula show korbe default hisabe home page */}
