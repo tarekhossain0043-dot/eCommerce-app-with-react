@@ -38,9 +38,9 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
         className="absolute top-2 right-0 z-999 w-5 h-5 shadow-sm bg-blue-2 rounded-full flex items-center justify-center text-[16px] cursor-pointer"
       >
         {!isCollapsed ? (
-          <ChevronRight className="w-4 h-4 cursor-pointer text-white" />
-        ) : (
           <ChevronLeft className="w-4 h-4 cursor-pointer text-white" />
+        ) : (
+          <ChevronRight className="w-4 h-4 cursor-pointer text-white" />
         )}
       </span>
       <div className="flex-1 flex flex-col gap-1 mt-4">

@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import OverviewCards from "../components/OverviewCards";
 import MainAnalytsChart from "../components/Chart/MainAnalytsChart";
+import MyBarChart from "../components/Chart/MyBarChart";
+import Transactions from "../components/Transactions";
 
 // import DashboardHeader from "../components/DashboardHeader";
 
@@ -30,9 +32,9 @@ export default function DashboardHome() {
     <div className="mb-6">
       <OverviewCards />
       <div className="grid grid-cols-1 lg:grid-cols-[9fr_3fr] gap-7.5 mt-6">
-        <div className="bg-white shadow-sm rounded-sm p-7.5">
+        <div className="bg-white shadow-sm h-full rounded-sm p-7.5">
           <div className="flex items-center mb-6 justify-between">
-            <p>Orders Over Time</p>
+            <h4>Orders Over Time</h4>
             <select
               name="ours"
               id="ours"
@@ -67,11 +69,11 @@ export default function DashboardHome() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-10">
               <div className="flex flex-col gap-1">
-                <p className="mb-0">645</p>
+                <h4 className="mb-0">645</h4>
                 <span className="text-default">Orders on May 22</span>
               </div>
               <div className="flex flex-col gap-1">
-                <p className="mb-0">472</p>
+                <h4 className="mb-0">472</h4>
                 <span className="text-default">Orders on May 21</span>
               </div>
             </div>
@@ -94,18 +96,26 @@ export default function DashboardHome() {
         </div>
         {/* small green chart */}
         <div className="bg-white rounded-sm shadow p-7 flex flex-col gap-6">
-          <span>Last 7 Days Sales</span>
+          <h4>Last 7 Days Sales</h4>
           <div className="flex flex-col items-start gap-1">
-            <p className="mb-0">1,259</p>
+            <h4 className="mb-0">1,259</h4>
             <span className="text-[14px] leading-5 text-default">
               Items Sold
             </span>
           </div>
           <div className="flex flex-col items-start gap-1">
-            <p className="mb-0">$12,546</p>
+            <h4 className="mb-0">$12,546</h4>
             <span className="text-[14px] leading-5 text-default">Revenue</span>
           </div>
-          <hr className="my-7.5 w-full-h-0.5 bg-[#E6E9F4]" />
+          <hr className="my-7.5 w-full h-px bg-[#E6E9F4]" />
+          <MyBarChart />
+        </div>
+      </div>
+      {/* product details */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-7.5">
+        <div className="bg-white shadow-sm rounded-sm cursor-pointer p-7 border border-default transition-all duration-300 ease-in-out">
+          <h4 className="mb-5">Recent Transactions</h4>
+          <Transactions />
         </div>
       </div>
     </div>

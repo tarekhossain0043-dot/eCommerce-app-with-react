@@ -14,6 +14,8 @@ import { setUser } from "./features/authSlice/authSlice";
 import Order from "./components/Order";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
+import Modal from "./components/modal";
+import NewCategory from "./components/NewCategory";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -57,6 +59,7 @@ export default function App() {
             <Route path="/orders" element={<Order />} />
             <Route path="/products" element={<Products />} />
             <Route path="/add-poroduct" element={<AddProduct />} />
+            <Route path="/modal" element={<Modal />} />
           </Route>
         </Route>
       </Routes>
