@@ -54,6 +54,7 @@ export default function App() {
           <Route element={<DashboardLayout />}>
             <Route path="/" element={<DashboardHome />} />
             <Route path="/orders" element={<Order />} />
+            <Route Path="/category" element={<Category />} />
           </Route>
         </Route>
       </Routes>
