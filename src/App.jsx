@@ -17,6 +17,7 @@ import AddProduct from "./components/AddProduct";
 import Modal from "./components/modal";
 import NewCategory from "./components/NewCategory";
 import Modal_one from "./components/Modal_one";
+import Category from "./components/category/Category";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -60,14 +61,7 @@ export default function App() {
             <Route path="/orders" element={<Order />} />
             <Route path="/products" element={<Products />} />
             <Route path="/add-poroduct" element={<AddProduct />} />
-            <Route
-              path="/modal"
-              element={
-                <Modal>
-                  <Modal_one />
-                </Modal>
-              }
-            />
+            <Route path="/category" element={<Category />} />
           </Route>
         </Route>
       </Routes>
