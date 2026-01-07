@@ -5,6 +5,8 @@ import FileDropCompo from "./FileDropCompo";
 import CustomCheckbox from "./CustomCheckbox";
 import Modal from "./modal";
 import NewCategory from "./NewCategory";
+import Tags from "./Tags";
+import Seo_settings from "./Seo_settings";
 
 export default function AddProduct() {
   // const { setHeaderTitle, setHeaderBtns } = useOutletContext();
@@ -13,33 +15,26 @@ export default function AddProduct() {
   // const [newCategory, setNewCategory] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [onClose, setOnClose] = useState(true);
-  // useEffect(() => {
-  //   setHeaderTitle("Add Products");
-  //   setHeaderBtns(
-  //     <div className="flex items-center gap-3">
-  //       <button className="text-blue-clr px-5 py-2.5 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
-  //         Cancel
-  //       </button>
-  //       <button
-  //         onClick={() => navigate("/add-poroduct")}
-  //         className="text-white py-2.5 text-[16px] leading-6 font-normal px-5 rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
-  //       >
-  //         Save
-  //       </button>
-  //     </div>
-  //   );
-  //   return () => {
-  //     setHeaderTitle("");
-  //     setHeaderBtns(null);
-  //   };
-  // }, [navigate, setHeaderTitle, setHeaderBtns]);
+  const size = ["xs", "s", "m", "l", "xl", "xxl"];
+  const [currentSize, setCurrentSize] = useState("");
+  const [discountPrice, setDiscountPrice] = useState({
+    price: 0,
+    discount: 40,
+  });
 
-  // const options = ["XS", "S", "M", "L", "XL", "XXL"];
-  // const [selectedItems, setSelectedItems] = useState([]);
-  // const handleSelect = (id) => {
-  //   const currentItem = options.filter((item) => item === id);
-  //   setSelectedItems(currentItem);
-  // };
+  const discount_price =
+    discountPrice.price - (discountPrice.price * discountPrice.discount) / 100;
+
+  const handlePriceChange = (e) => {
+    const newPrice = parseFloat(e.target.value) || 0;
+    setDiscountPrice((prev) => ({
+      ...prev,
+      price: newPrice,
+    }));
+  };
+
+  console.log(discountPrice);
+
   return (
     <div>
       <div>
@@ -108,7 +103,9 @@ export default function AddProduct() {
                   <input
                     type="number"
                     name="price"
+                    value={discountPrice.price}
                     placeholder="Enter price"
+                    onChange={handlePriceChange}
                     id="price"
                     className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                   />
@@ -118,10 +115,12 @@ export default function AddProduct() {
                   <input
                     type="number"
                     name="discount-price"
-                    placeholder="Price at Discount"
+                    placeholder="discount price.."
+                    value={discount_price}
                     id="discount-price"
                     className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                   />
+                  {/* <span>{discount_price}</span> */}
                 </div>
               </div>
             </div>
@@ -155,43 +154,27 @@ export default function AddProduct() {
                     id="size"
                     className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                     defaultValue=""
-                    // onChange={handleSelect}
+                    onChange={(e) => setCurrentSize(e.target.value)}
                   >
-                    <option value="xs" defaultValue="xs">
-                      XS
-                    </option>
-                    <option value="s" defaultValue="s">
-                      S
-                    </option>
-                    <option value="m" defaultValue="m">
-                      M
-                    </option>
-                    <option value="l" defaultValue="l">
-                      L
-                    </option>
-                    <option value="xl" defaultValue="xl">
-                      XL
-                    </option>
-                    <option value="xxl" defaultValue="xxl">
-                      XXL
-                    </option>
+                    {size.map((size, index) => (
+                      <option key={index} value={size}>
+                        {size}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div className="flex w-full flex-col gap-1">
                   <label htmlFor="discount-price">Value</label>
                   <div className="w-full rounded-sm border flex items-center gap-2 px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default">
-                    <span className="flex items-center gap-1 bg-default rounded-sm p-1 text-white leading-1">
-                      XL{" "}
-                      <X className="w-4 h-4 cursor-pointer transition-all duration-300 ease-in-out hover:text-primary" />
-                    </span>
-                    <span className="flex items-center gap-1 bg-default rounded-sm p-1 text-white leading-1">
-                      XL{" "}
-                      <X className="w-4 h-4 cursor-pointer transition-all duration-300 ease-in-out hover:text-primary" />
-                    </span>
-                    <span className="flex items-center gap-1 bg-default rounded-sm p-1 text-white leading-1">
-                      XL{" "}
-                      <X className="w-4 h-4 cursor-pointer transition-all duration-300 ease-in-out hover:text-primary" />
-                    </span>
+                    {currentSize && (
+                      <span className="flex items-center gap-1 bg-default rounded-sm p-1 text-white leading-1">
+                        {currentSize}
+                        <X
+                          onClick={() => setCurrentSize("")}
+                          className="w-4 h-4 cursor-pointer transition-all duration-300 ease-in-out hover:text-primary"
+                        />
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -267,27 +250,22 @@ export default function AddProduct() {
               <NewCategory />
             </Modal>
           </div>
-          <div className="w-full p-7 bg-white rounded-sm text-black">
-            <span className="mb-6 font-bold block text-[16px] leading-6 capitalize text-black">
-              Tags
-            </span>
-            <div className="flex flex-col gap-1 w-full mb-5">
-              <label htmlFor="tag">Add Tags</label>
-              <input
-                type="text"
-                name="tag"
-                placeholder="Enter tag name"
-                id="tag"
-                className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
-              />
-            </div>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(120px,1fr))] gap-4">
-              <div className="py-1 px-3 rounded-sm bg-slate-50 rounded-sm capitalize">
-                t-shirt
-                <X className="w-4 h-4 cursor-pointer transition-all duration-300 ease-in-out hover:text-blue-clr hover:scale-105" />
-              </div>
-            </div>
-          </div>
+          <Tags />
+          <Seo_settings />
+        </div>
+      </div>
+      <hr className="h-px w-full bg-default my-7" />
+      <div className="flex items-center justify-end">
+        <div className="flex items-center gap-3">
+          <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
+            Cancel
+          </button>
+          <button
+            onClick={() => navigate("/add-poroduct")}
+            className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
+          >
+            Save
+          </button>
         </div>
       </div>
     </div>

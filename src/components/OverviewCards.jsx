@@ -49,7 +49,7 @@ export default function OverviewCards() {
         </div>
         <div className="py-6 rounded-sm bg-white shadow-sm flex justify-center items-center gap-10">
           <div>
-            <p className="mb-0">1,056</p>
+            <h4 className="mb-0">1,056</h4>
             <span className="text-[10px] font-normal leading-5 text-default">
               Orders
             </span>
@@ -66,8 +66,8 @@ export default function OverviewCards() {
             <span className="text-[10px] font-normal leading-5 text-default">
               Unique Visits
             </span>
-            <p className="mb-0">5.420</p>
-            <span className="text-green-clr flex items-center gap-1">
+            <h4 className="mb-0">5.420</h4>
+            <span className="text-[#F0142F] flex items-center gap-1">
               10.24% <ChevronDown className="pl-1 w-4 h-4" />
             </span>
           </div>
@@ -75,7 +75,7 @@ export default function OverviewCards() {
         </div>
         <div className="py-6 rounded-sm bg-white shadow-sm flex justify-center items-center gap-10">
           <div>
-            <p className="mb-0">$10.540</p>
+            <h4 className="mb-0">$10.540</h4>
             <span className="text-[10px] font-normal leading-5 text-default">
               Total Revenue
             </span>
@@ -92,7 +92,7 @@ export default function OverviewCards() {
         </div>
         <div className="py-6 rounded-sm bg-white shadow-sm flex justify-center items-center gap-10">
           <div>
-            <p className="mb-0">$10.540</p>
+            <h4 className="mb-0">$10.540</h4>
             <span className="text-[10px] font-normal leading-5 text-default">
               Total Revenue
             </span>
