@@ -14,9 +14,11 @@ import { setUser } from "./features/authSlice/authSlice";
 import Order from "./components/Order";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
-import Modal from "./components/modal";
-import NewCategory from "./components/NewCategory";
-import Modal_one from "./components/Modal_one";
+// import Modal from "./components/modal";
+// import NewCategory from "./components/NewCategory";
+// import Modal_one from "./components/Modal_one";
+import Category from "./components/category/Category";
+import CreateCategory from "./components/category/CreateCategory";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -60,6 +62,8 @@ export default function App() {
             <Route path="/orders" element={<Order />} />
             <Route path="/products" element={<Products />} />
             <Route path="/add-poroduct" element={<AddProduct />} />
+            <Route path="/categories" element={<Category />} />
+            <Route path="/crate-category" element={<CreateCategory />} />
           </Route>
         </Route>
       </Routes>

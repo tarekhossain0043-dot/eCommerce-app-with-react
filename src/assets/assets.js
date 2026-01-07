@@ -15,6 +15,17 @@ import {
   User,
   Users,
 } from "lucide-react";
+import img_1 from "./features/image-1.png";
+import img_2 from "./features/image-2.png";
+import img_3 from "./features/image-3.png";
+import img_4 from "./features/image-4.png";
+import img_5 from "./features/image-5.png";
+import img_6 from "./features/image-6.png";
+import img_7 from "./features/image-7.png";
+import img_8 from "./features/image-8.png";
+import img_9 from "./features/image.png";
+
+import { nanoid } from "nanoid";
 
 export const sidebarData = [
   {
@@ -149,5 +160,62 @@ export const dashboardOverviewCart = [
     overview_average: "22.45%",
     overviewStatus: ChevronUp,
     overviewIcon: DollarSign,
+  },
+];
+
+export const product_Category = [
+  {
+    id: nanoid(),
+    image: img_1,
+    title: "Men Clothes",
+    desc: "24 items",
+  },
+  {
+    id: nanoid(),
+    image: img_2,
+    title: "Women Clothes",
+    desc: "12 items",
+  },
+  {
+    id: nanoid(),
+    image: img_3,
+    title: "Accessories",
+    desc: "43 items",
+  },
+  {
+    id: nanoid(),
+    image: img_4,
+    title: "Cotton Clothes",
+    desc: "31 items",
+  },
+  {
+    id: nanoid(),
+    image: img_5,
+    title: "Summer Clothes",
+    desc: "26 items",
+  },
+  {
+    id: nanoid(),
+    image: img_6,
+    title: "Wedding Clothes",
+    desc: "52 items",
+  },
+  {
+    id: nanoid(),
+    image: img_7,
+    title: "Wedding Clothes",
+    desc: "52 items",
+  },
+  {
+    id: nanoid(),
+    image: img_8,
+    title: "Wedding Clothes",
+    desc: "52 items",
+  },
+  {
+    id: nanoid(),
+    image: img_9,
+    title: "Wedding Clothes",
+    desc: "52 items",
   },
 ];
