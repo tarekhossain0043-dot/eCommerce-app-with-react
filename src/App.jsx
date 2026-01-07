@@ -11,7 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { setUser } from "./features/authSlice/authSlice";
+import Modal from "./Modal";
 import Order from "./components/Order";
+import { ToastContainer } from "react-toastify";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -38,8 +40,11 @@ export default function App() {
       loading....
     </p>;
   }
+
   return (
     <>
+      <Modal />
+      <ToastContainer position="bottom-right" autoClose={2000} />
       <Routes>
         {/* default user can show this login page */}
         <Route path="/signin" element={<SignIn />} />
