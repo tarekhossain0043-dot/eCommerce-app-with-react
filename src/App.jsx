@@ -12,6 +12,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase";
 import { setUser } from "./features/authSlice/authSlice";
 import Order from "./components/Order";
+import Category from "./components/category/Category";
 
 export default function App() {
   const dispatch = useDispatch();
