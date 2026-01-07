@@ -5,6 +5,7 @@ import OverviewCards from "../components/OverviewCards";
 import MainAnalytsChart from "../components/Chart/MainAnalytsChart";
 import MyBarChart from "../components/Chart/MyBarChart";
 import Transactions from "../components/Transactions";
+import TopSoldProduct from "../components/TopSoldProduct";
 
 // import DashboardHeader from "../components/DashboardHeader";
 
@@ -112,10 +113,15 @@ export default function DashboardHome() {
         </div>
       </div>
       {/* product details */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-7.5">
-        <div className="bg-white shadow-sm rounded-sm cursor-pointer p-7 border border-default transition-all duration-300 ease-in-out">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-7.5 mt-6">
+        <div className="bg-white shadow-sm rounded-sm cursor-pointer p-7 border border-slate-300 transition-all duration-300 ease-in-out">
           <h4 className="mb-5">Recent Transactions</h4>
           <Transactions />
+        </div>
+        {/*top sold product details */}
+        <div className="bg-white shadow-sm rounded-sm cursor-pointer p-7 border border-slate-300 transition-all duration-300 ease-in-out">
+          <h4 className="mb-5">Top Products by Units Sold</h4>
+          <TopSoldProduct />
         </div>
       </div>
     </div>

@@ -55,7 +55,7 @@ export default function Transactions() {
           class={`${
             isPayment
               ? "bg-green-100 text-green-700"
-              : "bg-default/80 text-default/90"
+              : "bg-[#E6E9F4] text-default/90"
           } col-span-1 md:col-span-3 px-2 py-1 rounded w-fit`}
         >
           {isPayment ? "Paid" : "Pending"}
@@ -83,7 +83,7 @@ export default function Transactions() {
           class={`${
             isPayment
               ? "bg-green-100 text-green-700"
-              : "bg-default/80 text-default/90"
+              : "bg-[#E6E9F4] text-default/90"
           } col-span-1 md:col-span-3 px-2 py-1 rounded w-fit`}
         >
           {isPayment ? "Paid" : "Pending"}
