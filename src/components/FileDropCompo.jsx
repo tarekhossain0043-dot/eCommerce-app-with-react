@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
 
-const FileDropCompo = () => {
+const FileDropCompo = ({ files }) => {
   const onDrop = useCallback((acceptedFiles) => {
     console.log(acceptedFiles);
   }, []);
@@ -19,7 +19,7 @@ const FileDropCompo = () => {
               : "border-gray-300 bg-gray-50"
           }`}
       >
-        <input {...getInputProps()} />
+        <input name={files} {...getInputProps()} />
 
         <div className="border border-blue-200 text-sm capitalize font-medium text-blue-600 px-6 py-2 rounded-md bg-white shadow-sm mb-3 font-medium">
           Add File
