@@ -24,10 +24,10 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   }, [setIsCollapsed]);
   return (
     <div
-      className={`${!isCollapsed ? "w-62.5" : "w-20"} flex flex-col ${
-        window.innerHeight < 530
+      className={`${!isCollapsed ? "w-20" : "w-62.5"} flex flex-col ${
+        window.innerHeight > 530
           ? "h-screen"
-          : "min-h-full overflow-y-scroll pb-25"
+          : "min-h-full overflow-y-scroll pb-10"
       }
       transition-all duration-500 pb-25 ease-in-out fixed z-999 overflow-x-hidden top-22.75 left-0 bg-primary min-h-screen p-4 border-r border-slate-100`}
     >
@@ -47,12 +47,12 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
               {!menuItem.Icon ? null : (
                 <menuItem.Icon className="w-5 h-5 text-gray-400 group-hover:text-white" />
               )}
-              {!isCollapsed && <span className="">{menuItem.label}</span>}
+              {isCollapsed && <span className="">{menuItem.label}</span>}
             </div>
 
             {menuItem.orderNum !== undefined &&
               menuItem.orderNum !== null &&
-              !isCollapsed && (
+              isCollapsed && (
                 <span className="text-white font-bold bg-black text-[14px] flex items-center justify-center px-3 py-1 rounded-full">
                   {menuItem.orderNum}
                 </span>
@@ -62,8 +62,8 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
       </div>
       <div
         className={`${
-          isCollapsed && "hidden"
-        } p-6 rounded-md relative bg-[#1E5EFF] text-white text-[14px] font-normal leading-5`}
+          !isCollapsed && "hidden"
+        } p-6 rounded-md mt-10 relative bg-[#1E5EFF] text-white text-[14px] font-normal leading-5`}
       >
         <span className="mb-1 text-white text-[16px] block font-bold leading-6">
           Grow Business

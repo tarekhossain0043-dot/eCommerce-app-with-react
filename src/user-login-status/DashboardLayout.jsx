@@ -18,7 +18,7 @@ export default function DashboardLayout() {
         setIsCollapsed={setIsCollapsed}
         handleSidebarToggle={handleSidebarToggle}
       />
-      <div className={`${isCollapsed ? "ml-20" : "ml-62.5"} flex`}>
+      <div className={`${!isCollapsed ? "ml-20" : "ml-62.5"} flex`}>
         <Sidebar
           isCollapsed={isCollapsed}
           setIsCollapsed={setIsCollapsed}
