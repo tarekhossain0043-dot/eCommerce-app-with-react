@@ -24,10 +24,10 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   }, [setIsCollapsed]);
   return (
     <div
-      className={`${isCollapsed ? "w-62.5" : "w-20"} flex flex-col ${
+      className={`${!isCollapsed ? "w-62.5" : "w-20"} flex flex-col ${
         window.innerHeight < 530
-          ? "min-h-full overflow-y-scroll pb-25"
-          : "h-screen"
+          ? "h-screen"
+          : "min-h-full overflow-y-scroll pb-25"
       }
       transition-all duration-500 pb-25 ease-in-out fixed z-999 overflow-x-hidden top-22.75 left-0 bg-primary min-h-screen p-4 border-r border-slate-100`}
     >
