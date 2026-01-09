@@ -7,6 +7,7 @@ export default function OrderModal() {
   const [filter_category, setFilter_category] = useState("choose one");
   const [filter_orders, setFilter_orders] = useState("choose one");
   const [isOpenFilter, setIsOpenFilter] = useState(false);
+  const [isOpenOrder, setIsOpenOrder] = useState(false);
   const handleFilter = (filterItem) => {
     setFilter_category(filterItem);
   };
@@ -100,31 +101,31 @@ export default function OrderModal() {
           </div>
           <div className="flex flex-col gap-2 w-full">
             <label htmlFor="Order Status">Order Status</label>
-            {/* filter area */}
+            {/* order area */}
             <div
-              onClick={() => setIsOpenFilter((prev) => !prev)}
+              onClick={() => setIsOpenOrder((prev) => !prev)}
               className="max-w-45 relative w-full py-2 px-3 flex items-center border border-slate-100 rounded-sm cursor-pointer transition-all duration-300 ease-in-out focus:ring-1 focus:ring-blue-clr justify-between"
             >
               <span className="text-[16px] leading-6 text-default capitalize cursor-pointer transition-all duration-300 ease-in-out">
-                {filter_category}
+                {filter_orders}
               </span>
               <ChevronDown className="w-4 h-4 text-[#979797]" />
               <div
                 className={`${
-                  filter_orders ? "block" : "hidden"
+                  isOpenOrder ? "block" : "hidden"
                 } absolute top-full left-0 max-w-62.5 bg-slate-50 shadow-sm cursor-pointer transition-all duration-300 ease-in-out w-full`}
               >
                 <p
-                  onClick={() => handleOrder("Ready")}
+                  onClick={() => handleOrder("order")}
                   className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
                 >
-                  Ready
+                  Order
                 </p>
                 <p
-                  onClick={() => handleOrder("UnReady")}
+                  onClick={() => handleOrder("Unorder")}
                   className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
                 >
-                  UnReady
+                  Unorder
                 </p>
               </div>
             </div>
