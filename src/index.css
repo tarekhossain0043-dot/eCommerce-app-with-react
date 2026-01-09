@@ -32,6 +32,7 @@ layer(base);
   --color-gray-400: #a1a7c4;
   --color-white-3: #d9e1ec;
   --color-black: #131523;
+  --color-red: #f0142f;
   --color-blue-2: #1877f2;
   --color-blue-3: #1976d2;
   --color-primary: #1e2753;
@@ -39,6 +40,7 @@ layer(base);
   --color-orange: #ff3d00;
   --color-yellow: #ffc107;
   --color-header-bg: #070b1d;
+  --color-green-clr: #06a561;
 }
 
 h3 {
