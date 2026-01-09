@@ -19,6 +19,7 @@ import Customers from "./components/customers/Customers";
 import CustomerInfo from "./components/customers/CustomerInfo";
 import AddCustomers from "./components/customers/AddCustomers";
 import Coupons from "./components/coupones/Coupons";
+import OrderModal from "./components/modal/OrderModal";
 import CreateCategory from "./components/category/CreateCategory";
 import { ToastContainer } from "react-toastify";
 
@@ -70,7 +71,7 @@ export default function App() {
             <Route path="/customerInfo" element={<CustomerInfo />} />
             <Route path="/add_customers" element={<AddCustomers />} />
             <Route path="/coupons" element={<Coupons />} />
-            {/* <Route path="/order-modal" element={<OrderModel />} /> */}
+            <Route path="/order-modal" element={<OrderModal />} />
           </Route>
         </Route>
       </Routes>
