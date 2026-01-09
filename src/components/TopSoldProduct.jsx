@@ -3,7 +3,7 @@ import pro_1 from "../assets/features/image-1.png";
 export default function TopSoldProduct() {
   return (
     <div className="w-full">
-      <div className="grid md:grid-cols-12 grid-cols-1 gap-4 border-b py-3 font-semibold text-gray-600">
+      <div className="grid md:grid-cols-12 grid-cols-1 gap-4 border-b last-of-type:border-b-0 py-2.5 font-semibold text-gray-600">
         {/* <div class="pl-4">Checkbox</div> */}
         {/* <div className="col-span-1 lg:col-span-4">
           <input
@@ -25,24 +25,47 @@ export default function TopSoldProduct() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-12 col-cols-1 w-full border-b py-4 items-center">
+      <div className="grid md:grid-cols-12 col-cols-1 w-full border-b py-2.5 items-center">
         <div className="flex items-center gap-2 md:col-span-6 col-span-1">
           <img src={pro_1} className="w-10 h-10 rounded" />
           <div>
             <p className="font-bold">Men Grey Hoodie</p>
-            <p className="text-sm text-gray-400">Hoodies</p>
+            {/* <p className="text-sm text-gray-400">Hoodies</p> */}
           </div>
         </div>
 
         <div className="md:col-span-3 col-span-1 text-black">24.05.2023</div>
         <div className="md:col-span-3 col-span-1 text-black">$124.97</div>
       </div>
-      <div className="grid md:grid-cols-12 grid-cols-1 w-full border-b py-4 items-center">
+      <div className="grid md:grid-cols-12 col-cols-1 w-full border-b py-2.5 items-center">
+        <div className="flex items-center gap-2 md:col-span-6 col-span-1">
+          <img src={pro_1} className="w-10 h-10 rounded" />
+          <div>
+            <p className="font-bold">Men Grey Hoodie</p>
+            {/* <p className="text-sm text-gray-400">Hoodies</p> */}
+          </div>
+        </div>
+
+        <div className="md:col-span-3 col-span-1 text-black">24.05.2023</div>
+        <div className="md:col-span-3 col-span-1 text-black">$124.97</div>
+      </div>
+      <div className="grid md:grid-cols-12 col-cols-1 w-full border-b py-2.5 items-center">
+        <div className="flex items-center gap-2 md:col-span-6 col-span-1">
+          <img src={pro_1} className="w-10 h-10 rounded" />
+          <div>
+            <p className="font-bold">Men Grey Hoodie</p>
+            {/* <p className="text-sm text-gray-400">Hoodies</p> */}
+          </div>
+        </div>
+
+        <div className="md:col-span-3 col-span-1 text-black">24.05.2023</div>
+        <div className="md:col-span-3 col-span-1 text-black">$124.97</div>
+      </div>
+      <div className="grid md:grid-cols-12 grid-cols-1 w-full py-2.5 items-center">
         <div className="flex items-center gap-2 md:col-span-6 col-span-1 text-black">
           <img src={pro_1} className="w-10 h-10 rounded" />
           <div>
             <p className="font-bold">Men Grey Hoodie</p>
-            <p className="text-sm text-gray-400">Hoodies</p>
           </div>
         </div>
 

@@ -107,7 +107,7 @@ export default function MainAnalytsChart() {
           />
           <Tooltip
             content={<CustomTooltip />}
-            cursor={false}
+            cursor={true}
             // position={{ y: 50 }}
           />
           <Line
@@ -123,8 +123,13 @@ export default function MainAnalytsChart() {
             dataKey="current"
             stroke="#2563eb"
             strokeWidth={3}
-            dot={{ r: 6, fill: "#fff", stroke: "#2563eb", strokeWidth: 3 }}
-            activeDot={{ r: 8 }}
+            dot={false}
+            activeDot={{
+              r: 6,
+              fill: "#fff",
+              stroke: "#2563eb",
+              strokeWidth: 5,
+            }}
           />
         </LineChart>
       </ResponsiveContainer>

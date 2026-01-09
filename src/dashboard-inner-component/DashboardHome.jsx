@@ -35,7 +35,9 @@ export default function DashboardHome() {
       <div className="grid grid-cols-1 lg:grid-cols-[9fr_3fr] gap-7.5 mt-6">
         <div className="bg-white shadow-sm h-full rounded-sm p-7.5">
           <div className="flex items-center mb-6 justify-between">
-            <h4>Orders Over Time</h4>
+            <span className="mb-0 font-bold text-[16px] leading-6 text-black">
+              Orders Over Time
+            </span>
             <select
               name="ours"
               id="ours"
@@ -97,7 +99,9 @@ export default function DashboardHome() {
         </div>
         {/* small green chart */}
         <div className="bg-white rounded-sm shadow p-7 flex flex-col gap-6">
-          <h4>Last 7 Days Sales</h4>
+          <span className="mb-0 font-bold text-[16px] leading-6 text-black">
+            Last 7 Days Sales
+          </span>
           <div className="flex flex-col items-start gap-1">
             <h4 className="mb-0">1,259</h4>
             <span className="text-[14px] leading-5 text-default">
@@ -115,12 +119,16 @@ export default function DashboardHome() {
       {/* product details */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-7.5 mt-6">
         <div className="bg-white shadow-sm rounded-sm cursor-pointer p-7 border border-slate-300 transition-all duration-300 ease-in-out">
-          <h4 className="mb-5">Recent Transactions</h4>
+          <span className="mb-5 font-bold text-[16px] leading-6 text-black">
+            Recent Transactions
+          </span>
           <Transactions />
         </div>
         {/*top sold product details */}
         <div className="bg-white shadow-sm rounded-sm cursor-pointer p-7 border border-slate-300 transition-all duration-300 ease-in-out">
-          <h4 className="mb-5">Top Products by Units Sold</h4>
+          <span className="mb-5 font-bold text-[16px] leading-6 text-black">
+            Top Products by Units Sold
+          </span>
           <TopSoldProduct />
         </div>
       </div>

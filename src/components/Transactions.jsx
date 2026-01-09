@@ -33,7 +33,7 @@ export default function Transactions() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-12 col-span-1 w-full border-b py-4 items-center">
+      <div className="grid md:grid-cols-12 col-span-1 w-full border-b last-of-type:border-b-0 py-4 items-center">
         {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
           <div>
             <input
@@ -61,7 +61,63 @@ export default function Transactions() {
           {isPayment ? "Paid" : "Pending"}
         </div>
       </div>
-      <div className="grid md:grid-cols-12 col-span-1 w-full border-b py-4 items-center">
+      <div className="grid md:grid-cols-12 col-span-1 w-full border-b last-of-type:border-b-0 py-4 items-center">
+        {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
+          <div>
+            <input
+              type="checkbox"
+              className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
+            />
+          </div>
+          <img src={pro_1} class="w-10 h-10 rounded" />
+          <div>
+            <p class="font-bold">Men Grey Hoodie</p>
+            <p class="text-sm text-gray-400">Hoodies</p>
+          </div>
+        </div> */}
+
+        <div className="md:col-span-3 col-span-1 text-black">Jagarnath S.</div>
+        <div className="md:col-span-3 col-span-1 text-black">24.05.2023</div>
+        <div className="md:col-span-3 col-span-1 text-black">$124.97</div>
+        <div
+          className={`${
+            isPayment
+              ? "bg-green-100 text-green-700"
+              : "bg-[#E6E9F4] text-default/90"
+          } col-span-1 md:col-span-3 px-2 py-1 rounded w-fit`}
+        >
+          {isPayment ? "Paid" : "Pending"}
+        </div>
+      </div>
+      <div className="grid md:grid-cols-12 col-span-1 w-full border-b last-of-type:border-b-0 py-4 items-center">
+        {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
+          <div>
+            <input
+              type="checkbox"
+              className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
+            />
+          </div>
+          <img src={pro_1} class="w-10 h-10 rounded" />
+          <div>
+            <p class="font-bold">Men Grey Hoodie</p>
+            <p class="text-sm text-gray-400">Hoodies</p>
+          </div>
+        </div> */}
+
+        <div className="md:col-span-3 col-span-1 text-black">Jagarnath S.</div>
+        <div className="md:col-span-3 col-span-1 text-black">24.05.2023</div>
+        <div className="md:col-span-3 col-span-1 text-black">$124.97</div>
+        <div
+          className={`${
+            isPayment
+              ? "bg-green-100 text-green-700"
+              : "bg-[#E6E9F4] text-default/90"
+          } col-span-1 md:col-span-3 px-2 py-1 rounded w-fit`}
+        >
+          {isPayment ? "Paid" : "Pending"}
+        </div>
+      </div>
+      <div className="grid md:grid-cols-12 col-span-1 w-full py-4 items-center">
         {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
           <div>
             <input

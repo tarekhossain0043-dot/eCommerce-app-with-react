@@ -25,11 +25,11 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   return (
     <div
       className={`${!isCollapsed ? "w-20" : "w-62.5"} flex flex-col ${
-        window.innerHeight > 530
+        window.innerHeight > 530 || window.innerHeight < 520
           ? "h-screen"
-          : "min-h-full overflow-y-scroll pb-10"
+          : "min-h-screen overflow-y-scroll pb-10"
       }
-      transition-all duration-500 pb-25 ease-in-out fixed z-999 overflow-x-hidden top-22.75 left-0 bg-primary min-h-screen p-4 border-r border-slate-100`}
+      transition-all duration-500 pb-25 ease-in-out h-full fixed z-999 overflow-x-hidden top-22.75 left-0 bg-primary p-4 border-r border-slate-100`}
     >
       <div className="flex-1 flex flex-col gap-1">
         {sidebarData.map((menuItem, index) => (
@@ -53,7 +53,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
             {menuItem.orderNum !== undefined &&
               menuItem.orderNum !== null &&
               isCollapsed && (
-                <span className="text-white font-bold bg-black text-[14px] flex items-center justify-center px-3 py-1 rounded-full">
+                <span className="text-white font-bold bg-black text-[14px] flex items-center justify-center px-2 py-px rounded-full">
                   {menuItem.orderNum}
                 </span>
               )}
