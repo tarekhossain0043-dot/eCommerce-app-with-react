@@ -29,23 +29,35 @@ export default function User() {
             openProfile
               ? "flex transform translate-y-0 transition-all duration-500 ease-in-out"
               : "hidden"
-          } top-10 flex flex-col p-4 translte-y-5 items-start gap-4 right-0 rounded-sm w-62.5 w-full text-slate-900 z-99999 bg-slate-100 shadow-sm shadow-sm`}
+          } top-10 flex flex-col p-4 translte-y-5 items-start gap-4 right-0 rounded-sm w-50 text-slate-900 z-99999 bg-slate-100 shadow-sm`}
         >
-          <Link to="/profile" className="flex items-center gap-3">
-            <User2 />
-            <span>User profile</span>
+          <Link
+            to="/profile"
+            className="flex items-center gap-3 w-full py-2 bg-slate-50 hover:pl-2 transition-all duration-300 ease-in-out"
+          >
+            <User2 className="w-4 h-4" />
+            <span className="text-sm text-default">User profile</span>
           </Link>
-          <Link to="/profile" className="flex items-center gap-3">
-            <Settings />
-            <span>User settings</span>
+          <Link
+            to="/profile"
+            className="flex items-center gap-3 w-full py-2 bg-slate-50 hover:pl-2 transition-all duration-300 ease-in-out"
+          >
+            <Settings className="w-4 h-4" />
+            <span className="text-sm text-default">User settings</span>
           </Link>
-          <Link to="/account-setting" className="flex items-center gap-3">
-            <Bell />
-            <span>Notifications</span>
+          <Link
+            to="/account-setting"
+            className="flex items-center gap-3 w-full py-2 bg-slate-50 hover:pl-2 transition-all duration-300 ease-in-out"
+          >
+            <Bell className="w-4 h-4" />
+            <span className="text-sm text-default">Notifications</span>
           </Link>
-          <Link to="logout" className="flex items-center gap-3">
-            <LogOut />
-            <span>Logout</span>
+          <Link
+            to="logout"
+            className="flex items-center gap-3 w-full py-2 bg-slate-50 hover:pl-2 transition-all duration-300 ease-in-out"
+          >
+            <LogOut className="w-4 h-4" />
+            <span className="text-sm text-default">Logout</span>
           </Link>
         </div>
       </div>
