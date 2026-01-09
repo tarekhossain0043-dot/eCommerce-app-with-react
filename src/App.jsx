@@ -19,6 +19,7 @@ import AddProduct from "./components/AddProduct";
 // import Modal_one from "./components/Modal_one";
 import Category from "./components/category/Category";
 import CreateCategory from "./components/category/CreateCategory";
+import Category from "./components/category/Category";
 
 export default function App() {
   const dispatch = useDispatch();
