@@ -7,9 +7,12 @@ import Modal from "./modal";
 import NewCategory from "./NewCategory";
 import Tags from "./Tags";
 import Seo_settings from "./Seo_settings";
+import { useAddProductsMutation } from "../features/api/apiSlice";
+import { toast } from "react-toastify";
 
 export default function AddProduct() {
   // const { setHeaderTitle, setHeaderBtns } = useOutletContext();
+  // const notify = () => toast("product added successfully!");
   const navigate = useNavigate();
   const category = ["women", "man", "T-Shirt", "Hoodie", "Dress"];
   // const [newCategory, setNewCategory] = useState([]);
@@ -22,6 +25,40 @@ export default function AddProduct() {
     discount: 40,
   });
 
+  const [productData, setProductData] = useState({
+    name: "",
+    description: "",
+    productImg: "",
+    discountPrice: "",
+    size: "",
+    category: "",
+  });
+  const [addProduct, { isLoading }] = useAddProductsMutation();
+
+  const handleInputChange = (e) => {
+    setProductData({ ...productData, [e.target.name]: e.target.value });
+  };
+
+  const handleSave = async () => {
+    if (!productData.name) return toast("Name and desctioption is required!");
+
+    try {
+      // POST data to api
+      await addProduct(productData).unwrap();
+      setProductData({
+        name: "",
+        description: "",
+        productImg: "",
+        discountPrice: "",
+        size: "",
+        category: "",
+      }); // input form for clear
+      toast("product added successfully!");
+    } catch (error) {
+      console.error("Failed to add products on apis:", error);
+    }
+  };
+
   const discount_price =
     discountPrice.price - (discountPrice.price * discountPrice.discount) / 100;
 
@@ -33,7 +70,13 @@ export default function AddProduct() {
     }));
   };
 
-  console.log(discountPrice);
+  // const handleProductData = (e) => {
+  //   const productData = e.target.value;
+  //   setNewProduct((prev) => ({
+  //     ...prev,
+  //     productName: productData,
+  //   }));
+  // };
 
   return (
     <div>
@@ -52,10 +95,11 @@ export default function AddProduct() {
             Cancel
           </button>
           <button
-            onClick={() => navigate("/add-poroduct")}
+            onClick={handleSave}
+            disabled={isLoading}
             className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
           >
-            Save
+            {!isLoading ? "save" : "saving ...."}
           </button>
         </div>
       </div>
@@ -71,16 +115,23 @@ export default function AddProduct() {
               </label>
               <input
                 type="text"
+                name="name"
+                id="product_name"
+                value={productData.name}
+                onChange={(e) => handleInputChange(e)}
                 placeholder="Summer T-Shirt"
                 className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label htmlFor="product_name" className="text-default">
+              <label htmlFor="product-desc" className="text-default">
                 Product Description
               </label>
               <textarea
                 placeholder="Product description"
+                name="description"
+                value={productData.description}
+                onChange={(e) => handleInputChange(e)}
                 className="w-full max-h-24 h-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
               />
             </div>
@@ -89,7 +140,8 @@ export default function AddProduct() {
               <span className="mb-6 font-bold block text-[16px] leading-6 capitalize text-black">
                 Images
               </span>
-              <FileDropCompo />
+              <FileDropCompo files="image" />
+              {/* <input type="file" name="productImg" id="productImg" /> */}
             </div>
             <hr className=" mb-7 block" />
             {/* price tab */}
@@ -114,7 +166,8 @@ export default function AddProduct() {
                   <label htmlFor="discount-price">Discount Price</label>
                   <input
                     type="number"
-                    name="discount-price"
+                    name="discountPrice"
+                    disabled
                     placeholder="discount price.."
                     value={discount_price}
                     id="discount-price"
@@ -152,6 +205,7 @@ export default function AddProduct() {
                   <select
                     name="size"
                     id="size"
+                    value={productData.size}
                     className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                     defaultValue=""
                     onChange={(e) => setCurrentSize(e.target.value)}
@@ -227,6 +281,8 @@ export default function AddProduct() {
                   <input
                     type="checkbox"
                     name="category"
+                    value={productData.category}
+                    onChange={(e) => handleInputChange(e)}
                     id={category}
                     className="accent-blue-clr focus:outline-none foucs:ring-1 focus:ring-blue-clr"
                   />

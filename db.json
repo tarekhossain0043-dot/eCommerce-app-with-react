@@ -1,0 +1,114 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Summer T-Shirt",
+      "description": "High quality cotton t-shirt",
+      "categories": ["man", "T-Shirt"],
+      "tags": ["Summer Collection"],
+      "img": "https://unsplash.com/photos/a-dining-room-with-a-table-and-chairs-4svhyGs2o3Q"
+    },
+    {
+      "id": "2",
+      "name": "Men Grey Hoodie",
+      "description": "High quality cotton t-shirt",
+      "categories": ["man", "Hoodies"],
+      "tags": ["Winter Collection"],
+      "img": "https://unsplash.com/photos/arched-doorway-of-an-old-stone-building-LCW4EWNW7Fw"
+    },
+    {
+      "id": "3",
+      "name": "Women Striped T-Shirt",
+      "description": "High quality cotton t-shirt",
+      "categories": ["Women", "T-Shirt"],
+      "tags": ["Hot Collection"],
+      "img": "https://unsplash.com/photos/a-black-limousine-parked-at-a-gas-station-at-night-3ABZ_Uc0Ie0"
+    },
+    {
+      "id": "4",
+      "name": "Women White T-Shirt",
+      "description": "High quality cotton t-shirt",
+      "categories": ["Women", "T-Shirt"],
+      "tags": ["Summer Collection"],
+      "img": "../feature/image-4.png"
+    },
+    {
+      "id": "1bd4",
+      "name": "Recomended shoe",
+      "description": "winter summer shoe product",
+      "": "9",
+      "product_name": "e",
+      "product-desc": "d"
+    },
+    {
+      "id": "e2c3",
+      "name": "Men black jacket",
+      "description": "Men special jacket for this winter"
+    },
+    {
+      "id": "5d42",
+      "name": "Winter men shoe fast life support",
+      "description": "Life support product for men",
+      "image": null,
+      "discountPrice": "",
+      "size": ""
+    },
+    {
+      "id": "5b67",
+      "name": "product-1",
+      "description": "product-1 desc",
+      "image": null,
+      "discountPrice": "",
+      "size": ""
+    },
+    {
+      "id": "5a9e",
+      "name": "",
+      "description": "",
+      "image": null,
+      "discountPrice": "",
+      "size": ""
+    },
+    {
+      "id": "68c9",
+      "name": "also checked product 10",
+      "description": "this is an test produt 10",
+      "image": null,
+      "discountPrice": "",
+      "size": ""
+    },
+    {
+      "id": "7290",
+      "name": "Winter best huddi",
+      "description": "men for best winter huddi",
+      "productImg": "",
+      "discountPrice": "",
+      "size": ""
+    },
+    {
+      "id": "1462",
+      "name": "hisina hena",
+      "description": "this is a test product",
+      "productImg": "",
+      "discountPrice": "",
+      "size": ""
+    },
+    {
+      "id": "309f",
+      "name": "winter summer",
+      "description": "winter summer pro",
+      "productImg": "",
+      "discountPrice": "",
+      "size": ""
+    },
+    {
+      "id": "cae2",
+      "name": "product-1",
+      "description": "product- 1 desc",
+      "productImg": "",
+      "discountPrice": "",
+      "size": "",
+      "category": ""
+    }
+  ]
+}

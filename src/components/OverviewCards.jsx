@@ -33,13 +33,11 @@ export default function OverviewCards() {
       <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4.25">
         <div className="py-6 rounded-sm bg-white shadow-sm flex justify-center items-center gap-10">
           <div>
-            <span className="text-[16px] font-bold block mb-0 leading-7 text-black">
-              $10.540
-            </span>
+            <h4 className="mb-0">$10.540</h4>
             <span className="text-[10px] font-normal leading-5 text-default">
               Total Revenue
             </span>
-            <span className="text-green-clr text-[10px] leading-5 flex items-center gap-1">
+            <span className="text-green-clr flex items-center gap-1">
               22.45% <ChevronUp className="pl-1 w-4 h-4" />
             </span>
           </div>

@@ -14,9 +14,6 @@ import { setUser } from "./features/authSlice/authSlice";
 import Order from "./components/Order";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
-// import Modal from "./components/modal";
-// import NewCategory from "./components/NewCategory";
-// import Modal_one from "./components/Modal_one";
 import Category from "./components/category/Category";
 import CreateCategory from "./components/category/CreateCategory";
 import Category from "./components/category/Category";
@@ -65,9 +62,26 @@ export default function App() {
             <Route path="/add-poroduct" element={<AddProduct />} />
             <Route path="/categories" element={<Category />} />
             <Route path="/crate-category" element={<CreateCategory />} />
+            <Route path="/customers" element={<Customers />} />
+            <Route path="/customerInfo" element={<CustomerInfo />} />
+            <Route path="/add_customers" element={<AddCustomers />} />
+            <Route path="/coupons" element={<Coupons />} />
+            <Route path="/order-modal" element={<OrderModal />} />
           </Route>
         </Route>
       </Routes>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        // theme="dark" // Options: "light", "dark", "colored"
+      />
     </>
   );
 }

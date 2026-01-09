@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import Pagination from "./Pagination";
 import pro_1 from "../assets/products/Image-1.png";
+import { useGetProductQuery } from "../features/api/apiSlice";
 
 export default function Products() {
   const { setHeaderTitle, setHeaderBtns } = useOutletContext();
@@ -28,214 +29,14 @@ export default function Products() {
       setHeaderBtns(null);
     };
   }, [navigate, setHeaderTitle, setHeaderBtns]);
+
+  // get product from api
+  const { data: products, isLoading, isError } = useGetProductQuery();
+
+  if (isLoading) return <p>Loading Products...</p>;
+  if (isError) return <p>Error loading data!</p>;
   return (
     <div className="mt-4">
-      {/* <thead className="flex items-center justify-between border-b-2 border-slate-100 py-3">
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <input
-            type="checkbox"
-            name="checkbox"
-            id="checkbox"
-            className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
-          />
-          <label
-            htmlFor="checkbox"
-            className="text-default capitalize  font-normal text-[14px] leading-5"
-          >
-            Product
-          </label>
-        </th>
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <span className="text-default capitalize  font-normal text-[14px] leading-5">
-            Inventory
-          </span>
-        </th>
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <span className="text-default capitalize  font-normal text-[14px] leading-5">
-            Color
-          </span>
-        </th>
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <span className="text-default capitalize  font-normal text-[14px] leading-5">
-            Price
-          </span>
-        </th>
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <span className="text-default capitalize  font-normal text-[14px] leading-5">
-            Rating
-          </span>
-        </th>
-      </thead>
-      <tbody className="w-full flex flex-col items-center justify-between w-full">
-        <tr className="py-3.5 border-b border-slate-100 flex items-center justify-between text-center w-full">
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <input
-              type="checkbox"
-              name="checkbox"
-              id="checkbox"
-              className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
-            />
-            <label
-              htmlFor="checkbox"
-              className="text-default capitalize flex items-center gap-4  font-normal text-[14px] leading-5"
-            >
-              <img src={pro_1} alt="pro_1" className="w-12 h-12 rounded-sm" />
-              <div className="flex items-start flex-col gap-1">
-                <span className="text-[14px] font-medium mb-0 text-black">
-                  Men Grey Hoodie
-                </span>
-                <span className="text-[14px] mb-0 text-default">Hoodies</span>
-              </div>
-            </label>
-          </td>
-          <td className="cursor-pointer flex justify-start transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5">
-              96 in stock
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5">
-              Black
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#C4F8E2] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-[#06A561]">
-              $49.90
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#F99600] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-white">
-              5.0 (32 Votes)
-            </span>
-          </td>
-        </tr>
-        <tr className="py-3.5 border-b border-slate-100 flex items-center justify-between text-center w-full">
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <input
-              type="checkbox"
-              name="checkbox"
-              id="checkbox"
-              className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
-            />
-            <label
-              htmlFor="checkbox"
-              className="text-default capitalize flex items-center gap-4  font-normal text-[14px] leading-5"
-            >
-              <img src={pro_1} alt="pro_1" className="w-12 h-12 rounded-sm" />
-              <div className="flex items-start flex-col gap-1">
-                <span className="text-[14px] font-medium mb-0 text-black">
-                  Men Grey Hoodie
-                </span>
-                <span className="text-[14px] mb-0 text-default">Hoodies</span>
-              </div>
-            </label>
-          </td>
-          <td className="cursor-pointer flex justify-start transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5">
-              96 in stock
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5">
-              Black
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#C4F8E2] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-[#06A561]">
-              $49.90
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#F99600] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-white">
-              5.0 (32 Votes)
-            </span>
-          </td>
-        </tr>
-        <tr className="py-3.5 border-b border-slate-100 flex items-center justify-between text-center w-full">
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <input
-              type="checkbox"
-              name="checkbox"
-              id="checkbox"
-              className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
-            />
-            <label
-              htmlFor="checkbox"
-              className="text-default capitalize flex items-center gap-4  font-normal text-[14px] leading-5"
-            >
-              <img src={pro_1} alt="pro_1" className="w-12 h-12 rounded-sm" />
-              <div className="flex items-start flex-col gap-1">
-                <span className="text-[14px] font-medium mb-0 text-black">
-                  Men Grey Hoodie
-                </span>
-                <span className="text-[14px] mb-0 text-default">Hoodies</span>
-              </div>
-            </label>
-          </td>
-          <td className="cursor-pointer flex justify-start transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5">
-              96 in stock
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5">
-              Black
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#C4F8E2] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-[#06A561]">
-              $49.90
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#F99600] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-white">
-              5.0 (32 Votes)
-            </span>
-          </td>
-        </tr>
-        <tr className="py-3.5 border-b border-slate-100 flex items-center justify-between text-center w-full">
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <input
-              type="checkbox"
-              name="checkbox"
-              id="checkbox"
-              className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
-            />
-            <label
-              htmlFor="checkbox"
-              className="text-default capitalize flex items-center gap-4  font-normal text-[14px] leading-5"
-            >
-              <img src={pro_1} alt="pro_1" className="w-12 h-12 rounded-sm" />
-              <div className="flex items-start flex-col gap-1">
-                <span className="text-[14px] font-medium mb-0 text-black">
-                  Men Grey Hoodie
-                </span>
-                <span className="text-[14px] mb-0 text-default">Hoodies</span>
-              </div>
-            </label>
-          </td>
-          <td className="cursor-pointer flex justify-start transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5">
-              96 in stock
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5">
-              Black
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#C4F8E2] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-[#06A561]">
-              $49.90
-            </span>
-          </td>
-          <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-            <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#F99600] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-white">
-              5.0 (32 Votes)
-            </span>
-          </td>
-        </tr>
-      </tbody> */}
       <div class="w-full">
         <div class="grid md:grid-cols-12 grid-cols-1 gap-4 border-b py-3 font-semibold text-gray-600">
           {/* <div class="pl-4">Checkbox</div> */}
@@ -253,55 +54,35 @@ export default function Products() {
           <div className="md:col-span-2 col-span-1">Price</div>
           <div className="md:col-span-2 col-span-1">Rating</div>
         </div>
+        {products.map((product, index) => (
+          <div
+            key={index}
+            class="grid md:grid-cols-12 col-span-1 gap-4 border-b py-4 items-center"
+          >
+            <div class="flex items-center gap-2 md:col-span-4 col-span-1">
+              <div>
+                <input
+                  type="checkbox"
+                  className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
+                />
+              </div>
+              <img src={pro_1} class="w-10 h-10 rounded" />
+              <div>
+                <p class="font-bold">{product.name}</p>
+                <p class="text-sm text-gray-400">{product.category}</p>
+              </div>
+            </div>
 
-        <div class="grid md:grid-cols-12 col-span-1 gap-4 border-b py-4 items-center">
-          <div class="flex items-center gap-2 md:col-span-4 col-span-1">
-            <div>
-              <input
-                type="checkbox"
-                className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
-              />
+            <div className="md:col-span-2 col-span-1">96 In Stock</div>
+            <div className="md:col-span-2 col-span-1">Black</div>
+            <div class="bg-green-100 col-span-1 md:col-span-2 text-green-700 px-2 py-1 rounded w-fit">
+              $49.90
             </div>
-            <img src={pro_1} class="w-10 h-10 rounded" />
-            <div>
-              <p class="font-bold">Men Grey Hoodie</p>
-              <p class="text-sm text-gray-400">Hoodies</p>
+            <div class="bg-orange-500 col-span-1 md:col-span-2 text-white px-3 py-1 rounded w-fit text-sm">
+              5.0 (32 Votes)
             </div>
           </div>
-
-          <div className="md:col-span-2 col-span-1">96 In Stock</div>
-          <div className="md:col-span-2 col-span-1">Black</div>
-          <div class="bg-green-100 col-span-1 md:col-span-2 text-green-700 px-2 py-1 rounded w-fit">
-            $49.90
-          </div>
-          <div class="bg-orange-500 col-span-1 md:col-span-2 text-white px-3 py-1 rounded w-fit text-sm">
-            5.0 (32 Votes)
-          </div>
-        </div>
-        <div class="grid md:grid-cols-12 col-span-1 gap-4 border-b py-4 items-center">
-          <div class="flex items-center gap-2 md:col-span-4 col-span-1">
-            <div>
-              <input
-                type="checkbox"
-                className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
-              />
-            </div>
-            <img src={pro_1} class="w-10 h-10 rounded" />
-            <div>
-              <p class="font-bold">Men Grey Hoodie</p>
-              <p class="text-sm text-gray-400">Hoodies</p>
-            </div>
-          </div>
-
-          <div className="md:col-span-2 col-span-1">96 In Stock</div>
-          <div className="md:col-span-2 col-span-1">Black</div>
-          <div class="bg-green-100 col-span-1 md:col-span-2 text-green-700 px-2 py-1 rounded w-fit">
-            $49.90
-          </div>
-          <div class="bg-orange-500 col-span-1 md:col-span-2 text-white px-3 py-1 rounded w-fit text-sm">
-            5.0 (32 Votes)
-          </div>
-        </div>
+        ))}
       </div>
       {/* pagination area */}
       <Pagination />
