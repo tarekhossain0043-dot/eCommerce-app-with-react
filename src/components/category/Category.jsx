@@ -1,4 +1,3 @@
-import React from "react";
 import { Plus } from "lucide-react";
 import React, { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
@@ -47,3 +46,4 @@ export default function Category() {
       </div>
     </div>
   );
+}

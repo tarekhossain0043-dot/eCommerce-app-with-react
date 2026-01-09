@@ -7,8 +7,8 @@ export default function Transactions() {
     return () => clearTimeout(payment);
   }, 10000);
   return (
-    <div class="w-full">
-      <div class="grid md:grid-cols-12 grid-cols-1 gap-4 border-b py-3 font-semibold text-gray-600">
+    <div className="w-full">
+      <div className="grid md:grid-cols-12 grid-cols-1 gap-4 border-b py-3 font-semibold text-gray-600">
         {/* <div class="pl-4">Checkbox</div> */}
         {/* <div className="col-span-1 lg:col-span-4">
           <input
@@ -33,7 +33,7 @@ export default function Transactions() {
         </div>
       </div>
 
-      <div class="grid md:grid-cols-12 col-span-1 w-full border-b py-4 items-center">
+      <div className="grid md:grid-cols-12 col-span-1 w-full border-b py-4 items-center">
         {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
           <div>
             <input
@@ -52,7 +52,7 @@ export default function Transactions() {
         <div className="md:col-span-3 col-span-1 text-black">24.05.2023</div>
         <div className="md:col-span-3 col-span-1 text-black">$124.97</div>
         <div
-          class={`${
+          className={`${
             isPayment
               ? "bg-green-100 text-green-700"
               : "bg-[#E6E9F4] text-default/90"
@@ -61,7 +61,7 @@ export default function Transactions() {
           {isPayment ? "Paid" : "Pending"}
         </div>
       </div>
-      <div class="grid md:grid-cols-12 col-span-1 w-full border-b py-4 items-center">
+      <div className="grid md:grid-cols-12 col-span-1 w-full border-b py-4 items-center">
         {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
           <div>
             <input
@@ -80,7 +80,7 @@ export default function Transactions() {
         <div className="md:col-span-3 col-span-1 text-black">24.05.2023</div>
         <div className="md:col-span-3 col-span-1 text-black">$124.97</div>
         <div
-          class={`${
+          className={`${
             isPayment
               ? "bg-green-100 text-green-700"
               : "bg-[#E6E9F4] text-default/90"
