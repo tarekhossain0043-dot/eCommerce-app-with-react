@@ -16,12 +16,6 @@ import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 import Category from "./components/category/Category";
 import CreateCategory from "./components/category/CreateCategory";
-import Customers from "./components/customers/Customers";
-import { ToastContainer } from "react-toastify";
-import CustomerInfo from "./components/customers/CustomerInfo";
-import AddCustomers from "./components/customers/AddCustomers";
-import Coupons from "./components/coupones/Coupons";
-import OrderModal from "./components/modal/OrderModal";
 import Category from "./components/category/Category";
 
 export default function App() {
