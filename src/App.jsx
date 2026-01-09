@@ -16,7 +16,7 @@ import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 import Category from "./components/category/Category";
 import CreateCategory from "./components/category/CreateCategory";
-import Category from "./components/category/Category";
+
 
 export default function App() {
   const dispatch = useDispatch();
