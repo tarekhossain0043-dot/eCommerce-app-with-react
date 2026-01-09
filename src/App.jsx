@@ -22,6 +22,7 @@ import CustomerInfo from "./components/customers/CustomerInfo";
 import AddCustomers from "./components/customers/AddCustomers";
 import Coupons from "./components/coupones/Coupons";
 import OrderModal from "./components/modal/OrderModal";
+import Category from "./components/category/Category";
 
 export default function App() {
   const dispatch = useDispatch();
