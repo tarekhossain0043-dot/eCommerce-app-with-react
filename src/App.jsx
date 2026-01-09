@@ -16,10 +16,7 @@ import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
 import Category from "./components/category/Category";
 import CreateCategory from "./components/category/CreateCategory";
-import Customers from "./components/customers/Customers";
-import { ToastContainer } from "react-toastify";
-import CustomerInfo from "./components/customers/CustomerInfo";
-import AddCustomers from "./components/customers/AddCustomers";
+import Category from "./components/category/Category";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -68,6 +65,8 @@ export default function App() {
             <Route path="/customers" element={<Customers />} />
             <Route path="/customerInfo" element={<CustomerInfo />} />
             <Route path="/add_customers" element={<AddCustomers />} />
+            <Route path="/coupons" element={<Coupons />} />
+            <Route path="/order-modal" element={<OrderModal />} />
           </Route>
         </Route>
       </Routes>

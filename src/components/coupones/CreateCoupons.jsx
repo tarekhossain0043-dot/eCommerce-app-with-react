@@ -1,133 +1,73 @@
-import { ArrowLeft, ChevronDown } from "lucide-react";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function OrderModal() {
+export default function CreateCoupons() {
   const [isLoading, setIsLoading] = useState(false);
-  const [filter_category, setFilter_category] = useState("choose one");
-  const [filter_orders, setFilter_orders] = useState("choose one");
-  const [isOpenFilter, setIsOpenFilter] = useState(false);
-  const handleFilter = (filterItem) => {
-    setFilter_category(filterItem);
-  };
-  const handleOrder = (orderStatus) => {
-    setFilter_orders(orderStatus);
-  };
   const navigate = useNavigate();
   return (
     <div>
       <div>
-        <div>
-          <Link
-            to="/Customers"
-            className="text-default cursor-pointer capitalize cursor-pointer flex items-center gap-1 transition-all duration-300 ease-in-out hover:pr-1 hover:text-blue-clr"
+        <Link
+          to="/coupons"
+          className="text-default cursor-pointer capitalize cursor-pointer flex items-center gap-1 transition-all duration-300 ease-in-out hover:pr-1 hover:text-blue-clr"
+        >
+          <ArrowLeft className="w-4 h-4" /> back
+        </Link>
+      </div>
+      <div className="flex items-center justify-between">
+        <h3>Create Coupon</h3>
+        <div className="flex items-center gap-3">
+          <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
+            Cancel
+          </button>
+          <button
+            onClick={() => setIsLoading((prev) => !prev)}
+            disabled={isLoading}
+            className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
           >
-            <ArrowLeft className="w-4 h-4" /> back
-          </Link>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="text-[24px] font-bold leading-9 text-black">
-            Add Orders
-          </span>
-          <div className="flex items-center gap-3">
-            <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
-              Cancel
-            </button>
-            <button
-              onClick={() => setIsLoading((prev) => !prev)}
-              disabled={isLoading}
-              className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
-            >
-              {!isLoading ? "save" : "saving ...."}
-            </button>
-          </div>
+            {!isLoading ? "save" : "saving ...."}
+          </button>
         </div>
       </div>
       <div className="p-7 bg-white rounded-sm shadow-sm drop-shadow-sm mt-7.5">
         <span className="block text-[16px] leading-6 text-black font-bold capitalize">
-          Order Information
+          Customer Information
         </span>
         <span className="mb-6 block text-[14px] leading-5 font-normal text-default">
-          Most common order from the customer
+          Most important information about the customer
         </span>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col gap-2 w-full">
-            <label htmlFor="date">Date</label>
-            <input
-              type="date"
-              placeholder="Date"
-              className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
-            />
-          </div>
-          <div className="flex flex-col gap-2 w-full">
-            <label htmlFor="customer_name">Customer Name</label>
+            <label htmlFor="fast_name">First Name</label>
             <input
               type="text"
-              placeholder="Customer Name"
+              placeholder="first name"
               className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
             />
           </div>
           <div className="flex flex-col gap-2 w-full">
-            <label htmlFor="Payment status">Payment status</label>
-            {/* filter area */}
-            <div
-              onClick={() => setIsOpenFilter((prev) => !prev)}
-              className="max-w-45 relative w-full py-2 px-3 flex items-center border border-slate-100 rounded-sm cursor-pointer transition-all duration-300 ease-in-out focus:ring-1 focus:ring-blue-clr justify-between"
-            >
-              <span className="text-[16px] leading-6 text-default capitalize cursor-pointer transition-all duration-300 ease-in-out">
-                {filter_category}
-              </span>
-              <ChevronDown className="w-4 h-4 text-[#979797]" />
-              <div
-                className={`${
-                  isOpenFilter ? "block" : "hidden"
-                } absolute top-full left-0 max-w-62.5 bg-slate-50 shadow-sm cursor-pointer transition-all duration-300 ease-in-out w-full`}
-              >
-                <p
-                  onClick={() => handleFilter("paid")}
-                  className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-                >
-                  Paid
-                </p>
-                <p
-                  onClick={() => handleFilter("unpaid")}
-                  className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-                >
-                  Unpaid
-                </p>
-              </div>
-            </div>
+            <label htmlFor="last_name">Last Name</label>
+            <input
+              type="text"
+              placeholder="last name"
+              className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
+            />
           </div>
           <div className="flex flex-col gap-2 w-full">
-            <label htmlFor="Order Status">Order Status</label>
-            {/* filter area */}
-            <div
-              onClick={() => setIsOpenFilter((prev) => !prev)}
-              className="max-w-45 relative w-full py-2 px-3 flex items-center border border-slate-100 rounded-sm cursor-pointer transition-all duration-300 ease-in-out focus:ring-1 focus:ring-blue-clr justify-between"
-            >
-              <span className="text-[16px] leading-6 text-default capitalize cursor-pointer transition-all duration-300 ease-in-out">
-                {filter_category}
-              </span>
-              <ChevronDown className="w-4 h-4 text-[#979797]" />
-              <div
-                className={`${
-                  filter_orders ? "block" : "hidden"
-                } absolute top-full left-0 max-w-62.5 bg-slate-50 shadow-sm cursor-pointer transition-all duration-300 ease-in-out w-full`}
-              >
-                <p
-                  onClick={() => handleOrder("Ready")}
-                  className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-                >
-                  Ready
-                </p>
-                <p
-                  onClick={() => handleOrder("UnReady")}
-                  className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-                >
-                  UnReady
-                </p>
-              </div>
-            </div>
+            <label htmlFor="Email Address">Email Address</label>
+            <input
+              type="email"
+              placeholder="Email Address"
+              className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
+            />
+          </div>
+          <div className="flex flex-col gap-2 w-full">
+            <label htmlFor="Phone Number">Phone Number</label>
+            <input
+              type="number"
+              placeholder="Phone Number"
+              className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
+            />
           </div>
         </div>
         <hr className="w-full h-px bg-slate-100 my-7.5" />
@@ -226,7 +166,6 @@ export default function OrderModal() {
               onClick={() => navigate("/customers")}
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
-              {isLoading ? "saving..." : "save"}
               Save
             </button>
           </div>

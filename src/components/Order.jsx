@@ -1,10 +1,11 @@
 import { ChevronDown, Edit, Plus, Search, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import FilterPro from "../components/FilterPro";
 
 export default function Order() {
   const { setHeaderTitle, setHeaderBtns } = useOutletContext();
+  const navigate = useNavigate();
   useEffect(() => {
     setHeaderTitle("Orders");
     setHeaderBtns(
@@ -12,7 +13,10 @@ export default function Order() {
         <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
           Export
         </button>
-        <button className="text-white py-2.5 text-[16px] leading-6 font-normal px-5 flex items-center gap-2 rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6">
+        <button
+          onClick={() => navigate("/order-modal")}
+          className="text-white py-2.5 text-[16px] leading-6 font-normal px-5 flex items-center gap-2 rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
+        >
           <Plus className="w-4 h-4 text-white" />
           Add Order
         </button>
@@ -22,7 +26,7 @@ export default function Order() {
       setHeaderTitle("");
       setHeaderBtns(null);
     };
-  }, [setHeaderTitle, setHeaderBtns]);
+  }, [setHeaderTitle, setHeaderBtns, navigate]);
   const [filter_category, setFilter_category] = useState("filter");
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const handleFilter = (filterItem) => {
