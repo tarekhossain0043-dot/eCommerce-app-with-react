@@ -14,9 +14,8 @@ import { setUser } from "./features/authSlice/authSlice";
 import Order from "./components/Order";
 import Products from "./components/Products";
 import AddProduct from "./components/AddProduct";
-// import Category from "./components/category/Category";
-// import CreateCategory from "./components/category/CreateCategory";
-
+import Category from "./components/category/Category";
+import CreateCategory from "./components/category/CreateCategory";
 
 export default function App() {
   const dispatch = useDispatch();
