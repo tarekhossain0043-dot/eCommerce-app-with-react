@@ -1,12 +1,13 @@
 {
   "name": "ecommerce-app-with-react",
+  "homepage": "https://tarekhossain0043-dot.github.io/eCommerce-app-with-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "npm run build gh-pages -d dist",
     "lint": "eslint .",
     "preview": "vite preview",
     "server": "json-server --watch db.json --port 5000"

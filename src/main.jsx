@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter basename="/eCommerce-app-with-react">
       <App />
     </BrowserRouter>
   </Provider>
