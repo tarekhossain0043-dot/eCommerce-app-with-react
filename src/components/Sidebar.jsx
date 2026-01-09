@@ -9,9 +9,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   const handleMenu = (id) => {
     setCurrentMenu(id);
   };
-  const handleSidebarToggle = () => {
-    setIsCollapsed((prev) => !prev);
-  };
+
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 600) {
@@ -28,22 +26,12 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
     <div
       className={`${!isCollapsed ? "w-62.5" : "w-20"} flex flex-col ${
         window.innerHeight < 530
-          ? "max-h-80 h-full overflow-y-scroll pb-25"
+          ? "min-h-full overflow-y-scroll pb-25"
           : "h-screen"
       }
-      } transition-all duration-500 pb-25 ease-in-out fixed z-999 overflow-x-hidden top-[91px] left-0 bg-primary min-h-screen p-4 border-r border-slate-100`}
+      transition-all duration-500 pb-25 h-screen ease-in-out fixed z-999 overflow-x-hidden top-22.75 left-0 bg-primary min-h-screen p-4 border-r border-slate-100`}
     >
-      <span
-        onClick={handleSidebarToggle}
-        className="absolute top-2 right-0 z-999 w-5 h-5 shadow-sm bg-blue-2 rounded-full flex items-center justify-center text-[16px] cursor-pointer"
-      >
-        {!isCollapsed ? (
-          <ChevronLeft className="w-4 h-4 cursor-pointer text-white" />
-        ) : (
-          <ChevronRight className="w-4 h-4 cursor-pointer text-white" />
-        )}
-      </span>
-      <div className="flex-1 flex flex-col gap-1 mt-4">
+      <div className="flex-1 flex flex-col gap-1">
         {sidebarData.map((menuItem, index) => (
           <Link
             to={menuItem.to}

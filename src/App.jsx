@@ -21,6 +21,7 @@ import { ToastContainer } from "react-toastify";
 import CustomerInfo from "./components/customers/CustomerInfo";
 import AddCustomers from "./components/customers/AddCustomers";
 import Coupons from "./components/coupones/Coupons";
+import OrderModal from "./components/modal/OrderModal";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ export default function App() {
             <Route path="/customerInfo" element={<CustomerInfo />} />
             <Route path="/add_customers" element={<AddCustomers />} />
             <Route path="/coupons" element={<Coupons />} />
+            <Route path="/order-modal" element={<OrderModal />} />
           </Route>
         </Route>
       </Routes>
