@@ -18,6 +18,7 @@ export default function OrderModal() {
   const handleOrder = (orderStatus) => {
     setFilter_orders(orderStatus);
   };
+  const navigete = useNavigate();
 
   // order from data data
   const [formData, setFormData] = useState({
@@ -38,7 +39,7 @@ export default function OrderModal() {
   const handleSubmit = () => {
     dispatch(addRecord(formData));
     setIsLoading((prev) => !prev);
-    // setFormData("");
+    navigete("/orders");
   };
 
   const navigate = useNavigate();

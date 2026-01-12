@@ -73,6 +73,9 @@ const recordSlice = createSlice({
       state.items = state.items.filter((r) => r.id !== action.payload);
       localStorage.setItem("employeeRecords", JSON.stringify(state.items));
       state.nextId = calculateNextId(state.items);
+      // const id = action.payload;
+      // state.items = state.items.filter((newProduct) => id.includes(newProduct));
+      // localStorage.setItem("productRecord", JSON.stringify(state.items));
     },
     setSearchTerm: (state, action) => {
       state.searchTerms = action.payload;

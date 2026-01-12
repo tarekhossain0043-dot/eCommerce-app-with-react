@@ -60,8 +60,13 @@ const productSlice = createSlice({
 
     deleteProduct: (state, action) => {
       const id = action.payload;
-      state.items = state.items.filter((newProduct) => newProduct.id !== id);
+      state.items = state.items.filter((newProduct) =>
+        id.includes(newProduct.id)
+      );
       localStorage.setItem("productRecord", JSON.stringify(state.items));
+      //   state.items = state.items.filter(
+      // (item) => !idsToDelete.includes(item.id)
+      // localStorage.setItem("productRecord", JSON.stringify(state.items));
     },
 
     updateProduct: (state, action) => {
