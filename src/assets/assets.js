@@ -219,3 +219,30 @@ export const product_Category = [
     desc: "52 items",
   },
 ];
+
+export const orderProductData = [
+  {
+    id: nanoid(),
+    date: new Date().toISOString(),
+    customer: "Tom Anderson",
+    payment_sts: "Paid",
+    order_sts: "Ready",
+    total: "$49.90",
+  },
+  {
+    id: nanoid(),
+    date: new Date().toISOString(),
+    customer: "Tom Armstrong",
+    payment_sts: "UnPaid",
+    order_sts: "UnReady",
+    total: "$99.90",
+  },
+  {
+    id: nanoid(),
+    date: new Date().toISOString(),
+    customer: "Takasur Anderson",
+    payment_sts: "Paid",
+    order_sts: "Ready",
+    total: "$89.90",
+  },
+];

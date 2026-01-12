@@ -2,8 +2,16 @@ import { ChevronDown, Edit, Plus, Search, Trash2 } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import FilterPro from "../components/FilterPro";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteRecord,
+  setSearchTerm,
+  selectSearchTerms,
+  selectFilterRecords,
+} from "../features/add-product-slice/addProductSlice";
 
 export default function Order() {
+  const [isCheckboxIsChecked, setIsCheckboxIsChecked] = useState(true);
   const { setHeaderTitle, setHeaderBtns } = useOutletContext();
   const navigate = useNavigate();
   useEffect(() => {
@@ -32,6 +40,41 @@ export default function Order() {
   const handleFilter = (filterItem) => {
     setFilter_category(filterItem);
   };
+
+  // order conditional rendering
+
+  const dispatch = useDispatch();
+  const filterRecords = useSelector(selectFilterRecords);
+  // const allRecords = useSelector(selectAllRecords);
+  const searchTerms = useSelector(selectSearchTerms);
+
+  const storeRecords = [...filterRecords].sort((a, b) => b.id - a.id);
+
+  // delete
+  const handleDelete = (record) => {
+    dispatch(deleteRecord(record.id));
+  };
+
+  // const [showModal, setShowModal] = useState(false);
+  // const [currentRecords, setCurrentRecords] = useState(null);
+
+  // const openCreateModal = () => {
+  //   setCurrentRecords(null);
+  //   setShowModal(true);
+  // };
+
+  // const openEditModal = (record) => {
+  //   // setCurrentRecords(record);
+  //   // setShowModal(true);
+  // };
+
+  // const closeModal = () => {
+  //   setShowModal(false);
+  //   setCurrentRecords(null);
+  // };
+  // ------
+  // const orderDatas = useSelector((state) => state.addProducts.orders);
+  // console.log(orderDatas);
   return (
     <div className="p-6 bg-white shadow-sm rounded-sm border border-slate-50 mt-4">
       {/* head of order */}
@@ -105,6 +148,8 @@ export default function Order() {
             <input
               type="text"
               name="search"
+              value={searchTerms}
+              onChange={(e) => dispatch(setSearchTerm(e.target.value))}
               placeholder="search anything.."
               id="search"
               className="px-4 text-sm pl-12 w-full py-3 bg-transparent text-default cursor-pointer outline-none ring-1 ring-blue-clr focus:ring-primary rounded-sm transition-all duration-300 ease-in-out"
@@ -112,17 +157,31 @@ export default function Order() {
             <Search className="w-4 h-4 absolute top-1/2 left-5 text-slate-400 transform -translate-y-1/2 cursor-pointer" />
           </form>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="w-10 h-10 rounded-sm bg- border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold">
-            <Edit className="w-6 h-6" />
-          </span>
-          <span className="w-10 h-10 rounded-sm border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer transition-all duration-300 ease-in-out flex items-center justify-center text-blue-clr font-bold">
-            <Trash2 className="w-6 h-6" />
-          </span>
-        </div>
+        {storeRecords.map((record) => (
+          <div className="flex items-center gap-3">
+            <span
+              // onClick={() => openEditModal()}
+              className="w-10 h-10 rounded-sm bg- border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold"
+            >
+              <Edit className="w-6 h-6" />
+            </span>
+            <button
+              disabled={!isCheckboxIsChecked}
+              onClick={() => handleDelete(record)}
+              className={`w-10 h-10
+                
+              rounded-sm border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer transition-all duration-300 ease-in-out flex items-center justify-center text-blue-clr font-bold`}
+            >
+              <Trash2 className="w-6 h-6" />
+            </button>
+          </div>
+        ))}
       </div>
       {/* filtered product */}
-      <FilterPro />
+      <FilterPro
+        setIsCheckboxIsChecked={setIsCheckboxIsChecked}
+        orderDatas={storeRecords}
+      />
     </div>
   );
 }

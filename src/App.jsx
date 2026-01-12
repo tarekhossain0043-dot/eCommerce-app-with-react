@@ -20,8 +20,9 @@ import CustomerInfo from "./components/customers/CustomerInfo";
 import AddCustomers from "./components/customers/AddCustomers";
 import Coupons from "./components/coupones/Coupons";
 import OrderModal from "./components/modal/OrderModal";
-import CreateCategory from "./components/category/CreateCategory";
+// import CreateCategory from "./components/category/CreateCategory";
 import { ToastContainer } from "react-toastify";
+import ProductDetails from "./components/Product_functionality/ProductDetails";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -48,6 +49,7 @@ export default function App() {
       loading....
     </p>;
   }
+  // modal
   return (
     <>
       <Routes>
@@ -64,9 +66,9 @@ export default function App() {
             <Route path="/" element={<DashboardHome />} />
             <Route path="/orders" element={<Order />} />
             <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/add-poroduct" element={<AddProduct />} />
             <Route path="/categories" element={<Category />} />
-            <Route path="/crate-category" element={<CreateCategory />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/customerInfo" element={<CustomerInfo />} />
             <Route path="/add_customers" element={<AddCustomers />} />
@@ -75,6 +77,7 @@ export default function App() {
           </Route>
         </Route>
       </Routes>
+
       <ToastContainer
         position="bottom-right"
         autoClose={3000}

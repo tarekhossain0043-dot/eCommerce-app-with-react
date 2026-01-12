@@ -34,26 +34,32 @@ export default function Tags() {
         />
       </div>
       <div className="flex flex-wrap items-center gap-4">
-        {tags.map((tag, index) => (
-          <div
-            key={index}
-            className="py-1 px-4 rounded-sm truncate bg-slate-50 flex items-center gap-1 rounded-sm capitalize"
-          >
-            {tag}
-            <X
-              onClick={() => dispatch(removeTag(tag))}
-              className="w-4 h-4 cursor-pointer transition-all duration-300 ease-in-out hover:text-blue-clr hover:scale-105"
-            />
-          </div>
-        ))}
-        <div className="py-1 px-4 truncate rounded-sm bg-slate-50 flex items-center gap-1 rounded-sm capitalize">
+        {tags.length <= 0 ? (
+          <span className="text-center block text-default text-[14px] capitalize py-4">
+            Nothing Following any tags.. add one tag
+          </span>
+        ) : (
+          tags.map((tag, index) => (
+            <div
+              key={index}
+              className="py-1 px-4 rounded-sm truncate bg-slate-50 flex items-center gap-1 rounded-sm capitalize"
+            >
+              {tag}
+              <X
+                onClick={() => dispatch(removeTag(tag))}
+                className="w-4 h-4 cursor-pointer transition-all duration-300 ease-in-out hover:text-blue-clr hover:scale-105"
+              />
+            </div>
+          ))
+        )}
+        {/* <div className="py-1 px-4 truncate rounded-sm bg-slate-50 flex items-center gap-1 rounded-sm capitalize">
           Men Clothes
           <X className="w-4 h-4 cursor-pointer transition-all duration-300 ease-in-out hover:text-blue-clr hover:scale-105" />
         </div>
         <div className="py-1 px-4 truncate rounded-sm bg-slate-50 flex items-center gap-1 rounded-sm capitalize">
           Summer Collection
           <X className="w-4 h-4 cursor-pointer transition-all duration-300 ease-in-out hover:text-blue-clr hover:scale-105" />
-        </div>
+        </div> */}
       </div>
     </div>
   );

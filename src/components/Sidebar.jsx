@@ -3,12 +3,15 @@ import { ChevronLeft, ChevronRight, House, Menu, X } from "lucide-react";
 import { sidebarData } from "../assets/assets";
 import sidebarImg from "../assets/sidebar-img.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectAllRecords } from "../features/add-product-slice/addProductSlice";
 
 export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   const [currentMenu, setCurrentMenu] = useState(sidebarData[0].label);
   const handleMenu = (id) => {
     setCurrentMenu(id);
   };
+  const orderNum = useSelector(selectAllRecords);
 
   useEffect(() => {
     const handleResize = () => {
@@ -54,7 +57,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
               menuItem.orderNum !== null &&
               isCollapsed && (
                 <span className="text-white font-bold bg-black text-[14px] flex items-center justify-center px-2 py-px rounded-full">
-                  {menuItem.orderNum}
+                  {orderNum.length}
                 </span>
               )}
           </Link>

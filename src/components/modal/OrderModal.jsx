@@ -1,11 +1,15 @@
 import { ArrowLeft, ChevronDown } from "lucide-react";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { Link, useNavigate } from "react-router-dom";
+import { addRecord } from "../../features/add-product-slice/addProductSlice";
+// import { addOrders } from "../../features/add-product-slice/addProductSlice";
 
 export default function OrderModal() {
   const [isLoading, setIsLoading] = useState(false);
-  const [filter_category, setFilter_category] = useState("choose one");
-  const [filter_orders, setFilter_orders] = useState("choose one");
+  const [filter_category, setFilter_category] = useState("paid");
+  const [filter_orders, setFilter_orders] = useState("ready");
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const [isOpenOrder, setIsOpenOrder] = useState(false);
   const handleFilter = (filterItem) => {
@@ -14,13 +18,37 @@ export default function OrderModal() {
   const handleOrder = (orderStatus) => {
     setFilter_orders(orderStatus);
   };
+
+  // order from data data
+  const [formData, setFormData] = useState({
+    date: "",
+    customer: "",
+    paymentStatus: filter_category,
+    orderStatus: filter_orders,
+    price: "",
+  });
+  // console.log(typeof formData);
+  // const handleInputChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
+  const dispatch = useDispatch();
+  // // useEffect(() => {
+  // //   dispatch(addOrders(formData));
+  // // }, [dispatch, formData]);
+  const handleSubmit = () => {
+    dispatch(addRecord(formData));
+    setIsLoading((prev) => !prev);
+    // setFormData("");
+  };
+
   const navigate = useNavigate();
+
   return (
     <div>
       <div>
         <div>
           <Link
-            to="/Customers"
+            to="/orders"
             className="text-default cursor-pointer capitalize cursor-pointer flex items-center gap-1 transition-all duration-300 ease-in-out hover:pr-1 hover:text-blue-clr"
           >
             <ArrowLeft className="w-4 h-4" /> back
@@ -35,7 +63,7 @@ export default function OrderModal() {
               Cancel
             </button>
             <button
-              onClick={() => setIsLoading((prev) => !prev)}
+              onClick={handleSubmit}
               disabled={isLoading}
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
@@ -56,7 +84,12 @@ export default function OrderModal() {
             <label htmlFor="date">Date</label>
             <input
               type="date"
+              name="date"
               placeholder="Date"
+              value={formData.date.toWellFormed()}
+              onChange={(e) =>
+                setFormData({ ...formData, date: e.target.value })
+              }
               className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
             />
           </div>
@@ -64,6 +97,11 @@ export default function OrderModal() {
             <label htmlFor="customer_name">Customer Name</label>
             <input
               type="text"
+              name="customer"
+              value={formData.customer}
+              onChange={(e) =>
+                setFormData({ ...formData, customer: e.target.value })
+              }
               placeholder="Customer Name"
               className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
             />
@@ -116,16 +154,16 @@ export default function OrderModal() {
                 } absolute top-full left-0 max-w-62.5 bg-slate-50 shadow-sm cursor-pointer transition-all duration-300 ease-in-out w-full`}
               >
                 <p
-                  onClick={() => handleOrder("order")}
+                  onClick={() => handleOrder("ready")}
                   className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
                 >
-                  Order
+                  ready
                 </p>
                 <p
-                  onClick={() => handleOrder("Unorder")}
+                  onClick={() => handleOrder("unready")}
                   className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
                 >
-                  Unorder
+                  unready
                 </p>
               </div>
             </div>
@@ -140,10 +178,15 @@ export default function OrderModal() {
         </span>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col gap-2 w-full">
-            <label htmlFor="address">Address</label>
+            <label htmlFor="price">price</label>
             <input
-              type="text"
-              placeholder="Address"
+              type="number"
+              name="price"
+              value={formData.price}
+              onChange={(e) =>
+                setFormData({ ...formData, price: e.target.value })
+              }
+              placeholder="price"
               className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
             />
           </div>
@@ -228,7 +271,6 @@ export default function OrderModal() {
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
               {isLoading ? "saving..." : "save"}
-              Save
             </button>
           </div>
         </div>
