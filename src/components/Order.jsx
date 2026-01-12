@@ -1,5 +1,5 @@
 import { ChevronDown, Edit, Plus, Search, Trash2 } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import FilterPro from "../components/FilterPro";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,7 +36,8 @@ export default function Order() {
       setHeaderBtns(null);
     };
   }, [setHeaderTitle, setHeaderBtns, navigate]);
-  const [filter_category, setFilter_category] = useState("filter");
+  const [filter_category, setFilter_category] = useState("Choose one");
+  console.log(filter_category);
   const [isOpenFilter, setIsOpenFilter] = useState(false);
   const handleFilter = (filterItem) => {
     setFilter_category(filterItem);
@@ -67,6 +68,14 @@ export default function Order() {
   //       : setSelectedOrderId(storeRecords.map((selectedpro) => selectedpro.id));
   //   };
 
+  const filterProData = useMemo(() => {
+    if (filter_category === "all") {
+      storeRecords;
+    } else {
+      storeRecords.filter((pro) => pro.paymentStatus === filter_category);
+    }
+  }, [storeRecords, filter_category]);
+
   return (
     <div className="p-6 bg-white shadow-sm rounded-sm border border-slate-50 mt-4">
       {/* head of order */}
@@ -86,22 +95,10 @@ export default function Order() {
             } absolute top-full left-0 max-w-62.5 bg-slate-50 shadow-sm cursor-pointer transition-all duration-300 ease-in-out w-full`}
           >
             <p
-              onClick={() => handleFilter("price")}
+              onClick={() => handleFilter("all")}
               className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
             >
-              price
-            </p>
-            <p
-              onClick={() => handleFilter(" order number")}
-              className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-            >
-              order number
-            </p>
-            <p
-              onClick={() => handleFilter("customer")}
-              className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-            >
-              customer
+              all
             </p>
             <p
               onClick={() => handleFilter("paid")}
@@ -110,28 +107,22 @@ export default function Order() {
               paid
             </p>
             <p
-              onClick={() => handleFilter("unpaid")}
+              onClick={() => handleFilter("unPaid")}
               className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
             >
-              unpaid
+              uppaid
             </p>
             <p
-              onClick={() => handleFilter("ready")}
+              onClick={() => handleFilter("customer")}
               className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
             >
               ready
             </p>
             <p
-              onClick={() => handleFilter("shipped")}
+              onClick={() => handleFilter("paid")}
               className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
             >
-              shipped
-            </p>
-            <p
-              onClick={() => handleFilter("Recive")}
-              className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-            >
-              Recive
+              unready
             </p>
           </div>
         </div>

@@ -8,24 +8,15 @@ import { addRecord } from "../../features/add-product-slice/addProductSlice";
 
 export default function OrderModal() {
   const [isLoading, setIsLoading] = useState(false);
-  const [filter_category, setFilter_category] = useState("paid");
-  const [filter_orders, setFilter_orders] = useState("ready");
-  const [isOpenFilter, setIsOpenFilter] = useState(false);
-  const [isOpenOrder, setIsOpenOrder] = useState(false);
-  const handleFilter = (filterItem) => {
-    setFilter_category(filterItem);
-  };
-  const handleOrder = (orderStatus) => {
-    setFilter_orders(orderStatus);
-  };
+
   const navigete = useNavigate();
 
   // order from data data
   const [formData, setFormData] = useState({
     date: "",
     customer: "",
-    paymentStatus: filter_category,
-    orderStatus: filter_orders,
+    paymentStatus: "",
+    orderStatus: "",
     price: "",
   });
   // console.log(typeof formData);
@@ -110,64 +101,32 @@ export default function OrderModal() {
           <div className="flex flex-col gap-2 w-full">
             <label htmlFor="Payment status">Payment status</label>
             {/* filter area */}
-            <div
-              onClick={() => setIsOpenFilter((prev) => !prev)}
-              className="max-w-45 relative w-full py-2 px-3 flex items-center border border-slate-100 rounded-sm cursor-pointer transition-all duration-300 ease-in-out focus:ring-1 focus:ring-blue-clr justify-between"
+            <select
+              name="orderData"
+              id="orderData"
+              value={formData.paymentStatus}
+              onChange={(e) =>
+                setFormData({ ...formData, paymentStatus: e.target.value })
+              }
             >
-              <span className="text-[16px] leading-6 text-default capitalize cursor-pointer transition-all duration-300 ease-in-out">
-                {filter_category}
-              </span>
-              <ChevronDown className="w-4 h-4 text-[#979797]" />
-              <div
-                className={`${
-                  isOpenFilter ? "block" : "hidden"
-                } absolute top-full left-0 max-w-62.5 bg-slate-50 shadow-sm cursor-pointer transition-all duration-300 ease-in-out w-full`}
-              >
-                <p
-                  onClick={() => handleFilter("paid")}
-                  className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-                >
-                  Paid
-                </p>
-                <p
-                  onClick={() => handleFilter("unpaid")}
-                  className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-                >
-                  Unpaid
-                </p>
-              </div>
-            </div>
+              <option value="paid">paid</option>
+              <option value="unpaid">unpaid</option>
+            </select>
           </div>
           <div className="flex flex-col gap-2 w-full">
             <label htmlFor="Order Status">Order Status</label>
             {/* order area */}
-            <div
-              onClick={() => setIsOpenOrder((prev) => !prev)}
-              className="max-w-45 relative w-full py-2 px-3 flex items-center border border-slate-100 rounded-sm cursor-pointer transition-all duration-300 ease-in-out focus:ring-1 focus:ring-blue-clr justify-between"
+            <select
+              name="orderStatus"
+              id="orderStatus"
+              value={formData.orderStatus}
+              onChange={(e) =>
+                setFormData({ ...formData, orderStatus: e.target.value })
+              }
             >
-              <span className="text-[16px] leading-6 text-default capitalize cursor-pointer transition-all duration-300 ease-in-out">
-                {filter_orders}
-              </span>
-              <ChevronDown className="w-4 h-4 text-[#979797]" />
-              <div
-                className={`${
-                  isOpenOrder ? "block" : "hidden"
-                } absolute top-full left-0 max-w-62.5 bg-slate-50 shadow-sm cursor-pointer transition-all duration-300 ease-in-out w-full`}
-              >
-                <p
-                  onClick={() => handleOrder("ready")}
-                  className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-                >
-                  ready
-                </p>
-                <p
-                  onClick={() => handleOrder("unready")}
-                  className="mb-2 w-full py-2 rounded-sm transition-all duration-300 ease-in-out hover:bg-slate-100 px-3 hover:text-white"
-                >
-                  unready
-                </p>
-              </div>
-            </div>
+              <option value="ready">ready</option>
+              <option value="unready">unready</option>
+            </select>
           </div>
         </div>
         <hr className="w-full h-px bg-slate-100 my-7.5" />

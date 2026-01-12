@@ -1,9 +1,7 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
-import { selectFilterRecords } from "../features/add-product-slice/addProductSlice";
 
-export default function Pagination() {
-  const orderNumbers = selectFilterRecords;
+export default function Pagination({ orderNumbers }) {
   return (
     <div className="flex items-center justify-between gap-5 text-default">
       {orderNumbers.length > 5 ? (
