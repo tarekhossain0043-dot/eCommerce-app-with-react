@@ -76,7 +76,6 @@ export default function App() {
             <Route path="/add_customers" element={<AddCustomers />} />
             <Route path="/coupons" element={<Coupons />} />
             <Route path="/create-coupons" element={<CreateCoupons />} />
-
             <Route path="/order-modal" element={<OrderModal />} />
             <Route path="/create-category" element={<CreateCoupons />} />
           </Route>
