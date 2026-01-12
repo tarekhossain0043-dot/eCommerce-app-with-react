@@ -23,7 +23,7 @@ export default function Coupons() {
     setHeaderBtns(
       <div className="flex items-center gap-3">
         <button
-          onClick={() => navigate("/crate-category")}
+          onClick={() => navigate("/create-coupons")}
           className="text-white py-2.5 text-[16px] leading-6 font-normal px-12 flex items-center justify-center gap-2 rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
         >
           <Plus className="w-4 h-4 text-white" />
@@ -143,8 +143,8 @@ export default function Coupons() {
           </div>
         </div>
         {/* filterable products */}
-        <div class="w-full">
-          <div class="grid md:grid-cols-12 grid-cols-1 gap-4 border-b py-3 font-semibold text-gray-600">
+        <div className="w-full">
+          <div className="grid md:grid-cols-12 grid-cols-1 gap-4 border-b py-3 font-semibold text-gray-600">
             {/* <div class="pl-4">Checkbox</div> */}
             <div className="col-span-1 lg:col-span-6">
               <input
@@ -162,9 +162,9 @@ export default function Coupons() {
 
           <div
             onClick={() => navigate("/customerInfo")}
-            class="grid md:grid-cols-12 cursor-pointer transition-all duration-500 ease-in-out col-span-1 gap-4 last-of-type:border-none py-4 items-center"
+            className="grid md:grid-cols-12 cursor-pointer transition-all duration-500 ease-in-out col-span-1 gap-4 last-of-type:border-none py-4 items-center"
           >
-            <div class="flex items-center gap-2 md:col-span-6 col-span-1">
+            <div className="flex items-center gap-2 md:col-span-6 col-span-1">
               <div>
                 <input
                   type="checkbox"
@@ -175,7 +175,7 @@ export default function Coupons() {
                 <Tag className="w-5 h-5 text-white" />
               </h4>
               <div>
-                <span class="font-bold mb-0 transition-all duration-300 ease-in-out hover:text-primary">
+                <span className="font-bold mb-0 transition-all duration-300 ease-in-out hover:text-primary">
                   Summer discount 10% off
                 </span>
                 <span className="block text-default">Summer2020</span>
@@ -184,7 +184,7 @@ export default function Coupons() {
 
             <div className="md:col-span-2 col-span-1">15 times</div>
 
-            <div class="bg-green-100 col-span-1 md:col-span-2 text-green-700 px-2 py-1 rounded w-fit">
+            <div className="bg-green-100 col-span-1 md:col-span-2 text-green-700 px-2 py-1 rounded w-fit">
               Active
             </div>
             <div className="md:col-span-2 col-span-1 truncate">

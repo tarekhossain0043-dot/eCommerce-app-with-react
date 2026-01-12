@@ -1,4 +1,4 @@
-import { Plus } from "lucide-react";
+import { Edit, Plus } from "lucide-react";
 import React, { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { product_Category } from "../../assets/assets";
@@ -11,7 +11,7 @@ export default function Category() {
     setHeaderBtns(
       <div className="flex items-center gap-3">
         <button
-          onClick={() => navigate("/crate-category")}
+          onClick={() => navigate("/create-category")}
           className="text-white py-2.5 text-[16px] leading-6 font-normal px-5 flex items-center gap-2 rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
         >
           <Plus className="w-4 h-4 text-white" />
@@ -30,13 +30,19 @@ export default function Category() {
         {product_Category.map((category, index) => (
           <div
             key={index}
-            className="rounded-sm cursor-pointer cursor-pointer hover:shadow-md transition-all duration-300 ease-in-out"
+            className="rounded-sm group relative cursor-pointer cursor-pointer hover:shadow-md transition-all duration-300 ease-in-out"
           >
             <img
               src={category.image}
               alt="product-img"
               className="w-full max-h-60 object-cover"
             />
+            <div className="absolute transform scale-75 transition-all duration-500 ease-in-out group-hover:scale-100 group-hover:opacity-100 opacity-0 top-0 left-0 w-full h-full flex items-center justify-center transform backdrop-blur-sm inset-1">
+              <div className="flex items-center gap-2 text-blue-clr bg-white shadow-sm text-[18px] font-medium px-8 py-3 rounded-sm">
+                <Edit className="w-5 h-5 cursor-pointer transition-all duration-300 ease-in-out hover:text-primary" />
+                Edit
+              </div>
+            </div>
             <div className="px-7 py-5 bg-white shadow rounded-br-sm rounded-bl-sm">
               <h4>{category.title}</h4>
               <span className="text-default">{category.desc}</span>

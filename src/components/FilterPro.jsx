@@ -10,46 +10,48 @@ export default function FilterPro({ orderDatas }) {
   const orderNumbers = orderDatas;
   return (
     <table className="mt-4 w-full max-[600px]:overflow-x-scroll max-[600px]:w-100">
-      <thead className="flex items-center justify-between border-b-2 border-slate-100 py-3">
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <input
-            type="checkbox"
-            name="checkbox"
-            id="checkbox"
-            className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
-          />
-          <label
-            htmlFor="checkbox"
-            className="text-default capitalize  font-normal text-[14px] leading-5"
-          >
-            Order
-          </label>
-        </th>
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <span className="text-default capitalize  font-normal text-[14px] leading-5">
-            Date
-          </span>
-        </th>
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <span className="text-default capitalize  font-normal text-[14px] leading-5">
-            Customer
-          </span>
-        </th>
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <span className="text-default capitalize  font-normal text-[14px] leading-5">
-            Payment status
-          </span>
-        </th>
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <span className="text-default capitalize  font-normal text-[14px] leading-5">
-            Order Status
-          </span>
-        </th>
-        <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-          <span className="text-default capitalize  font-normal text-[14px] leading-5">
-            Total
-          </span>
-        </th>
+      <thead>
+        <tr className="flex items-center justify-between border-b-2 border-slate-100 py-3">
+          <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+            <input
+              type="checkbox"
+              name="checkbox"
+              id="checkbox"
+              className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
+            />
+            <label
+              htmlFor="checkbox"
+              className="text-default capitalize  font-normal text-[14px] leading-5"
+            >
+              Order
+            </label>
+          </th>
+          <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+            <span className="text-default capitalize  font-normal text-[14px] leading-5">
+              Date
+            </span>
+          </th>
+          <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+            <span className="text-default capitalize  font-normal text-[14px] leading-5">
+              Customer
+            </span>
+          </th>
+          <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+            <span className="text-default capitalize  font-normal text-[14px] leading-5">
+              Payment status
+            </span>
+          </th>
+          <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+            <span className="text-default capitalize  font-normal text-[14px] leading-5">
+              Order Status
+            </span>
+          </th>
+          <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+            <span className="text-default capitalize  font-normal text-[14px] leading-5">
+              Total
+            </span>
+          </th>
+        </tr>
       </thead>
       {orderDatas.length === 0 ? (
         <p className="text-center py-4 bg-slate-50">

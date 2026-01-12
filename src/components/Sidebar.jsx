@@ -35,33 +35,40 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
       transition-all duration-500 pb-25 ease-in-out h-full fixed z-999 overflow-x-hidden top-22.75 left-0 bg-primary p-4 border-r border-slate-100`}
     >
       <div className="flex-1 flex flex-col gap-1">
-        {sidebarData.map((menuItem, index) => (
-          <Link
-            to={menuItem.to}
-            onClick={() => handleMenu(menuItem.label)}
-            key={index}
-            className={`flex items-center justify-between py-2.5 w-full hover:text-default relative transition-all duration-300 ease-in-out cursor-pointer rounded-sm px-4 ${
-              currentMenu === menuItem.label
-                ? "bg-white text-default"
-                : "bg-transparent text-white"
-            } bg-transparent  gap-4 transition-all duration-300 ease-in-out hover:bg-slate-200`}
-          >
-            <div className="flex items-center gap-4">
-              {!menuItem.Icon ? null : (
-                <menuItem.Icon className="w-5 h-5 text-gray-400 group-hover:text-white" />
-              )}
-              {isCollapsed && <span className="">{menuItem.label}</span>}
-            </div>
+        {sidebarData.map((menuItem, index) => {
+          const hasIcon = !!menuItem.Icon;
+          return (
+            <Link
+              to={menuItem.to}
+              onClick={() => handleMenu(menuItem.label)}
+              key={index}
+              className={`flex items-center ${
+                hasIcon.Icon
+                  ? "cursor-pointer hover:bg-slate-100"
+                  : "cursor-default"
+              } justify-between py-2.5 w-full hover:text-default hover:bg-slate-100 relative transition-all duration-300 ease-in-out cursor-pointer rounded-sm px-4 ${
+                currentMenu === menuItem.label
+                  ? "bg-white text-default"
+                  : "bg-transparent text-white"
+              } bg-transparent  gap-4 transition-all duration-300 ease-in-out `}
+            >
+              <div className="flex items-center gap-4">
+                {!menuItem.Icon ? null : (
+                  <menuItem.Icon className="w-5 h-5 text-gray-400 group-hover:text-white" />
+                )}
+                {isCollapsed && <span className="">{menuItem.label}</span>}
+              </div>
 
-            {menuItem.orderNum !== undefined &&
-              menuItem.orderNum !== null &&
-              isCollapsed && (
-                <span className="text-white font-bold bg-black text-[14px] flex items-center justify-center px-2 py-px rounded-full">
-                  {orderNum.length}
-                </span>
-              )}
-          </Link>
-        ))}
+              {menuItem.orderNum !== undefined &&
+                menuItem.orderNum !== null &&
+                isCollapsed && (
+                  <span className="text-white font-bold bg-black text-[14px] flex items-center justify-center px-2 py-px rounded-full">
+                    {orderNum.length}
+                  </span>
+                )}
+            </Link>
+          );
+        })}
       </div>
       <div
         className={`${
