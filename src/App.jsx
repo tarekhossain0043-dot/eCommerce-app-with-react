@@ -29,6 +29,8 @@ import Profile from "./components/settings/Profile";
 import Notification from "./components/settings/Nitification";
 import Accounts from "./components/settings/Accounts";
 import Security from "./components/settings/Security";
+import Pricing from "./components/pricing/Pricing";
+import Inbox from "./components/Inbox";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -86,6 +88,8 @@ export default function App() {
             <Route path="/notification" element={<Notification />} />
             <Route path="/accounts" element={<Accounts />} />
             <Route path="/security" element={<Security />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/inbox" element={<Inbox />} />
           </Route>
         </Route>
       </Routes>

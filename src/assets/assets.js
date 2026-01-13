@@ -1,5 +1,8 @@
 import {
+  CheckCircle,
+  ChevronDown,
   ChevronUp,
+  CircleMinus,
   CircleQuestionMark,
   DollarSign,
   Folder,
@@ -26,7 +29,12 @@ import img_8 from "./features/image-8.png";
 import img_9 from "./features/image.png";
 
 import { nanoid } from "nanoid";
-
+import img_index_1 from "../assets/inbox/Avatar-1.png";
+import img_index_2 from "../assets/inbox/Avatar-2.png";
+import img_index_3 from "../assets/inbox/Avatar-3.png";
+import img_index_4 from "../assets/inbox/Avatar-4.png";
+import img_index_5 from "../assets/inbox/Avatar-5.png";
+import img_index_6 from "../assets/inbox/Avatar.png";
 export const sidebarData = [
   {
     id: 1,
@@ -62,7 +70,7 @@ export const sidebarData = [
   {
     id: 6,
     Icon: SignalHigh,
-    to: "/reports",
+    to: "/pricing",
     label: "Reports",
   },
   {
@@ -267,5 +275,402 @@ export const settingMenuOrder = [
     id: nanoid(3),
     label: "Security",
     to: "/security",
+  },
+];
+
+export const pricingTable = [
+  {
+    id: nanoid(3),
+    price_m: "$12",
+    price_y: "$100",
+    category: "Basic Plan",
+    categoryDesc: "Start your business ",
+    listCategory: [
+      {
+        id: 1,
+        Icon: CheckCircle,
+        label: "Free Domain",
+      },
+      {
+        id: 2,
+        Icon: CheckCircle,
+        label: "Google Ads Credit",
+      },
+      {
+        id: 3,
+        Icon: CheckCircle,
+        label: "Up to 5 Users",
+      },
+      {
+        id: 4,
+        Icon: CheckCircle,
+        label: "Free SSL Security",
+      },
+      {
+        id: 5,
+        Icon: CheckCircle,
+        label: "Up to 100 Products",
+      },
+      {
+        id: 6,
+        Icon2: CircleMinus,
+        label: "Unlimited Storage",
+      },
+      {
+        id: 7,
+        Icon2: CircleMinus,
+        label: "Chat Inbox",
+      },
+      {
+        id: 8,
+        Icon2: CircleMinus,
+        label: "No Transaction Fee",
+      },
+    ],
+  },
+  {
+    id: nanoid(3),
+    price_m: "$20",
+    price_y: "$150",
+    recomended: "Recommended",
+    category: "Professional",
+    categoryDesc: "Start your business ",
+    listCategory: [
+      {
+        id: 1,
+        Icon: CheckCircle,
+        label: "Free Domain",
+      },
+      {
+        id: 2,
+        Icon: CheckCircle,
+        label: "Google Ads Credit",
+      },
+      {
+        id: 3,
+        Icon: CheckCircle,
+        label: "Up to 5 Users",
+      },
+      {
+        id: 4,
+        Icon: CheckCircle,
+        label: "Free SSL Security",
+      },
+      {
+        id: 5,
+        Icon: CheckCircle,
+        label: "Up to 100 Products",
+      },
+      {
+        id: 6,
+        Icon2: CircleMinus,
+        label: "Unlimited Storage",
+      },
+      {
+        id: 7,
+        Icon2: CircleMinus,
+        label: "Chat Inbox",
+      },
+      {
+        id: 8,
+        Icon2: CircleMinus,
+        label: "No Transaction Fee",
+      },
+    ],
+  },
+  {
+    id: nanoid(3),
+    price_m: "$45",
+    price_y: "$450",
+    category: "Business",
+    categoryDesc: "Start your business ",
+    listCategory: [
+      {
+        id: 1,
+        Icon: CheckCircle,
+        label: "Free Domain",
+      },
+      {
+        id: 2,
+        Icon: CheckCircle,
+        label: "Google Ads Credit",
+      },
+      {
+        id: 3,
+        Icon: CheckCircle,
+        label: "Up to 5 Users",
+      },
+      {
+        id: 4,
+        Icon: CheckCircle,
+        label: "Free SSL Security",
+      },
+      {
+        id: 5,
+        Icon: CheckCircle,
+        label: "Up to 100 Products",
+      },
+      {
+        id: 6,
+        Icon2: CircleMinus,
+        label: "Unlimited Storage",
+      },
+      {
+        id: 7,
+        Icon2: CircleMinus,
+        label: "Chat Inbox",
+      },
+      {
+        id: 8,
+        Icon2: CircleMinus,
+        label: "No Transaction Fee",
+      },
+    ],
+  },
+];
+
+export const faqCollapse = [
+  {
+    id: nanoid(3),
+    label: "Is there any discount for yearly subscription?",
+    Icon: ChevronDown,
+    desc: "You can cancel or change your subscription at any time without any additional charges. If you want to cancel your subscription go to your profile page and click on billing information.",
+  },
+  {
+    id: nanoid(3),
+    label: "Is there any discount for yearly subscription-2?",
+    Icon: ChevronDown,
+    desc: "You can cancel or change your subscription at any time without any additional charges. If you want to cancel your subscription go to your profile page and click on billing information.",
+  },
+  {
+    id: nanoid(3),
+    label: "Is there any discount for yearly subscription-3?",
+    Icon: ChevronDown,
+    desc: "You can cancel or change your subscription at any time without any additional charges. If you want to cancel your subscription go to your profile page and click on billing information.",
+  },
+];
+const now = new Date();
+
+const formattedTime = now.toLocaleTimeString("en-US", {
+  hour: "numeric",
+  minute: "2-digit",
+  hour12: true,
+});
+export const commentsData = [
+  {
+    id: nanoid(),
+    img: img_index_1,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_2,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_3,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_4,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_5,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
+  },
+  {
+    id: nanoid(),
+    img: img_index_6,
+    title: "Tom Anderson",
+    desc: "Hello, I’m interested in this item...",
+    comment: "08",
+    time: formattedTime,
   },
 ];
