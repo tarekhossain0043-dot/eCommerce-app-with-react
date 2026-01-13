@@ -107,7 +107,7 @@ export const sidebarData = [
   {
     id: 14,
     Icon: Settings,
-    to: "global-settings",
+    to: "/setting",
     label: "Global Settings",
   },
 ];
@@ -244,5 +244,28 @@ export const orderProductData = [
     payment_sts: "Paid",
     order_sts: "Ready",
     total: "$89.90",
+  },
+];
+
+export const settingMenuOrder = [
+  {
+    id: nanoid(3),
+    to: "/setting",
+    label: "profile",
+  },
+  {
+    id: nanoid(3),
+    to: "/notification",
+    label: "Notifications",
+  },
+  {
+    id: nanoid(3),
+    to: "/accounts",
+    label: "Accounts",
+  },
+  {
+    id: nanoid(3),
+    label: "Security",
+    to: "/security",
   },
 ];

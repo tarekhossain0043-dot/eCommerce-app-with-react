@@ -40,16 +40,18 @@ export default function AddProduct() {
   //   }
   // };
 
-  // const [productData, setProductData] = useState({
-  //   name: "",
-  //   description: "",
-  //   productImg: "",
-  //   discountPrice: "",
-  //   size: "",
-  //   category: "",
-  //   country: "",
-  //   weight: "",
-  // });
+  const [productData, setProductData] = useState({
+    name: "",
+    description: "",
+    productImg: "",
+    discountPrice: "",
+    size: "",
+    category: "",
+    country: "",
+    weight: "",
+  });
+  const imgUrl = URL.createObjectURL(productData.productImg);
+  console.log(imgUrl);
   // console.log(productData);
 
   // const handleProductsFun = () => {
@@ -129,8 +131,10 @@ export default function AddProduct() {
                   type="text"
                   name="name"
                   id="product_name"
-                  // value={productData.name}
-                  // onChange={(e) => handleInputChange(e)}
+                  value={productData.name}
+                  onChange={(e) =>
+                    setProductData({ ...productData, name: e.target.value })
+                  }
                   placeholder="Summer T-Shirt"
                   className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                 />
@@ -142,8 +146,13 @@ export default function AddProduct() {
                 <textarea
                   placeholder="Product description"
                   name="description"
-                  // value={productData.description}
-                  // onChange={(e) => handleInputChange(e)}
+                  value={productData.description}
+                  onChange={(e) =>
+                    setProductData({
+                      ...productData,
+                      description: e.target.value,
+                    })
+                  }
                   className="w-full max-h-24 h-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                 />
               </div>
@@ -152,12 +161,17 @@ export default function AddProduct() {
                 <span className="mb-6 font-bold block text-[16px] leading-6 capitalize text-black">
                   Images
                 </span>
-                {/* <FileDropCompo files="image" /> */}
+                <FileDropCompo files="image" />
                 <input
                   type="file"
                   name="productImg"
-                  // value={productData.productImg}
-                  // onChange={(e) => handleInputChange(e)}
+                  value={productData.productImg}
+                  onChange={(e) =>
+                    setProductData({
+                      ...productData,
+                      productImg: e.target.files[0],
+                    })
+                  }
                   id="productImg"
                 />
               </div>
@@ -177,7 +191,7 @@ export default function AddProduct() {
                       // value={productData.discountPrice}
                       placeholder="Enter price"
                       // onChange={handlePriceChange}
-                      // onChange={(e) => handleInputChange(e)}
+                      // onChange={(e) => setProductData({...productData, name : e.target.value})}
                       id="price"
                       className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                     />
@@ -229,7 +243,7 @@ export default function AddProduct() {
                       className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                       defaultValue=""
                       // onChange={(e) => setCurrentSize(e.target.value)}
-                      // onChange={(e) => handleInputChange(e)}
+                      // onChange={(e) => setProductData({...productData, name : e.target.value})}
                     >
                       {size.map((size, index) => (
                         <option key={index} value={size}>
@@ -265,7 +279,7 @@ export default function AddProduct() {
                     type="text"
                     placeholder="Enter Weight"
                     // value={productData.weight}
-                    // onChange={(e) => handleInputChange(e)}
+                    // onChange={(e) => setProductData({...productData, name : e.target.value})}
                     className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                   />
                 </div>
@@ -275,7 +289,7 @@ export default function AddProduct() {
                     name="country-select"
                     id="country-select"
                     // value={productData.country}
-                    // onChange={(e) => handleInputChange(e)}
+                    // onChange={(e) => setProductData({...productData, name : e.target.value})}
                     className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                   >
                     <option value="ban">Bangladesh</option>
@@ -307,7 +321,7 @@ export default function AddProduct() {
                       type="checkbox"
                       name="category"
                       value={productData.category}
-                      onChange={(e) => handleInputChange(e)}
+                      onChange={(e) => setProductData({...productData, name : e.target.value})}
                       // id={newCategory}
                       className="accent-blue-clr focus:outline-none foucs:ring-1 focus:ring-blue-clr"
                     />

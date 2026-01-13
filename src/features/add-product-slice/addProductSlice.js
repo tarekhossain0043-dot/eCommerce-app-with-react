@@ -62,7 +62,7 @@ const recordSlice = createSlice({
     // update records
     updateRecords: (state, action) => {
       const { id, data } = action.payload;
-      const index = state.items.findIndex((r) => r.id === id);
+      const index = state.items.find((r) => r.id === id);
       if (index !== -1) {
         state.items[index] = { ...state.items[index], ...data };
         localStorage.setItem("employeeRecords", JSON.stringify(state.items));

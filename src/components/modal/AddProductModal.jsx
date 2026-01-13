@@ -18,8 +18,8 @@ export default function AddProductModal({ isModal, setIsModal }) {
     price: "",
     rating: "",
   });
-  console.log(formData.image);
-  const [image, setImage] = useState(null);
+
+  const [imrrage, setImage] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +28,7 @@ export default function AddProductModal({ isModal, setIsModal }) {
       id: nanoid(),
       name: "",
       desc: "",
-      image: image,
+      image: "",
       invent: "",
       clr: "",
       price: "",
@@ -37,21 +37,17 @@ export default function AddProductModal({ isModal, setIsModal }) {
     setIsModal(false);
     navigate("/products");
   };
-  console.log(setFormData.image);
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const previewUrl = URL.createObjectURL(file);
-      setImage(previewUrl);
-    }
-  };
+  // const imgUrl = URL.createObjectURL(imrrage);
+  console.log(imrrage);
+
   return (
     <div
       className={`fixed top-0 left-0 w-full h-screen inset-1 z-9999 backdrop-blur-sm ${
         isModal ? "flex" : "hidden"
       } items-center justify-center`}
     >
+      <div>{/* <img src={imgUrl} alt="" /> */}</div>
       <div className="bg-white max-w-lg w-full shadow-sm rounded-sm p-5">
         <div className="flex items-center mb-5 justify-between">
           <h4 className="mb-0">add new product</h4>
@@ -106,8 +102,13 @@ export default function AddProductModal({ isModal, setIsModal }) {
             <input
               type="file"
               name="image"
-              value={formData.image}
-              onChange={(e) => setFormData(handleImageChange(e))}
+              // value={formData.image}
+              // onChange={(e) =>
+              //   setFormData({ ...formData, image: e.target.files[0] })
+              // }
+
+              value={imrrage}
+              onChange={(e) => setImage(e.target.files[0])}
               className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
               id="productImg"
             />

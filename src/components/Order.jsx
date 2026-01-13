@@ -56,17 +56,8 @@ export default function Order() {
   // delete
   const handleDelete = (id) => {
     dispatch(deleteRecord(id));
-    // setSelectedOrderId([]);
-    //   const handleBulkDelete = () => {
-    // dispatch(deleteRecords(selectedIds));
-    // setSelectedIds([]); // reset selection
   };
 
-  //  const handleSelectA llProduct = () => {
-  //     storeRecords.length === selectedOrderId.length
-  //       ? setSelectedOrderId([])
-  //       : setSelectedOrderId(storeRecords.map((selectedpro) => selectedpro.id));
-  //   };
   const filteredProducts =
     filter_category === "All"
       ? storeRecords
@@ -111,11 +102,7 @@ export default function Order() {
         </div>
         {/* {storeRecords.map((record) => ( */}
         <div className="flex items-center gap-3">
-          <button
-            // onClick={() => openEditModal()}
-            // disabled={}
-            className="w-10 h-10 rounded-sm bg- border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold"
-          >
+          <button className="w-10 h-10 rounded-sm bg- border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold">
             <Edit className="w-6 h-6" />
           </button>
           <button
@@ -186,62 +173,64 @@ export default function Order() {
           </p>
         ) : (
           <tbody className="w-full flex flex-col items-center justify-between w-full">
-            {filteredProducts.map((record) => (
-              <tr
-                key={record.id}
-                className="py-3.5 border-b border-slate-100 flex items-center justify-between text-center w-full"
-              >
-                <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                  <input
-                    type="checkbox"
-                    // onChange={() =>
-                    //   setSelectedOrderId((prev) =>
-                    //     prev.includes(selectedOrderId)
-                    //       ? prev.filter((id) => id !== selectedOrderId)
-                    //       : [...prev, selectedOrderId]
-                    //   )
-                    // }
-                    // checked={handleSelectAllProduct}
-                    value={selectedOrderId}
-                    onChange={() => setSelectedOrderId(record.id)}
-                    name="checkbox"
-                    id="checkbox"
-                    className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
-                  />
-                  <label
-                    htmlFor="checkbox"
-                    className="text-default capitalize  font-normal text-[14px] leading-5"
-                  >
-                    {record.id}
-                  </label>
-                </td>
-                <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                  <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                    {record.date}
-                  </span>
-                </td>
-                <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                  <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                    {record.customer}
-                  </span>
-                </td>
-                <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                  <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#C4F8E2] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-[#06A561]">
-                    {record.paymentStatus}
-                  </span>
-                </td>
-                <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                  <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#F99600] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-white">
-                    {record.orderStatus}
-                  </span>
-                </td>
-                <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                  <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                    {record.price}
-                  </span>
-                </td>
-              </tr>
-            ))}
+            {filteredProducts.map((record) => {
+              return (
+                <tr
+                  key={record.id}
+                  className="py-3.5 border-b border-slate-100 flex items-center justify-between text-center w-full"
+                >
+                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+                    <input
+                      type="checkbox"
+                      // onChange={() =>
+                      //   setSelectedOrderId((prev) =>
+                      //     prev.includes(selectedOrderId)
+                      //       ? prev.filter((id) => id !== selectedOrderId)
+                      //       : [...prev, selectedOrderId]
+                      //   )
+                      // }
+                      // checked={handleSelectAllProduct}
+                      value={selectedOrderId}
+                      onChange={() => setSelectedOrderId(record.id)}
+                      name="checkbox"
+                      id="checkbox"
+                      className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
+                    />
+                    <label
+                      htmlFor="checkbox"
+                      className="text-default capitalize  font-normal text-[14px] leading-5"
+                    >
+                      {record.id}
+                    </label>
+                  </td>
+                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+                    <span className="text-default capitalize  font-normal text-[14px] leading-5">
+                      {record.date}
+                    </span>
+                  </td>
+                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+                    <span className="text-default capitalize  font-normal text-[14px] leading-5">
+                      {record.customer}
+                    </span>
+                  </td>
+                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+                    <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#C4F8E2] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-[#06A561]">
+                      {record.paymentStatus}
+                    </span>
+                  </td>
+                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+                    <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#F99600] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-white">
+                      {record.orderStatus}
+                    </span>
+                  </td>
+                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+                    <span className="text-default capitalize  font-normal text-[14px] leading-5">
+                      {record.price}
+                    </span>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         )}
 
