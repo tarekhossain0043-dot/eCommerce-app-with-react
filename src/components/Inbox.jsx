@@ -1,7 +1,15 @@
-import { Plus, Search, Settings, User2, Video } from "lucide-react";
+import {
+  CloudDownload,
+  Plus,
+  Search,
+  Settings,
+  User2,
+  Video,
+} from "lucide-react";
 import inbox1 from "../assets/inbox/Avatar-1.png";
-import { commentsData } from "../assets/assets";
+import { commentsData, formattedTime } from "../assets/assets";
 import User from "./User";
+import { FaFileUpload } from "react-icons/fa";
 export default function Inbox() {
   //   const currentTime = new Date().getUTCDate();
   return (
@@ -13,9 +21,9 @@ export default function Inbox() {
           <span className="font-light text-white">New Message</span>
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-[4fr_7fr] h-screen mt-7 bg-white shadow-sm">
+      <div className="grid sm:grid-cols-[2fr_10fr] lg:grid-cols-[4fr_7fr] h-screen mt-7 overflow-hidden bg-white shadow-sm">
         {/* sidebar */}
-        <div className="border-r border-r-slate-200 max-h-[80] pt-4 pb-20 max-w-90 overflow-hidden">
+        <div className="border-r border-r-slate-200 max-h-[80] pt-4 lg:max-w-90 max-w-20 overflow-hidden">
           <span className="block px-8 w-full text-left text-black text-[16px] font-bold capitalize mb-12 font-bold">
             Conversations
           </span>
@@ -31,7 +39,7 @@ export default function Inbox() {
               <Search className="w-4 h-4 absolute top-1/2 left-5 text-slate-400 transform -translate-y-1/2 cursor-pointer" />
             </form>
           </div>
-          <ul className="flex flex-col mt-6 lg:max-h-210 mb-10 max-h-full overflow-y-scroll">
+          <ul className="flex flex-col mt-6 lg:max-h-200 h-full overflow-y-scroll">
             {commentsData.map((comments, index) => (
               <li
                 key={index}
@@ -40,7 +48,7 @@ export default function Inbox() {
                 <img
                   src={comments.img}
                   alt="user-img"
-                  className="w-12 h-12 rounded-full cursor-pointer transition-all duration-300 ease-in-out rounded-full"
+                  className="w-10 h-10 rounded-full cursor-pointer transition-all duration-300 ease-in-out rounded-full aspect-auto"
                 />
                 {/* comments */}
                 <div>
@@ -66,42 +74,79 @@ export default function Inbox() {
           </ul>
         </div>
         {/* users */}
-        <div className="h-screen p-7">
+        <div className="h-screen py-7 flex flex-col">
           {/* head */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-start justify-between px-3">
             <div className="flex items-center gap-1">
-              <h4 className="relative">Luis Pittman</h4>
+              <span className="relative text-3xl sm:text-xl font-bold">
+                Luis Pittman
+              </span>
               <span className="w-2 h-2 rounded-full bg-[#1FD286]"></span>
             </div>
             <div className="flex items-center gap-5">
-              <span>
-                <User2 className="w-5 h-5" />
+              <span className="flex items-center justify-center w-8 h-8 rounded-full cursor-pointer transition-all duration-300 ease-in-out  relative cursor-pointer transition-all duration-300 ease-in-out hover:bg-slate-200 bg-slate-100 text-default">
+                <User2 className="w-5 h-5 " />
+                <span className="absolute top-0.5 z-9999 right-0 w-2 h-2 bg-green-400 rounded-full"></span>
               </span>
-              <span>
+              <span className="sm:hidden">
                 <Video className="w-5 h-5" />
               </span>
-              <span>
+              <span className="sm:hidden">
                 <Settings className="w-5 h-5" />
               </span>
             </div>
           </div>
-          <hr className="w-full h-px bg-slate-100 my-7" />
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded-full flex items-center gap-4 w-fit">
-              <img src={inbox1} alt="" />
-              <span className="text-white bg-blue-2 p-3 rounded-sm">
-                Hi, I wonder when if there is going to be anything new for
-                spring?
-              </span>
+          <hr className="w-full h-px bg-slate-100 mt-7 mb-4" />
+          <div className="flex-1 h-full px-3 overflow-y-scroll mb-4">
+            <div className="h-full">
+              <div className="flex items-start gap-2.5 mb-10">
+                <img className="w-8 h-8 rounded-full" src={inbox1} alt="User" />
+                <div className="flex flex-col relative w-fit leading-1.5 p-4 border-gray-200 bg-blue-600 rounded-sm ">
+                  <span className="text-sm font-normal text-white mb-0">
+                    Hi, I wonder if there is going to be anything new Lorem
+                    ipsum dolor sit amet consectetur adipisicing elit. Fugit
+                    minima facilis eum ea vel alias iste recusandae, totam cum
+                    dolorum? for spring?
+                  </span>
+                  <span className="absolute left-0 -bottom-5 text-default text-xs">
+                    {formattedTime}
+                  </span>
+                </div>
+              </div>
+
+              {/* Right Aligned Message (Outgoing) */}
+              <div className="relative">
+                <div className="flex items-start justify-end gap-2.5 mb-4">
+                  <div className="flex flex-col w-fit rounded-sm leading-1.5 p-4 border-gray-200 bg-gray-100">
+                    <span className="text-sm font-normal text-black">
+                      Hi! Yes, we have a new collection launching next week.
+                    </span>
+                  </div>
+                  <img className="w-8 h-8 rounded-full" src={inbox1} alt="Me" />
+                </div>
+                <span className="absolute right-10 -bottom-5 text-default text-xs">
+                  {formattedTime}
+                </span>
+              </div>
             </div>
           </div>
-          <div className="flex items-end justify-end gap-2">
-            <div className="w-4 h-4 rounded-full flex items-center gap-4">
-              <span className="text-white bg-blue-2 p-3 rounded-sm">
-                Hi, I wonder when if there is going to be anything new for
-                spring?
-              </span>
-              <img src={inbox1} alt="" />
+          {/* bottom */}
+          <div className="border-t border-slate-200 pt-2 pb-1 px-3">
+            <div className="flex items-center justify-between gap-7 ring-1 ring-slate-100 px-2 rounded-sm">
+              <input
+                type="text"
+                className="w-full border-none cursor-pointer transition-all duration-300 ease-in-out capitalize py-4 rounded-sm cursor-pointer px-5 outline-none cursor-pointer transition-all duration-300 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default text-default"
+                placeholder="Your message…"
+              />
+              <div className="flex items-center gap-4">
+                <CloudDownload className="w-5 h-5 cursor-pointer text-default cursor-pointer transition-all duration-300 ease-in-out hover:text-blue-clr" />
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-clr text-white capitalize text-sm font-medium rounded-sm shadow-sm"
+                >
+                  Send
+                </button>
+              </div>
             </div>
           </div>
         </div>

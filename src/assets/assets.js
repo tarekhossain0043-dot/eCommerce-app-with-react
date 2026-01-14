@@ -451,7 +451,7 @@ export const faqCollapse = [
 ];
 const now = new Date();
 
-const formattedTime = now.toLocaleTimeString("en-US", {
+export const formattedTime = now.toLocaleTimeString("en-US", {
   hour: "numeric",
   minute: "2-digit",
   hour12: true,
