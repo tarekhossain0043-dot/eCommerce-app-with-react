@@ -31,6 +31,7 @@ import Accounts from "./components/settings/Accounts";
 import Security from "./components/settings/Security";
 import Pricing from "./components/pricing/Pricing";
 import Inbox from "./components/Inbox";
+import EditCategory from "./components/modal/EditCategory";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -90,6 +91,7 @@ export default function App() {
             <Route path="/security" element={<Security />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/inbox" element={<Inbox />} />
+            <Route path="/edit-category" element={<EditCategory />} />
           </Route>
         </Route>
       </Routes>

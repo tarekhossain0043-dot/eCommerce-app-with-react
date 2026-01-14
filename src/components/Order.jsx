@@ -10,9 +10,41 @@ import {
   selectFilterRecords,
 } from "../features/add-product-slice/addProductSlice";
 import Pagination from "./Pagination";
+import { toast } from "react-toastify";
 
 export default function Order() {
-  const [selectedOrderId, setSelectedOrderId] = useState("");
+  const [selectedOrderId, setSelectedOrderId] = useState([]);
+  const handleSelect = (id) => {
+    if (selectedOrderId.includes(id)) {
+      setSelectedOrderId(selectedOrderId.filter((itemId) => itemId !== id));
+    } else {
+      setSelectedOrderId(...selectedOrderId, id);
+    }
+  };
+
+  // const confirmMessage = `Are you sure you want to delete these ${selectedIds.length} item(s)?`;
+
+  //   if (window.confirm(confirmMessage)) {
+  //     // Filter kore selected items gulo bad deya
+  //     const remainingProducts = products.filter(
+  //       (product) => !selectedIds.includes(product.id)
+  //     );
+  //     setProducts(remainingProducts);
+  //     setSelectedIds([]); // Selection clear kora
+  //     alert("Items deleted successfully!");
+  //   }
+
+  const handleDelete = () => {
+    if (selectedOrderId.length === 0) {
+      alert("Please select at least one item!");
+      return;
+    } else {
+      dispatch(deleteRecord(selectedOrderId));
+      toast("order item deleted successfully!");
+    }
+  };
+  console.log(selectedOrderId);
+
   const { setHeaderTitle, setHeaderBtns } = useOutletContext();
   const navigate = useNavigate();
   useEffect(() => {
@@ -36,7 +68,7 @@ export default function Order() {
       setHeaderBtns(null);
     };
   }, [setHeaderTitle, setHeaderBtns, navigate]);
-  const [filter_category, setFilter_category] = useState("All");
+  const [filter_category, setFilter_category] = useState("Filter");
   console.log(filter_category);
   // const [isOpenFilter, setIsOpenFilter] = useState(false);
   // const handleFilter = (filterItem) => {
@@ -47,58 +79,69 @@ export default function Order() {
 
   const dispatch = useDispatch();
   const filterRecords = useSelector(selectFilterRecords);
-  // const allRecords = useSelector(selectAllRecords);
+  const filterProductData = filterRecords.filter((filterPro) => {
+    if (filter_category === "Filter") return filterRecords;
+    return (
+      // filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase(),
+      filterPro.orderStatus.toLowerCase() &&
+      filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase()
+    );
+  });
   const searchTerms = useSelector(selectSearchTerms);
 
   const storeRecords = [...filterRecords].sort((a, b) => b.id - a.id);
   // console.log(selectedId);
 
   // delete
-  const handleDelete = (id) => {
-    dispatch(deleteRecord(id));
+  // const handleDelete = (id) => {
+  //   dispatch(deleteRecord(id));
+  // };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Shipped":
+        return "bg-[#5A607F]";
+      case "Received":
+        return "bg-[#1E5EFF]";
+      default:
+        return "bg-[#F99600]";
+    }
   };
 
-  const filteredProducts =
-    filter_category === "All"
-      ? storeRecords
-      : storeRecords.filter(
-          (product) =>
-            product.paymentStatus || product.orderStatus === filter_category
-        );
   return (
     <div className="p-6 bg-white shadow-sm rounded-sm border border-slate-50 mt-4">
       {/* head of order */}
       <div className="flex items-center justify-between">
-        {/* filter area */}
-        <select
-          name="category"
-          id="category"
-          value={filter_category}
-          onChange={(e) => setFilter_category(e.target.value)}
-          className="w-fit px-4 py-2 ring-slate-100 text-slate-400 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-slate-100"
-        >
-          <option value="all">All</option>
-          <option value="paid">Paid</option>
-          <option value="unpaid">Unpaid</option>
-          <option value="teady">teady</option>
-          <option value="seady">seady</option>
-          <option value="ready">Ready</option>
-          <option value="navi">navi</option>
-          <option value="unready">Unready</option>
-        </select>
-        <div className="flex-1 w-full px-10 hidden md:block">
-          <form className="relative">
-            <input
-              type="text"
-              name="search"
-              value={searchTerms}
-              onChange={(e) => dispatch(setSearchTerm(e.target.value))}
-              placeholder="search anything.."
-              id="search"
-              className="px-4 text-sm pl-12 w-full py-3 bg-transparent text-default cursor-pointer outline-none ring-1 ring-blue-clr focus:ring-primary rounded-sm transition-all duration-300 ease-in-out"
-            />
-            <Search className="w-4 h-4 absolute top-1/2 left-5 text-slate-400 transform -translate-y-1/2 cursor-pointer" />
-          </form>
+        <div className="flex items-center gap-3 max-w-[80%] w-full">
+          {/* filter area */}
+          <select
+            name="category"
+            id="category"
+            value={filter_category}
+            onChange={(e) => setFilter_category(e.target.value)}
+            className="max-w-45 w-full px-2 rounded-sm py-3 ring-slate-100 ring-1 text-slate-400 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:ring-blue-clr"
+          >
+            <option value="Filter">Filter</option>
+            <option value="Paid">Paid</option>
+            <option value="Pending">Pending</option>
+            <option value="Ready">Ready</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Received">Received</option>
+          </select>
+          <div className="max-w-87.5 flex-1 w-full hidden md:block">
+            <form className="relative">
+              <input
+                type="text"
+                name="search"
+                value={searchTerms}
+                onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+                placeholder="search anything.."
+                id="search"
+                className="px-4 text-sm pl-12 w-full py-3 bg-transparent text-default cursor-pointer outline-none ring-1 ring-slate-100 rounded-sm focus:blue-clrrounded-sm transition-all duration-300 ease-in-out"
+              />
+              <Search className="w-4 h-4 absolute top-1/2 left-5 text-slate-400 transform -translate-y-1/2 cursor-pointer" />
+            </form>
+          </div>
         </div>
         {/* {storeRecords.map((record) => ( */}
         <div className="flex items-center gap-3">
@@ -107,136 +150,99 @@ export default function Order() {
           </button>
           <button
             // disabled={isCheckboxIsChecked}
-            onClick={() => handleDelete(selectedOrderId)}
+            onClick={() => handleDelete()}
+            disabled={selectedOrderId.length === 0}
             className={`w-10 h-10
                 
-              rounded-sm border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer transition-all duration-300 ease-in-out flex items-center justify-center text-blue-clr font-bold`}
+              rounded-sm border-slate-200 border hover:bg-blue-clr hover:text-white disabled:bg-slate-300 disabled:cursor-not-allowed cursor-pointer transition-all duration-300 ease-in-out flex items-center justify-center text-blue-clr font-bold`}
           >
             <Trash2 className="w-6 h-6" />
           </button>
         </div>
         {/* ))} */}
       </div>
-
-      <table className="mt-4 w-full max-[600px]:overflow-x-scroll max-[600px]:w-100">
-        <thead>
-          <tr className="flex items-center justify-between border-b-2 border-slate-100 py-3">
-            <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+      {/* filtered product */}
+      {filterProductData.length === 0 ? (
+        <p className="text-center py-4 bg-slate-50 mt-4">
+          there haven't any orders yeat
+        </p>
+      ) : (
+        <div className="w-full mt-3">
+          {/* order head */}
+          <div className="grid md:grid-cols-12 grid-cols-1 gap-4 border-b py-3 font-semibold text-gray-600">
+            <div className="col-span-1 md:col-span-2">
               <input
                 type="checkbox"
-                // onChange={handleSelectAllProduct}
-                // checked={
-                //   storeRecords.length > 0 &&
-                //   storeRecords.length === selectedOrderId.length
-                // }
-                name="checkbox"
-                id="checkbox"
-                className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
+                name="checkbox-label"
+                id="checkbox-label"
+                className="w-3 h-3 mr-4 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
               />
-              <label
-                htmlFor="checkbox"
-                className="text-default capitalize  font-normal text-[14px] leading-5"
+              <label htmlFor="checkbox-label">Order</label>
+            </div>
+            <div className="md:col-span-2 col-span-1">Date</div>
+            <div className="md:col-span-2 col-span-1">Customer</div>
+            <div className="md:col-span-2 col-span-1">Payment status</div>
+            <div className="md:col-span-2 col-span-1">Order Status</div>
+            <div className="md:col-span-2 col-span-1">Total</div>
+          </div>
+          {/* order body */}
+          {filterProductData.map((record) => {
+            return (
+              <div
+                key={record.id}
+                class="grid md:grid-cols-12 cursor-pointer transition-all duration-500 ease-in-out col-span-1 gap-4 last-of-type:border-none py-4 items-center"
               >
-                Order
-              </label>
-            </th>
-            <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-              <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                Date
-              </span>
-            </th>
-            <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-              <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                Customer
-              </span>
-            </th>
-            <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-              <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                Payment status
-              </span>
-            </th>
-            <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-              <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                Order Status
-              </span>
-            </th>
-            <th className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-              <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                Total
-              </span>
-            </th>
-          </tr>
-        </thead>
-        {filteredProducts.length === 0 ? (
-          <p className="text-center py-4 bg-slate-50">
-            there haven't any orders yeat
-          </p>
-        ) : (
-          <tbody className="w-full flex flex-col items-center justify-between w-full">
-            {filteredProducts.map((record) => {
-              return (
-                <tr
-                  key={record.id}
-                  className="py-3.5 border-b border-slate-100 flex items-center justify-between text-center w-full"
-                >
-                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
+                <div className="flex items-center gap-2 md:col-span-2 col-span-1">
+                  <div className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
                     <input
                       type="checkbox"
-                      // onChange={() =>
-                      //   setSelectedOrderId((prev) =>
-                      //     prev.includes(selectedOrderId)
-                      //       ? prev.filter((id) => id !== selectedOrderId)
-                      //       : [...prev, selectedOrderId]
-                      //   )
-                      // }
-                      // checked={handleSelectAllProduct}
-                      value={selectedOrderId}
-                      onChange={() => setSelectedOrderId(record.id)}
-                      name="checkbox"
-                      id="checkbox"
-                      className="border border-slate-100 accent-blue-clr cursor-pointer transition-all duration-300 ease-in-out rounded-sm"
+                      onChange={() => handleSelect(record.id)}
+                      className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
                     />
-                    <label
-                      htmlFor="checkbox"
-                      className="text-default capitalize  font-normal text-[14px] leading-5"
-                    >
+                    <span class="font-semibold text-default mb-0 transition-all duration-300 ease-in-out hover:text-primary">
                       {record.id}
-                    </label>
-                  </td>
-                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                    <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                      {record.date}
                     </span>
-                  </td>
-                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                    <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                      {record.customer}
-                    </span>
-                  </td>
-                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                    <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#C4F8E2] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-[#06A561]">
-                      {record.paymentStatus}
-                    </span>
-                  </td>
-                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                    <span className="text-default capitalize  font-normal text-[14px] leading-5 bg-[#F99600] px-2 py-2 capitalize cursor-pointer transition-all duration-500 ease-in-out rounded-sm text-white">
-                      {record.orderStatus}
-                    </span>
-                  </td>
-                  <td className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
-                    <span className="text-default capitalize  font-normal text-[14px] leading-5">
-                      {record.price}
-                    </span>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        )}
+                  </div>
+                </div>
 
-        {/* pagination area */}
-        <Pagination orderNumbers={storeRecords} />
-      </table>
+                <div className="md:col-span-2 col-span-1">
+                  <span className="text-default font-semibold capitalize  font-normal text-[14px] leading-5">
+                    {record.dates}
+                  </span>
+                </div>
+                <div className="md:col-span-2 col-span-1">
+                  <span className="text-default font-semibold capitalize  font-normal text-[14px] leading-5">
+                    {record.customer}
+                  </span>
+                </div>
+
+                <div
+                  className={`${
+                    record.paymentStatus === "Pending"
+                      ? "bg-[#E6E9F4] text-[#5A607F]"
+                      : "bg-green-100 text-green-700"
+                  } >  font-semibold col-span-1 md:col-span-2  px-2 py-1 rounded w-fit`}
+                >
+                  {record?.paymentStatus}
+                </div>
+                <div
+                  className={`${getStatusColor(
+                    record?.orderStatus
+                  )} col-span-1 md:col-span-2 text-white px-2 py-1 font-semibold rounded w-fit`}
+                >
+                  {record?.orderStatus}
+                </div>
+                <div>
+                  <span className="text-default font-bold capitalize  font-semibold text-[14px] leading-5">
+                    {record.price}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      <Pagination orderNumbers={storeRecords} />
     </div>
   );
 }

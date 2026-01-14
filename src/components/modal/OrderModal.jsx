@@ -11,9 +11,18 @@ export default function OrderModal() {
 
   const navigete = useNavigate();
 
+  const now = new Date();
+
+  const formattedTime = now.toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+  // const today = new Date().toISOString().split("T")[0];
+
   // order from data data
   const [formData, setFormData] = useState({
-    date: "",
+    dates: formattedTime,
     customer: "",
     paymentStatus: "",
     orderStatus: "",
@@ -75,12 +84,12 @@ export default function OrderModal() {
           <div className="flex flex-col gap-2 w-full">
             <label htmlFor="date">Date</label>
             <input
-              type="date"
+              type={formData.dates}
               name="date"
               placeholder="Date"
-              value={formData.date.toWellFormed()}
+              value={formData.dates}
               onChange={(e) =>
-                setFormData({ ...formData, date: e.target.value })
+                setFormData({ ...formData, dates: e.target.value })
               }
               className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
             />
@@ -109,8 +118,9 @@ export default function OrderModal() {
                 setFormData({ ...formData, paymentStatus: e.target.value })
               }
             >
-              <option value="paid">paid</option>
-              <option value="unpaid">unpaid</option>
+              <option value="Choose one">Choose One</option>
+              <option value="Paid">Paid</option>
+              <option value="Pending">Pending</option>
             </select>
           </div>
           <div className="flex flex-col gap-2 w-full">
@@ -124,8 +134,10 @@ export default function OrderModal() {
                 setFormData({ ...formData, orderStatus: e.target.value })
               }
             >
-              <option value="ready">ready</option>
-              <option value="unready">unready</option>
+              <option value="Choose One">Choose One</option>
+              <option value="Ready">Ready</option>
+              <option value="Shipped">Shipped</option>
+              <option value="Received">Received</option>
             </select>
           </div>
         </div>

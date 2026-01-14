@@ -2,6 +2,7 @@ import { Edit, Plus } from "lucide-react";
 import React, { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { product_Category } from "../../assets/assets";
+import EditCategory from "../modal/EditCategory";
 
 export default function Category() {
   const { setHeaderTitle, setHeaderBtns } = useOutletContext();
@@ -27,29 +28,41 @@ export default function Category() {
   return (
     <div className="mt-7">
       <div className="grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-7.5">
-        {product_Category.map((category, index) => (
-          <div
-            key={index}
-            className="rounded-sm group relative cursor-pointer cursor-pointer hover:shadow-md transition-all duration-300 ease-in-out"
-          >
-            <img
-              src={category.image}
-              alt="product-img"
-              className="w-full max-h-60 object-cover"
-            />
-            <div className="absolute transform scale-75 transition-all duration-500 ease-in-out group-hover:scale-100 group-hover:opacity-100 opacity-0 top-0 left-0 w-full h-full flex items-center justify-center transform backdrop-blur-sm inset-1">
-              <div className="flex items-center gap-2 text-blue-clr bg-white shadow-sm text-[18px] font-medium px-8 py-3 rounded-sm">
-                <Edit className="w-5 h-5 cursor-pointer transition-all duration-300 ease-in-out hover:text-primary" />
-                Edit
+        {product_Category.map((category, index) => {
+          const { image, title, desc } = category;
+
+          return (
+            <div
+              key={index}
+              className="rounded-sm group relative cursor-pointer cursor-pointer hover:shadow-md transition-all duration-300 ease-in-out"
+            >
+              <img
+                src={image}
+                alt="product-img"
+                className="w-full max-h-60 object-cover"
+              />
+              <div className="absolute transform scale-75 transition-all duration-500 ease-in-out group-hover:scale-100 group-hover:opacity-100 opacity-0 top-0 left-0 w-full h-full flex items-center justify-center transform backdrop-blur-sm inset-1">
+                <div
+                  onClick={() =>
+                    navigate("/edit-category", {
+                      state: { image, title, desc },
+                    })
+                  }
+                  className="flex items-center gap-2 text-blue-clr bg-white shadow-sm text-[18px] font-medium px-8 py-3 rounded-sm"
+                >
+                  <Edit className="w-5 h-5 cursor-pointer transition-all duration-300 ease-in-out hover:text-primary" />
+                  Edit
+                </div>
+              </div>
+              <div className="px-7 py-5 bg-white shadow rounded-br-sm rounded-bl-sm">
+                <h4>{title}</h4>
+                <span className="text-default">{desc}</span>
               </div>
             </div>
-            <div className="px-7 py-5 bg-white shadow rounded-br-sm rounded-bl-sm">
-              <h4>{category.title}</h4>
-              <span className="text-default">{category.desc}</span>
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
+      <EditCategory />
     </div>
   );
 }

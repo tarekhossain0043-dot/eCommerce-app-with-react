@@ -5,10 +5,6 @@ import FileDropCompo from "./FileDropCompo";
 import CustomCheckbox from "./CustomCheckbox";
 import Tags from "./Tags";
 import Seo_settings from "./Seo_settings";
-// import { useAddProductsMutation } from "../features/api/apiSlice";
-// import { toast } from "react-toastify";
-// import { useDispatch, useSelector } from "react-redux";
-// import { selectAllProducts } from "../features/add-product-slice/addProductSlice";
 
 export default function AddProduct() {
   const [isModalOpen, setIsModalOpen] = useState(false);

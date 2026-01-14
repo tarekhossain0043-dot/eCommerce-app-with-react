@@ -104,11 +104,11 @@ export const selectFilterRecords = (state) => {
   const term = state.records.searchTerms.toLowerCase();
   return state.records.items.filter(
     (r) =>
-      r.date.toLowerCase().includes(term) ||
-      r.customer.toLowerCase().includes(term) ||
-      r.paymentStatus.toLowerCase().includes(term) ||
-      r.orderStatus.toLowerCase().includes(term) ||
-      r.price.toLowerCase().includes(term)
+      r.date?.toLowerCase().includes(term) ||
+      r.customer?.toLowerCase().includes(term) ||
+      r.paymentStatus?.toLowerCase().includes(term) ||
+      r.orderStatus?.toLowerCase().includes(term) ||
+      r.price?.toLowerCase().includes(term)
   );
 };
 

@@ -1,5 +1,5 @@
 import { Plus, Search, Settings, User2, Video } from "lucide-react";
-// import inbox1 from "../assets/inbox/Avatar-1.png";
+import inbox1 from "../assets/inbox/Avatar-1.png";
 import { commentsData } from "../assets/assets";
 import User from "./User";
 export default function Inbox() {
@@ -13,13 +13,13 @@ export default function Inbox() {
           <span className="font-light text-white">New Message</span>
         </button>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 h-screen mt-7 bg-white shadow-sm">
+      <div className="grid grid-cols-1 md:grid-cols-[4fr_7fr] h-screen mt-7 bg-white shadow-sm">
         {/* sidebar */}
-        <div className="border-r border-r-slate-200 max-h-[80] px-8 pt-4 pb-20 max-w-[384px] overflow-hidden">
-          <span className="block w-full text-left text-black text-[16px] font-bold capitalize mb-12 font-bold">
+        <div className="border-r border-r-slate-200 max-h-[80] pt-4 pb-20 max-w-90 overflow-hidden">
+          <span className="block px-8 w-full text-left text-black text-[16px] font-bold capitalize mb-12 font-bold">
             Conversations
           </span>
-          <div className="w-full hidden md:block">
+          <div className="w-full hidden md:block px-8">
             <form className="relative">
               <input
                 type="text"
@@ -31,11 +31,11 @@ export default function Inbox() {
               <Search className="w-4 h-4 absolute top-1/2 left-5 text-slate-400 transform -translate-y-1/2 cursor-pointer" />
             </form>
           </div>
-          <ul className="flex flex-col mt-6 lg:max-h-screen max-h-full overflow-y-scroll">
+          <ul className="flex flex-col mt-6 lg:max-h-210 mb-10 max-h-full overflow-y-scroll">
             {commentsData.map((comments, index) => (
               <li
                 key={index}
-                className="px-8 py-6 bg-white text-black transition-all duration-300 ease-in-out hover:bg-[#A1A7C4]/40 cursor-pointer transition-all flex items-center gap-4"
+                className="px-8 py-6 bg-white text-black transition-all duration-300 ease-in-out hover:bg-[#A1A7C4]/40 cursor-pointer transition-all flex items-center justify-between gap-4"
               >
                 <img
                   src={comments.img}
@@ -75,17 +75,35 @@ export default function Inbox() {
             </div>
             <div className="flex items-center gap-5">
               <span>
-                <User2 className="w-4 h-4" />
+                <User2 className="w-5 h-5" />
               </span>
               <span>
-                <Video className="w-4 h-4" />
+                <Video className="w-5 h-5" />
               </span>
               <span>
-                <Settings className="w-4 h-4" />
+                <Settings className="w-5 h-5" />
               </span>
             </div>
           </div>
           <hr className="w-full h-px bg-slate-100 my-7" />
+          <div className="flex items-center gap-2">
+            <div className="w-4 h-4 rounded-full flex items-center gap-4 w-fit">
+              <img src={inbox1} alt="" />
+              <span className="text-white bg-blue-2 p-3 rounded-sm">
+                Hi, I wonder when if there is going to be anything new for
+                spring?
+              </span>
+            </div>
+          </div>
+          <div className="flex items-end justify-end gap-2">
+            <div className="w-4 h-4 rounded-full flex items-center gap-4">
+              <span className="text-white bg-blue-2 p-3 rounded-sm">
+                Hi, I wonder when if there is going to be anything new for
+                spring?
+              </span>
+              <img src={inbox1} alt="" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
