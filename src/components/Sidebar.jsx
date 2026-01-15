@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, House, Menu, X } from "lucide-react";
 import { sidebarData } from "../assets/assets";
 import sidebarImg from "../assets/sidebar-img.png";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectAllRecords } from "../features/add-product-slice/addProductSlice";
 
@@ -38,7 +38,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
         {sidebarData.map((menuItem, index) => {
           const hasIcon = !!menuItem.Icon;
           return (
-            <Link
+            <NavLink
               to={menuItem.to}
               onClick={() => handleMenu(menuItem.label)}
               key={index}
@@ -66,7 +66,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
                     {orderNum.length}
                   </span>
                 )}
-            </Link>
+            </NavLink>
           );
         })}
       </div>

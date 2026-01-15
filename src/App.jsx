@@ -32,6 +32,9 @@ import Security from "./components/settings/Security";
 import Pricing from "./components/pricing/Pricing";
 import Inbox from "./components/Inbox";
 import EditCategory from "./components/modal/EditCategory";
+import Default_profile from "./components/settings/Default_profile";
+import CustomToast from "./components/CustomToast";
+import DeleteSuccess from "./components/DeleteSuccess";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -58,7 +61,6 @@ export default function App() {
       loading....
     </p>;
   }
-  // modal
   return (
     <>
       <Routes>
@@ -85,13 +87,16 @@ export default function App() {
             <Route path="/create-coupons" element={<CreateCoupons />} />
             <Route path="/order-modal" element={<OrderModal />} />
             <Route path="/create-category" element={<CreateCoupons />} />
-            <Route path="/setting" element={<Profile />} />
-            <Route path="/notification" element={<Notification />} />
-            <Route path="/accounts" element={<Accounts />} />
-            <Route path="/security" element={<Security />} />
+            <Route path="/setting" element={<Profile />}>
+              <Route index element={<Default_profile />} />
+              <Route path="/setting/notification" element={<Notification />} />
+              <Route path="/setting/accounts" element={<Accounts />} />
+              <Route path="/setting/security" element={<Security />} />
+            </Route>
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/inbox" element={<Inbox />} />
             <Route path="/edit-category" element={<EditCategory />} />
+            <Route path="/custom-toast" element={<CustomToast />} />
           </Route>
         </Route>
       </Routes>
@@ -106,7 +111,6 @@ export default function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        // theme="dark" // Options: "light", "dark", "colored"
       />
     </>
   );

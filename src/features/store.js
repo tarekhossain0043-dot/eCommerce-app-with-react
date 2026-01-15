@@ -4,6 +4,7 @@ import getTagSlice from "./tagSlice/tagSlice";
 import getCategorySlice from "./createCategorySlice/categorySlice";
 import getRecordSlice from "./add-product-slice/addProductSlice";
 import getProductSlice from "./product-slice/productSlice";
+import getModalSlice from "./CustomModal/modalSlice";
 const store = configureStore({
   reducer: {
     authentication: getAuthSlice,
@@ -11,6 +12,7 @@ const store = configureStore({
     newCategory: getCategorySlice,
     records: getRecordSlice,
     products: getProductSlice,
+    modal: getModalSlice,
   },
 });
 

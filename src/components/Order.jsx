@@ -11,6 +11,7 @@ import {
 } from "../features/add-product-slice/addProductSlice";
 import Pagination from "./Pagination";
 import { toast } from "react-toastify";
+import Order_not_found from "./product-not-found-comopo/Order_not_found";
 
 export default function Order() {
   const [selectedOrderId, setSelectedOrderId] = useState([]);
@@ -150,7 +151,8 @@ export default function Order() {
           </button>
           <button
             // disabled={isCheckboxIsChecked}
-            onClick={() => handleDelete()}
+            // onClick={() => handleDelete()}
+            onClick={() => navigate("/custom-toast")}
             disabled={selectedOrderId.length === 0}
             className={`w-10 h-10
                 
@@ -163,9 +165,7 @@ export default function Order() {
       </div>
       {/* filtered product */}
       {filterProductData.length === 0 ? (
-        <p className="text-center py-4 bg-slate-50 mt-4">
-          there haven't any orders yeat
-        </p>
+        <Order_not_found />
       ) : (
         <div className="w-full mt-3">
           {/* order head */}
@@ -199,7 +199,7 @@ export default function Order() {
                       onChange={() => handleSelect(record.id)}
                       className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
                     />
-                    <span class="font-semibold text-default mb-0 transition-all duration-300 ease-in-out hover:text-primary">
+                    <span className="font-semibold text-default mb-0 transition-all duration-300 ease-in-out hover:text-primary">
                       {record.id}
                     </span>
                   </div>

@@ -263,18 +263,18 @@ export const settingMenuOrder = [
   },
   {
     id: nanoid(3),
-    to: "/notification",
+    to: "notification",
     label: "Notifications",
   },
   {
     id: nanoid(3),
-    to: "/accounts",
+    to: "accounts",
     label: "Accounts",
   },
   {
     id: nanoid(3),
     label: "Security",
-    to: "/security",
+    to: "security",
   },
 ];
 
@@ -672,5 +672,38 @@ export const commentsData = [
     desc: "Hello, I’m interested in this item...",
     comment: "08",
     time: formattedTime,
+  },
+];
+
+export const notification = [
+  {
+    id: nanoid(),
+    title: "Personalized Offers",
+    type: true,
+    desc: "Receive offers made special for you",
+  },
+  {
+    id: nanoid(),
+    title: "Online Webinars",
+    type: true,
+    desc: "Get notified about upcoming webinars",
+  },
+  {
+    id: nanoid(),
+    title: "New Features",
+    type: true,
+    desc: "Updates about new features and product releases",
+  },
+  {
+    id: nanoid(),
+    title: "Security and Billing",
+    type: false,
+    desc: "Account security and notifications about billing",
+  },
+  {
+    id: nanoid(),
+    title: "Marketing",
+    type: false,
+    desc: "Receive marketing newsletters about our new products.",
   },
 ];

@@ -43,7 +43,7 @@ export default function Inbox() {
             {commentsData.map((comments, index) => (
               <li
                 key={index}
-                className="min-[1050px]:px-8 mx-5 min-[1050px]:py-6 max-[1050px]:hover:ring-1 max-[1050px]:ring-blue-clr max-[1050px]:rounded-full max-[1050px]:mb-6 bg-white text-black transition-all duration-300 ease-in-out min-[1050px]hover:bg-[#A1A7C4]/40 cursor-pointer transition-all flex items-center justify-between gap-4"
+                className="min-[1050px]:px-8 max-[1050px]:mx-5 min-[1050px]:py-6 max-[1050px]:hover:ring-1 max-[1050px]:ring-blue-clr max-[1050px]:rounded-full max-[1050px]:mb-6 bg-white text-black transition-all duration-300 ease-in-out min-[1050px]:hover:bg-[#A1A7C4]/40 cursor-pointer transition-all flex items-center justify-between gap-4"
               >
                 <img
                   src={comments.img}
@@ -78,7 +78,7 @@ export default function Inbox() {
           {/* head */}
           <div className="flex items-center justify-between px-3">
             <div className="flex items-center gap-1">
-              <span className="relative text-3xl max-[500px]:text-xl font-bold">
+              <span className="relative text-2xl max-[500px]:text-xl font-bold">
                 Luis Pittman
               </span>
               <span className="w-2 h-2 rounded-full bg-[#1FD286]"></span>
@@ -96,7 +96,7 @@ export default function Inbox() {
               </span>
             </div>
           </div>
-          <hr className="w-full h-px bg-slate-100 mt-7 mb-4" />
+          <hr className="w-full h-px bg-slate-100 mt-4 mb-4" />
           <div className="flex-1 h-full px-3 overflow-y-scroll mb-4">
             <div className="h-full">
               <div className="flex items-start gap-2.5 mb-10">
@@ -135,14 +135,14 @@ export default function Inbox() {
             <div className="flex items-center justify-between gap-7 ring-1 ring-slate-100 px-2 rounded-sm">
               <input
                 type="text"
-                className="w-full border-none cursor-pointer transition-all duration-300 ease-in-out capitalize py-4 rounded-sm cursor-pointer px-5 outline-none cursor-pointer transition-all duration-300 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default text-default"
+                className="w-full border-none cursor-pointer transition-all duration-300 ease-in-out capitalize py-4 rounded-sm cursor-pointer px-5 outline-none cursor-pointer transition-all duration-300 ease-in-out outline-none text-default text-default"
                 placeholder="Your message…"
               />
               <div className="flex items-center gap-4">
                 <CloudDownload className="w-5 h-5 cursor-pointer text-default cursor-pointer transition-all duration-300 ease-in-out hover:text-blue-clr" />
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-blue-clr text-white capitalize text-sm font-medium rounded-sm shadow-sm"
+                  className="px-4 py-2 bg-blue-clr cursor-pointer transition-all duration-300 ease-in-out hover:bg-primary hover:text-white text-white capitalize text-sm font-medium rounded-sm shadow-sm"
                 >
                   Send
                 </button>
