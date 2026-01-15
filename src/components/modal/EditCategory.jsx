@@ -1,23 +1,23 @@
 import { X } from "lucide-react";
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function EditCategory() {
   const [isModal, setIsModal] = useState(true);
-  const location = useLocation();
-  const editData = location.state;
+  // const location = useLocation();
+  // const editData = location.state;
   //   const [editStateData, setEditStateData] = useState([]);
   const navigate = useNavigate();
   const handleModalOpen = () => {
     navigate("/categories");
     setIsModal((prev) => !prev);
   };
-  const [formData, setFormData] = useState({
-    title: "",
-    image: "",
-    desc: "",
-  });
-  console.log(formData.title);
+  // const [formData, setFormData] = useState({
+  //   title: "",
+  //   image: "",
+  //   desc: "",
+  // });
+  // console.log(formData.title);
   return (
     <div>
       <div
@@ -31,8 +31,8 @@ export default function EditCategory() {
             <label htmlFor="editCategory">Category Name</label>
             <input
               type="text"
-              onChange={(e) => setFormData(e.target.value)}
-              value={editData.title}
+              // onChange={(e) => setFormData(e.target.value)}
+              // value={editData.title}
               placeholder="Women Clothes"
               className="w-full border border-slate-100 rounded-sm px-4 py-2 ring-1 ring-slate-200 text-default font-medium capitalize transition-all duration-300 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr"
             />
@@ -41,14 +41,14 @@ export default function EditCategory() {
             <label htmlFor="editCategory">Image</label>
             <input
               type="file"
-              onChange={(e) => setFormData(e.target.value)}
+              // onChange={(e) => setFormData(e.target.value)}
               placeholder="Women Clothes"
               className="w-full border ring-1 ring-slate-200 h-20 px-5 py-3 rounded-sm text-default font-medium capitalize transition-all duration-300 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr"
             />
           </div>
           <input
             type="text"
-            onChange={(e) => setFormData(e.target.value)}
+            // onChange={(e) => setFormData(e.target.value)}
             className="w-full px-3 py-2 bg-slate-100 cursor-pointer transition-all duration-300 ease-in-out ring-1 ring-slate-200 focus:ring-blue-clr"
           />
           <button className="px-5 py-3 bg-transparent ring-1 ring-slate-200 rounded-sm text-blue-clr hover:bg-blue-clr hover:text-white cursor-pointer transition-all duration-300 ease-in-out">

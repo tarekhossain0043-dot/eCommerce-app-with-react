@@ -21,7 +21,7 @@ export default function Inbox() {
           <span className="font-light text-white">New Message</span>
         </button>
       </div>
-      <div className="grid sm:grid-cols-[2fr_10fr] lg:grid-cols-[4fr_7fr] h-screen mt-7 overflow-hidden bg-white shadow-sm">
+      <div className="grid sm:grid-cols-[2fr_10fr] lg:grid-cols-[4fr_7fr] h-screen mt-7 rounded-sm overflow-hidden bg-white shadow-sm">
         {/* sidebar */}
         <div className="border-r border-r-slate-200 max-h-[80] pt-4 lg:max-w-90 max-w-20 overflow-hidden">
           <span className="block px-8 w-full text-left text-black text-[16px] font-bold capitalize mb-12 font-bold">
@@ -34,16 +34,16 @@ export default function Inbox() {
                 name="search"
                 placeholder="search anything.."
                 id="search"
-                className="px-4 text-sm pl-12 w-full py-3 bg-transparent text-default cursor-pointer outline-none ring-1 ring-blue-clr focus:ring-primary rounded-sm transition-all duration-300 ease-in-out"
+                className="px-4 text-sm pl-12 w-full max-[1050px]:hidden py-3 bg-transparent text-default cursor-pointer outline-none ring-1 ring-blue-clr focus:ring-primary rounded-sm transition-all duration-300 ease-in-out"
               />
-              <Search className="w-4 h-4 absolute top-1/2 left-5 text-slate-400 transform -translate-y-1/2 cursor-pointer" />
+              <Search className="w-4 h-4 max-[1050px]:hover:text-primary cursor-pointer transition-all duration-300 ease-in-out min-[1050px]:absolute top-1/2 left-5 text-slate-400 transform -translate-y-1/2 cursor-pointer" />
             </form>
           </div>
-          <ul className="flex flex-col mt-6 lg:max-h-200 h-full overflow-y-scroll">
+          <ul className="flex flex-col mt-6 max-[1050px]:max-h-130 h-full overflow-y-scroll">
             {commentsData.map((comments, index) => (
               <li
                 key={index}
-                className="px-8 py-6 bg-white text-black transition-all duration-300 ease-in-out hover:bg-[#A1A7C4]/40 cursor-pointer transition-all flex items-center justify-between gap-4"
+                className="min-[1050px]:px-8 mx-5 min-[1050px]:py-6 max-[1050px]:hover:ring-1 max-[1050px]:ring-blue-clr max-[1050px]:rounded-full max-[1050px]:mb-6 bg-white text-black transition-all duration-300 ease-in-out min-[1050px]hover:bg-[#A1A7C4]/40 cursor-pointer transition-all flex items-center justify-between gap-4"
               >
                 <img
                   src={comments.img}
@@ -51,7 +51,7 @@ export default function Inbox() {
                   className="w-10 h-10 rounded-full cursor-pointer transition-all duration-300 ease-in-out rounded-full aspect-auto"
                 />
                 {/* comments */}
-                <div>
+                <div className="max-[1020px]:hidden">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <span className="text-[14px] leading-5 font-bold text-black">
@@ -74,11 +74,11 @@ export default function Inbox() {
           </ul>
         </div>
         {/* users */}
-        <div className="h-screen py-7 flex flex-col">
+        <div className="h-screen pt-3 pb-6 flex flex-col">
           {/* head */}
-          <div className="flex items-start justify-between px-3">
+          <div className="flex items-center justify-between px-3">
             <div className="flex items-center gap-1">
-              <span className="relative text-3xl sm:text-xl font-bold">
+              <span className="relative text-3xl max-[500px]:text-xl font-bold">
                 Luis Pittman
               </span>
               <span className="w-2 h-2 rounded-full bg-[#1FD286]"></span>
@@ -88,10 +88,10 @@ export default function Inbox() {
                 <User2 className="w-5 h-5 " />
                 <span className="absolute top-0.5 z-9999 right-0 w-2 h-2 bg-green-400 rounded-full"></span>
               </span>
-              <span className="sm:hidden">
+              <span className="max-[500px]:hidden">
                 <Video className="w-5 h-5" />
               </span>
-              <span className="sm:hidden">
+              <span className="max-[500px]:hidden">
                 <Settings className="w-5 h-5" />
               </span>
             </div>

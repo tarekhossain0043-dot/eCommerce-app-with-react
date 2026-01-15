@@ -15,7 +15,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 600) {
+      if (window.innerWidth > 768) {
         setIsCollapsed(true);
       } else {
         setIsCollapsed(false);
@@ -28,8 +28,8 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   return (
     <div
       className={`${!isCollapsed ? "w-20" : "w-62.5"} flex flex-col ${
-        window.innerHeight > 530 || window.innerHeight < 520
-          ? "h-screen"
+        window.innerHeight > 530
+          ? "min-h-screen h-full"
           : "min-h-screen overflow-y-scroll pb-10"
       }
       transition-all duration-500 pb-25 ease-in-out h-full fixed z-999 overflow-x-hidden top-22.75 left-0 bg-primary p-4 border-r border-slate-100`}

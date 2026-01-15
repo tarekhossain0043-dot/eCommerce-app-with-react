@@ -41,6 +41,7 @@ layer(base);
   --color-yellow: #ffc107;
   --color-header-bg: #070b1d;
   --color-green-clr: #06a561;
+  --font-primary: "Inter", sans-serif;
 }
 
 h3 {
@@ -73,6 +74,7 @@ body {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
+  font-family: "Inter", sans-serif;
 }
 
 ::-webkit-scrollbar {

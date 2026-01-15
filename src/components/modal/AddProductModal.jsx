@@ -19,7 +19,7 @@ export default function AddProductModal({ isModal, setIsModal }) {
     rating: "",
   });
 
-  const [imrrage, setImage] = useState(null);
+  // const [imrrage, setImage] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +39,7 @@ export default function AddProductModal({ isModal, setIsModal }) {
   };
 
   // const imgUrl = URL.createObjectURL(imrrage);
-  console.log(imrrage);
+  // console.log(imrrage);
 
   return (
     <div
@@ -102,13 +102,12 @@ export default function AddProductModal({ isModal, setIsModal }) {
             <input
               type="file"
               name="image"
-              // value={formData.image}
-              // onChange={(e) =>
-              //   setFormData({ ...formData, image: e.target.files[0] })
-              // }
-
-              value={imrrage}
-              onChange={(e) => setImage(e.target.files[0])}
+              value={formData.image}
+              onChange={(e) =>
+                setFormData({ ...formData, image: e.target.value })
+              }
+              // value={imrrage}
+              // onChange={(e) => setImage(e.target.files[0])}
               className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
               id="productImg"
             />
