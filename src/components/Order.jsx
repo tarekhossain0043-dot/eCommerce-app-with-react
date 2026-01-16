@@ -60,7 +60,7 @@ export default function Order() {
         </button>
         <button
           onClick={() => navigate("/order-modal")}
-          className="text-white py-2.5 text-[16px] leading-6 font-normal px-5 flex items-center gap-2 rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
+          className="text-white py-2.5 text-[16px] truncate leading-6 font-normal px-5 flex items-center gap-2 rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
         >
           <Plus className="w-4 h-4 text-white" />
           Add Order
@@ -118,7 +118,7 @@ export default function Order() {
   return (
     <div className="p-6 bg-white shadow-sm rounded-sm border border-slate-50 mt-4">
       {/* head of order */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center gap-3 justify-between">
         <div className="flex items-center gap-3 max-w-[80%] w-full">
           {/* filter area */}
           <select

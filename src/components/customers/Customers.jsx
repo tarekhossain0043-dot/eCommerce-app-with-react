@@ -15,21 +15,23 @@ export default function Customers() {
   return (
     <div>
       <div className="flex items-center justify-between mb-7.5">
-        <h3>Customers</h3>
+        <span className="text-[22px] leading-7 font-bold capitalize text-black">
+          Customers
+        </span>
         <div className="flex items-center gap-3">
           <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
             exports
           </button>
           <button
             onClick={() => navigate("/add_customers")}
-            className="text-white flex items-center gap-2 px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
+            className="text-white flex items-center truncate gap-2 px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
           >
             <Plus className="w-4 h-4" /> Add Customer
           </button>
         </div>
       </div>
       <div className="bg-white p-7.5 rounded-sm">
-        <div className="py-7 bg-white rounded-sm bg-white flex items-center gap-6 mb-5">
+        <div className="py-7 bg-white rounded-sm bg-white flex flex-col items-start md:items-center md:flex-row gap-3 md:gap-5 md:mb-5">
           <button className="inline-block cursor-pointer transition-all duration-300 ease-in-out hover:text-primary transition-all duration-300 ease-in-out hover:text-primary capitalize text-default">
             All Customers
           </button>

@@ -16,7 +16,7 @@ export default function Category_not_found() {
           <span className="block text-black capitalize font-bold">
             Add Products
           </span>
-          <span className="text-[14px] leading-6 text-default font-normal block">
+          <span className="text-[14px] max-[420px]:max-w-75 leading-6 text-default font-normal block">
             Start making sales by adding your products. You can import and
             manage your products at any time.
           </span>

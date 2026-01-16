@@ -69,7 +69,7 @@ export default function DashboardHome() {
               </option>
             </select>
           </div>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col min-[420px]:flex-row min-[420px]:items-center items-start gap-5 min-[420px]:gap-2 justify-between">
             <div className="flex items-center gap-10">
               <div className="flex flex-col gap-1">
                 <h4 className="mb-0">645</h4>

@@ -33,7 +33,7 @@ export default function Transactions() {
         </div>
       </div>
 
-      <div className="grid md:grid-cols-12 col-span-1 w-full border-b last-of-type:border-b-0 py-4 items-center">
+      <div className="grid md:grid-cols-12 col-span-1 w-full border-b last-of-type:border-b-0 py-4 gap-3 items-center">
         {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
           <div>
             <input
@@ -61,7 +61,7 @@ export default function Transactions() {
           {isPayment ? "Paid" : "Pending"}
         </div>
       </div>
-      <div className="grid md:grid-cols-12 col-span-1 w-full border-b last-of-type:border-b-0 py-4 items-center">
+      <div className="grid md:grid-cols-12 col-span-1 w-full border-b gap-3 last-of-type:border-b-0 py-4 items-center">
         {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
           <div>
             <input
@@ -89,7 +89,7 @@ export default function Transactions() {
           {isPayment ? "Paid" : "Pending"}
         </div>
       </div>
-      <div className="grid md:grid-cols-12 col-span-1 w-full border-b last-of-type:border-b-0 py-4 items-center">
+      <div className="grid md:grid-cols-12 col-span-1 w-full border-b gap-3 last-of-type:border-b-0 py-4 items-center">
         {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
           <div>
             <input
@@ -117,7 +117,7 @@ export default function Transactions() {
           {isPayment ? "Paid" : "Pending"}
         </div>
       </div>
-      <div className="grid md:grid-cols-12 col-span-1 w-full py-4 items-center">
+      <div className="grid md:grid-cols-12 col-span-1 w-full py-4 gap-3 items-center">
         {/* <div class="flex items-center gap-2 md:col-span-4 col-span-1">
           <div>
             <input

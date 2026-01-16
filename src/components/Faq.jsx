@@ -5,9 +5,8 @@ export default function Faq() {
   const [openItemId, setOpenItemId] = useState([]);
   const handleIsOpenFaq = (id) => {
     setOpenItemId(id);
-    faqCollapse.find((item) => item.id === faqIte.id);
   };
-  console.log(openItemId);
+
   return (
     <div>
       <div className="flex flex-col w-full mt-4">

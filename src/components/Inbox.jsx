@@ -86,7 +86,7 @@ export default function Inbox() {
             <div className="flex items-center gap-5">
               <span className="flex items-center justify-center w-8 h-8 rounded-full cursor-pointer transition-all duration-300 ease-in-out  relative cursor-pointer transition-all duration-300 ease-in-out hover:bg-slate-200 bg-slate-100 text-default">
                 <User2 className="w-5 h-5 " />
-                <span className="absolute top-0.5 z-9999 right-0 w-2 h-2 bg-green-400 rounded-full"></span>
+                <span className="absolute top-0.5 z-999 right-0 w-2 h-2 bg-green-400 rounded-full"></span>
               </span>
               <span className="max-[500px]:hidden">
                 <Video className="w-5 h-5" />

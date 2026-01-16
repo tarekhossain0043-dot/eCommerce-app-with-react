@@ -14,7 +14,7 @@ export default function Header({ isCollapsed, handleSidebarToggle }) {
       </div>
       <span
         onClick={handleSidebarToggle}
-        className="z-999 w-8 h-8 shadow-sm bg-blue-2 rounded-sm flex items-center justify-center text-[16px] cursor-pointer"
+        className="z-999 w-8 h-8 shadow-sm max-[420px]:hidden bg-blue-2 rounded-sm flex items-center justify-center text-[16px] cursor-pointer"
       >
         {isCollapsed ? (
           <Menu className="w-6 h-6 cursor-pointer text-white" />
