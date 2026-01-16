@@ -4,10 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function CreateCoupons() {
   const [isLoading, setIsLoading] = useState(false);
-  const [couponsData, setCouponsData] = useState({
-    code: "",
-    shipping: "",
-  });
+
   const navigate = useNavigate();
   return (
     <div>

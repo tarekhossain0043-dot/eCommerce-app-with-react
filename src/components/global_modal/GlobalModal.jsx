@@ -8,17 +8,30 @@ import AddCategory from "../category/AddCategory";
 export default function GlobalModal() {
   const {
     isOpen,
-    modalType, // delete modal or success modal
+    // delete modal or success modal
+    modalType,
     modalProps,
   } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
+  // const renderContent = () => {
+  //   switch (modalType) {
+  //     case "Delete_Confirm":
+  //       return <ModalDeleteToast {...modalProps} />;
+  //     case "Add_Category":
+  //       return <AddCategory {...modalProps} />;
+  //     case "Delete_Confirm_Message":
+  //       return <OrderDeleteSuccessMsg {...modalProps} />;
+  //     default:
+  //       return null;
+  //   }
+  // };
   if (!isOpen) return null;
   let content = null;
 
   if (modalType === "Delete_Confirm") {
     content = <ModalDeleteToast {...modalProps} />;
   }
-  if (modalType === "AddCategory") {
+  if (modalType === "Add_Category") {
     content = <AddCategory {...modalProps} />;
   }
   if (modalType === "Delete_Confirm_Message") {

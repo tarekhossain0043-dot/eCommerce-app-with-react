@@ -5,6 +5,7 @@ import { product_Category } from "../../assets/assets";
 import EditCategory from "../modal/EditCategory";
 import Category_not_found from "../product-not-found-comopo/Category_not_found";
 import { useDispatch } from "react-redux";
+import { openModal } from "../../features/CustomModal/modalSlice";
 
 export default function Category() {
   const { setHeaderTitle, setHeaderBtns } = useOutletContext();
@@ -18,9 +19,11 @@ export default function Category() {
         <button
           // onClick={() => navigate("/create-category")}
           onClick={() =>
-            dispatch({
-              open,
-            })
+            dispatch(
+              openModal({
+                type: "Add_Category",
+              })
+            )
           }
           className="text-white py-2.5 text-[16px] leading-6 font-normal px-5 flex items-center gap-2 rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
         >

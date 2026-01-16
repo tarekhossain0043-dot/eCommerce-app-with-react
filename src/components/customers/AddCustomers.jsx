@@ -1,9 +1,9 @@
 import { ArrowLeft } from "lucide-react";
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function AddCustomers() {
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   return (
     <div>
@@ -25,11 +25,12 @@ export default function AddCustomers() {
               Cancel
             </button>
             <button
-              onClick={() => setIsLoading((prev) => !prev)}
-              disabled={isLoading}
+              onClick={() => navigate("/customers")}
+              // disabled={isLoading}
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
-              {!isLoading ? "save" : "saving ...."}
+              {/* {!isLoading ? "save" : "saving ...."} */}
+              save
             </button>
           </div>
         </div>

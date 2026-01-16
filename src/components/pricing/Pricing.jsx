@@ -89,7 +89,7 @@ export default function Pricing() {
           </span>
         </div>
         <div className="py-10 px-7 bg-slate-50 shadow-sm text-center">
-          <div className="py-10 mx-auto max-w-100">
+          <div className="py-10 mx-auto">
             <h4>Frequently Asked Questions</h4>
             <Faq />
           </div>
