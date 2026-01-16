@@ -48,6 +48,7 @@ const recordSlice = createSlice({
   initialState: {
     items: loadRecordFromStorage(),
     searchTerms: "",
+    selectedIds: [],
     nextId: calculateNextId(loadRecordFromStorage()),
   },
   reducers: {
@@ -68,15 +69,7 @@ const recordSlice = createSlice({
         localStorage.setItem("employeeRecords", JSON.stringify(state.items));
       }
     },
-    // delete records
-    deleteRecord: (state, action) => {
-      state.items = state.items.filter((r) => r.id !== action.payload);
-      localStorage.setItem("employeeRecords", JSON.stringify(state.items));
-      state.nextId = calculateNextId(state.items);
-      // const id = action.payload;
-      // state.items = state.items.filter((newProduct) => id.includes(newProduct));
-      // localStorage.setItem("productRecord", JSON.stringify(state.items));
-    },
+
     setSearchTerm: (state, action) => {
       state.searchTerms = action.payload;
     },
@@ -86,20 +79,37 @@ const recordSlice = createSlice({
       state.nextId = calculateNextId(orderProductData);
       localStorage.setItem("employeeRecords", JSON.stringify(orderProductData));
     },
+    // multiple select product
+    toggleSelect: (state, action) => {
+      const id = action.payload;
+      if (state.selectedIds.includes(id)) {
+        state.selectedIds = state.selectedIds.filter((itemId) => itemId !== id);
+      } else {
+        state.selectedIds.push(id);
+      }
+    },
+    clearSelection: (state) => {
+      state.selectedIds = [];
+    },
+    deleteSelected: (state) => {
+      state.items = state.items.filter(
+        (p) => !state.selectedIds.includes(p.id)
+      );
+      state.selectedIds = [];
+    },
   },
 });
 export const {
   addRecord,
   updateRecords,
-  deleteRecord,
+
+  deleteSelected,
+  toggleSelect,
   setSearchTerm,
   resetAllRecords,
 } = recordSlice.actions;
 
 // selectors
-export const selectAllRecords = (state) => state.records.items;
-export const selectSearchTerms = (state) => state.records.searchTerms;
-
 export const selectFilterRecords = (state) => {
   const term = state.records.searchTerms.toLowerCase();
   return state.records.items.filter(

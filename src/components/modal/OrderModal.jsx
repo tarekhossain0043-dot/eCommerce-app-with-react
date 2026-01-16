@@ -3,12 +3,46 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
-import { addRecord } from "../../features/add-product-slice/addProductSlice";
+import {
+  addRecord,
+  // updateRecords,
+} from "../../features/add-product-slice/addProductSlice";
+// import { closeModal } from "../../features/CustomModal/modalSlice";
 // import { addOrders } from "../../features/add-product-slice/addProductSlice";
-
 export default function OrderModal() {
   const [isLoading, setIsLoading] = useState(false);
+  // const dispatch = useDispatch();
 
+  // if have the product id then work on the edit mode
+  // const product = useSelector((state) =>
+  //   state.records.items.find((pro) => pro.id === productId)
+  // );
+  // again fill the form when editing
+  // useEffect(() => {
+  //   if (product) {
+  //     setFormData(product.dates);
+  //     setFormData(product.customer);
+  //     setFormData(product.paymentStatus);
+  //     setFormData(product.orderStatus);
+  //     setFormData(product.price);
+  //   }
+  // },[product]);
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   if (product) {
+
+  //     dispatch(updateItem({ id: product.id, data: { name, price } }));
+  //   } else {
+
+  //     dispatch(addItem({ name, price }));
+  //   }
+
+  //   // Clear form or close modal
+  //   setName("");
+  //   setPrice("");
+  //   dispatch(closeModal());
+  // };
   const navigete = useNavigate();
 
   const now = new Date();
@@ -42,7 +76,7 @@ export default function OrderModal() {
     navigete("/orders");
   };
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <div>
@@ -113,6 +147,7 @@ export default function OrderModal() {
             <select
               name="orderData"
               id="orderData"
+              className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
               value={formData.paymentStatus}
               onChange={(e) =>
                 setFormData({ ...formData, paymentStatus: e.target.value })
@@ -129,6 +164,7 @@ export default function OrderModal() {
             <select
               name="orderStatus"
               id="orderStatus"
+              className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
               value={formData.orderStatus}
               onChange={(e) =>
                 setFormData({ ...formData, orderStatus: e.target.value })
@@ -239,10 +275,11 @@ export default function OrderModal() {
               Cancel
             </button>
             <button
-              onClick={() => navigate("/customers")}
+              onClick={handleSubmit}
+              disabled={isLoading}
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
-              {isLoading ? "saving..." : "save"}
+              {!isLoading ? "save" : "saving ...."}
             </button>
           </div>
         </div>

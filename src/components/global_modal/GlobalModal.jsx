@@ -1,35 +1,34 @@
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../features/CustomModal/modalSlice";
-import { X } from "lucide-react";
-import { useState } from "react";
+import ModalDeleteToast from "../Modal_delete_toast";
+import OrderDeleteSuccessMsg from "../modal/OrderDeleteSuccessMsg";
 
 export default function GlobalModal() {
+  const {
+    isOpen,
+    modalType, // delete modal or success modal
+    modalProps,
+  } = useSelector((state) => state.modal);
   const dispatch = useDispatch();
-  const { isOpen, content } = useSelector((state) => state.modal);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   if (!isOpen) return null;
+  let content = null;
 
+  if (modalType === "Delete_Confirm") {
+    content = <ModalDeleteToast {...modalProps} />;
+  }
+  if (modalType === "Delete_Confirm_Message") {
+    content = <OrderDeleteSuccessMsg {...modalProps} />;
+  }
   return (
-    <div
-      className={` ${
-        isModalOpen ? "visible" : "invisible"
-      } fixed inset-0 z-999 flex items-center justify-center backdrop-blur-sm inset-1`}
-    >
-      <div className="bg-white p-6 rounded-sm w-full max-w-md relative">
-        <button
-          onClick={() => dispatch(closeModal())}
-          className="absolute top-2 right-2 text-xl"
-        >
-          <X
-            onClick={() => setIsModalOpen((prev) => !prev)}
-            className="w-5 h-5 cursor-pointer transition-all duration-300 ease-in-out hover:scale-105"
-          />
-        </button>
-
-        {/* Dynamic Content */}
-        {content}
-      </div>
+    <div className="fixed top-0 left-0 w-full h-screen flex items-center justify-center backdrop-blur-sm inset-1 z-99999">
+      {content}
+      <button
+        className="mt-4 text-sm text-gray-500"
+        onClick={() => dispatch(closeModal())}
+      >
+        Close
+      </button>
     </div>
   );
 }

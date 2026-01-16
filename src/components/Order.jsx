@@ -4,24 +4,27 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import FilterPro from "../components/FilterPro";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteRecord,
+  // deleteRecord,
   setSearchTerm,
-  selectSearchTerms,
+  toggleSelect,
   selectFilterRecords,
 } from "../features/add-product-slice/addProductSlice";
 import Pagination from "./Pagination";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import Order_not_found from "./product-not-found-comopo/Order_not_found";
+import { openModal } from "../features/CustomModal/modalSlice";
 
 export default function Order() {
-  const [selectedOrderId, setSelectedOrderId] = useState([]);
-  const handleSelect = (id) => {
-    if (selectedOrderId.includes(id)) {
-      setSelectedOrderId(selectedOrderId.filter((itemId) => itemId !== id));
-    } else {
-      setSelectedOrderId(...selectedOrderId, id);
-    }
-  };
+  // const [selectedOrderId, setSelectedOrderId] = useState([]);
+  // const handleSelect = (id) => {
+  //   if (selectedOrderId.includes(id)) {
+  //     setSelectedOrderId(selectedOrderId.filter((itemId) => itemId !== id));
+  //   } else {
+  //     setSelectedOrderId(...selectedOrderId, id);
+  //   }
+  // };
+  // const { selectedIds } = useSelector((state) => state.products);
+  const selectedIds = useSelector((state) => state.records.selectedIds || []);
 
   // const confirmMessage = `Are you sure you want to delete these ${selectedIds.length} item(s)?`;
 
@@ -35,16 +38,16 @@ export default function Order() {
   //     alert("Items deleted successfully!");
   //   }
 
-  const handleDelete = () => {
-    if (selectedOrderId.length === 0) {
-      alert("Please select at least one item!");
-      return;
-    } else {
-      dispatch(deleteRecord(selectedOrderId));
-      toast("order item deleted successfully!");
-    }
-  };
-  console.log(selectedOrderId);
+  // const handleDelete = () => {
+  //   if (selectedOrderId.length === 0) {
+  //     alert("Please select at least one item!");
+  //     return;
+  //   } else {
+  //     dispatch(deleteRecord(selectedOrderId));
+  //     toast("order item deleted successfully!");
+  //   }
+  // };
+  // console.log(selectedOrderId);
 
   const { setHeaderTitle, setHeaderBtns } = useOutletContext();
   const navigate = useNavigate();
@@ -69,6 +72,7 @@ export default function Order() {
       setHeaderBtns(null);
     };
   }, [setHeaderTitle, setHeaderBtns, navigate]);
+
   const [filter_category, setFilter_category] = useState("Filter");
   console.log(filter_category);
   // const [isOpenFilter, setIsOpenFilter] = useState(false);
@@ -84,11 +88,13 @@ export default function Order() {
     if (filter_category === "Filter") return filterRecords;
     return (
       // filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase(),
-      filterPro.orderStatus.toLowerCase() &&
+      // filterPro.orderStatus.toLowerCase() &&
+      // filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase()
+      filterPro.orderStatus.toLowerCase() === filter_category.toLowerCase() ||
       filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase()
     );
   });
-  const searchTerms = useSelector(selectSearchTerms);
+  const searchTerms = useSelector((state) => state.products.searchTerms);
 
   const storeRecords = [...filterRecords].sort((a, b) => b.id - a.id);
   // console.log(selectedId);
@@ -146,14 +152,33 @@ export default function Order() {
         </div>
         {/* {storeRecords.map((record) => ( */}
         <div className="flex items-center gap-3">
-          <button className="w-10 h-10 rounded-sm bg- border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold">
+          <button
+            disabled={selectedIds.length !== 1} // only 1 item selectable
+            onClick={() => {
+              const itemId = selectedIds[0];
+              dispatch(
+                openModal({
+                  type: "Edit_Item",
+                  props: { id: itemId },
+                })
+              );
+            }}
+            className={`w-10 h-10 rounded-sm ${
+              selectedIds.length !== 1 ? "cursor-not-allowed" : "cursor-pointer"
+            } border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold`}
+          >
             <Edit className="w-6 h-6" />
           </button>
           <button
-            // disabled={isCheckboxIsChecked}
-            // onClick={() => handleDelete()}
-            onClick={() => navigate("/custom-toast")}
-            disabled={selectedOrderId.length === 0}
+            disabled={!selectedIds?.length}
+            onClick={() =>
+              dispatch(
+                openModal({
+                  type: "Delete_Confirm",
+                  props: { count: selectedIds.length },
+                })
+              )
+            }
             className={`w-10 h-10
                 
               rounded-sm border-slate-200 border hover:bg-blue-clr hover:text-white disabled:bg-slate-300 disabled:cursor-not-allowed cursor-pointer transition-all duration-300 ease-in-out flex items-center justify-center text-blue-clr font-bold`}
@@ -190,13 +215,14 @@ export default function Order() {
             return (
               <div
                 key={record.id}
-                class="grid md:grid-cols-12 cursor-pointer transition-all duration-500 ease-in-out col-span-1 gap-4 last-of-type:border-none py-4 items-center"
+                className="grid md:grid-cols-12 cursor-pointer transition-all duration-500 ease-in-out col-span-1 gap-4 last-of-type:border-none py-4 items-center"
               >
                 <div className="flex items-center gap-2 md:col-span-2 col-span-1">
                   <div className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
                     <input
                       type="checkbox"
-                      onChange={() => handleSelect(record.id)}
+                      checked={selectedIds.includes(record.id)}
+                      onChange={() => dispatch(toggleSelect(record.id))}
                       className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
                     />
                     <span className="font-semibold text-default mb-0 transition-all duration-300 ease-in-out hover:text-primary">

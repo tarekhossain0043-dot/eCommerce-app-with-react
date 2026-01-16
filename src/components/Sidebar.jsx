@@ -4,14 +4,13 @@ import { sidebarData } from "../assets/assets";
 import sidebarImg from "../assets/sidebar-img.png";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectAllRecords } from "../features/add-product-slice/addProductSlice";
 
 export default function Sidebar({ isCollapsed, setIsCollapsed }) {
   const [currentMenu, setCurrentMenu] = useState(sidebarData[0].label);
   const handleMenu = (id) => {
     setCurrentMenu(id);
   };
-  const orderNum = useSelector(selectAllRecords);
+  const orderNum = useSelector((state) => state.records.items);
 
   useEffect(() => {
     const handleResize = () => {

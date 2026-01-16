@@ -5,6 +5,8 @@ import FileDropCompo from "./FileDropCompo";
 import CustomCheckbox from "./CustomCheckbox";
 import Tags from "./Tags";
 import Seo_settings from "./Seo_settings";
+import { useDispatch } from "react-redux";
+import { addRecord } from "../features/add-product-slice/addProductSlice";
 
 export default function AddProduct() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,7 +19,7 @@ export default function AddProduct() {
     price: 0,
     discount: 40,
   });
-
+  const [isLoading, setIsLoading] = useState(false);
   // product add,edit,delete,update,filtering,sorting and more
 
   // new category
@@ -46,8 +48,15 @@ export default function AddProduct() {
     country: "",
     weight: "",
   });
-  const imgUrl = URL.createObjectURL(productData.productImg);
-  console.log(imgUrl);
+
+  const dispatch = useDispatch();
+  const handleSubmit = () => {
+    dispatch(addRecord(productData));
+    setIsLoading((prev) => !prev);
+    navigate("/products");
+  };
+  // const imgUrl = URL.createObjectURL(productData.productImg);
+  // console.log(imgUrl);
   // console.log(productData);
 
   // const handleProductsFun = () => {
@@ -82,9 +91,9 @@ export default function AddProduct() {
   const discount_price =
     discountPrice.price - (discountPrice.price * discountPrice.discount) / 100;
 
-  const handleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
+  // const handleModal = () => {
+  //   setIsModalOpen((prev) => !prev);
+  // };
 
   return (
     <>
@@ -104,8 +113,8 @@ export default function AddProduct() {
               Cancel
             </button>
             <button
-              // onClick={handleProductsFun}
-              // disabled={isLoading}
+              onClick={handleSubmit}
+              disabled={isLoading}
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
               {/* {!isLoading ? "save" : "saving ...."} */}
@@ -335,7 +344,7 @@ export default function AddProduct() {
                 </div> */}
               </div>
               <button
-                onClick={handleModal}
+                // onClick={handleModal}
                 className="text-[16px] mt-4 block leading-6 text-blue-clr cursor-pointer transition-all duration-300 ease-in-out hover:underline"
               >
                 Create New

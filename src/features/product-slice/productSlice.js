@@ -32,11 +32,16 @@ export const productData = [
 //   if (!record || record.length === nanoid()) return nanoid();
 //   return Math.max(...record.map((r) => r.id)) + nanoid();
 // };
+// calculate next id
+const calculateNextId = (record) => {
+  if (!record || record.length === 0) return nanoid(3);
+  return Math.max(...record.map((r) => r.id)) + nanoid(3);
+};
 
 // load record from local storeage
 const loadRecordFromStorage = () => {
   try {
-    const saveRecords = localStorage.getItem("productRecord");
+    const saveRecords = localStorage.getItem("Products");
     return saveRecords ? JSON.parse(saveRecords) : productData;
   } catch (error) {
     console.error("Error loading record", error);
@@ -46,6 +51,8 @@ const productSlice = createSlice({
   name: "product",
   initialState: {
     items: loadRecordFromStorage(),
+    searchTerms: "",
+    selectedIds: [],
     // nextId: calculateNextId(loadRecordFromStorage()),
   },
   reducers: {
@@ -55,7 +62,29 @@ const productSlice = createSlice({
       state.items.push(newRecord);
 
       localStorage.setItem("productRecord", JSON.stringify(state.items));
-      // state.nextId = calculateNextId(state.items);
+      state.nextId = calculateNextId(state.items);
+    },
+    setSearchTerm: (state, action) => {
+      state.searchTerms = action.payload;
+    },
+
+    // multiple select product
+    toggleSelect: (state, action) => {
+      const id = action.payload;
+      if (state.selectedIds.includes(id)) {
+        state.selectedIds = state.selectedIds.filter((itemId) => itemId !== id);
+      } else {
+        state.selectedIds.push(id);
+      }
+    },
+    clearSelection: (state) => {
+      state.selectedIds = [];
+    },
+    deleteSelected: (state) => {
+      state.items = state.items.filter(
+        (p) => !state.selectedIds.includes(p.id)
+      );
+      state.selectedIds = [];
     },
 
     deleteProduct: (state, action) => {
@@ -86,10 +115,26 @@ const productSlice = createSlice({
     },
   },
 });
-export const { addProduct, updateProduct, deleteProduct, resetAllRecords } =
-  productSlice.actions;
+export const {
+  addProduct,
+  updateProduct,
+  deleteSelected,
+  toggleSelect,
+  setSearchTerm,
+} = productSlice.actions;
 
 // selectors
+export const selectFilterRecords = (state) => {
+  const term = state.products.searchTerms.toLowerCase();
+  return state.products.items.filter(
+    (r) =>
+      r.date?.toLowerCase().includes(term) ||
+      r.customer?.toLowerCase().includes(term) ||
+      r.paymentStatus?.toLowerCase().includes(term) ||
+      r.orderStatus?.toLowerCase().includes(term) ||
+      r.price?.toLowerCase().includes(term)
+  );
+};
 export const selectAllProducts = (state) => state.products.items;
 
 export default productSlice.reducer;

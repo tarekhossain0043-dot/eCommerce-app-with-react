@@ -3,6 +3,7 @@ import Sidebar from "../components/Sidebar";
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header";
 import DashboardHeader from "../components/DashboardHeader";
+import GlobalModal from "../components/global_modal/GlobalModal";
 
 export default function DashboardLayout() {
   const [headerTitle, setHeaderTitle] = useState("Dashboard");
@@ -30,6 +31,7 @@ export default function DashboardLayout() {
           {/* i think ekhane Dashboard er page gula show korbe default hisabe home page */}
         </main>
       </div>
+      <GlobalModal />
     </div>
   );
 }
