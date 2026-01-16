@@ -48,6 +48,7 @@ export default function AddProduct() {
     country: "",
     weight: "",
   });
+  console.log(productData);
 
   const dispatch = useDispatch();
   const handleSubmit = () => {

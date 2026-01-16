@@ -4,16 +4,24 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { product_Category } from "../../assets/assets";
 import EditCategory from "../modal/EditCategory";
 import Category_not_found from "../product-not-found-comopo/Category_not_found";
+import { useDispatch } from "react-redux";
 
 export default function Category() {
   const { setHeaderTitle, setHeaderBtns } = useOutletContext();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setHeaderTitle("Category");
     setHeaderBtns(
       <div className="flex items-center gap-3">
         <button
-          onClick={() => navigate("/create-category")}
+          // onClick={() => navigate("/create-category")}
+          onClick={() =>
+            dispatch({
+              open,
+            })
+          }
           className="text-white py-2.5 text-[16px] leading-6 font-normal px-5 flex items-center gap-2 rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
         >
           <Plus className="w-4 h-4 text-white" />
@@ -25,7 +33,7 @@ export default function Category() {
       setHeaderTitle("");
       setHeaderBtns(null);
     };
-  }, [setHeaderTitle, setHeaderBtns, navigate]);
+  }, [setHeaderTitle, setHeaderBtns, navigate, dispatch]);
   return (
     <div>
       <div className="mt-7">

@@ -102,7 +102,6 @@ const recordSlice = createSlice({
 export const {
   addRecord,
   updateRecords,
-
   deleteSelected,
   toggleSelect,
   setSearchTerm,

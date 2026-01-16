@@ -4,6 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function CreateCoupons() {
   const [isLoading, setIsLoading] = useState(false);
+  const [couponsData, setCouponsData] = useState({
+    code: "",
+    shipping: "",
+  });
   const navigate = useNavigate();
   return (
     <div>
@@ -95,8 +99,17 @@ export default function CreateCoupons() {
           ></textarea> */}
           </div>
           <div className="flex flex-col gap-2 w-full">
-            <label htmlFor="Coupon_Name">Applies to</label>
-            <select name="applys" id="applys">
+            <label
+              htmlFor="Coupon_Name"
+              className="block text-[14px] leading-5 font-normal text-default"
+            >
+              Applies to
+            </label>
+            <select
+              name="applys"
+              id="applys"
+              className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
+            >
               <option value="choose">Choose</option>
               <option value="selling">selling</option>
               <option value="buying">buying</option>
@@ -127,8 +140,17 @@ export default function CreateCoupons() {
           ></textarea> */}
           </div>
           <div className="flex flex-col gap-2 w-full">
-            <label htmlFor="Coupon_Name">Applies to</label>
-            <select name="applys" id="applys">
+            <label
+              htmlFor="Coupon_Name"
+              className="block text-[14px] leading-5 font-normal text-default"
+            >
+              Applies to
+            </label>
+            <select
+              name="applys"
+              id="applys"
+              className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
+            >
               <option value="choose">Choose</option>
               <option value="selling">selling</option>
               <option value="buying">buying</option>

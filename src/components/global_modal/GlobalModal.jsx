@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../features/CustomModal/modalSlice";
 import ModalDeleteToast from "../Modal_delete_toast";
 import OrderDeleteSuccessMsg from "../modal/OrderDeleteSuccessMsg";
+import AddCategory from "../category/AddCategory";
 
 export default function GlobalModal() {
   const {
@@ -16,6 +17,9 @@ export default function GlobalModal() {
 
   if (modalType === "Delete_Confirm") {
     content = <ModalDeleteToast {...modalProps} />;
+  }
+  if (modalType === "AddCategory") {
+    content = <AddCategory {...modalProps} />;
   }
   if (modalType === "Delete_Confirm_Message") {
     content = <OrderDeleteSuccessMsg {...modalProps} />;
