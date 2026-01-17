@@ -8,8 +8,8 @@ export default function OverviewChart({
   nonActiveColor = "#FFF4D2",
 }) {
   return (
-    <div className="w-20.50 h-12 min-w-25 min-h-12">
-      <ResponsiveContainer width="100%" height="100%" aspect={2}>
+    <div className="max-w-30 max-h-42.5 absolute bottom-3 right-4">
+      <ResponsiveContainer aspect={2} width={120} height={170}>
         <BarChart data={chartData}>
           <Bar dataKey="value" radius={[4, 4, 4, 4]}>
             {chartData.map((entry, index) => (

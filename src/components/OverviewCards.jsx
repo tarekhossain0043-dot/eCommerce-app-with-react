@@ -31,7 +31,7 @@ export default function OverviewCards() {
   return (
     <div className="flex-1 items-center gap-4.25 w-full mt-6">
       <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-4.25">
-        <div className="py-6 rounded-sm bg-white shadow-sm flex justify-center items-center gap-10">
+        <div className="py-4 rounded-md bg-white shadow-sm flex justify-center items-center gap-10">
           <div>
             <h4 className="mb-0">$10.540</h4>
             <span className="text-[10px] font-normal leading-5 text-default">
@@ -45,7 +45,7 @@ export default function OverviewCards() {
             <DollarSign className="w-4 h-4" />
           </span>
         </div>
-        <div className="py-6 rounded-sm bg-white shadow-sm flex justify-center items-center gap-10">
+        <div className="py-4 rounded-md bg-white shadow-sm flex justify-center items-center gap-10">
           <div>
             <h4 className="mb-0">1,056</h4>
             <span className="text-[10px] font-normal leading-5 text-default">
@@ -59,7 +59,7 @@ export default function OverviewCards() {
             <ShoppingCart className="w-4 h-4" />
           </span>
         </div>
-        <div className="py-6 rounded-sm bg-white shadow-sm flex justify-center items-center gap-10">
+        <div className="p-4 rounded-md bg-white shadow-sm flex justify-between items-center relative gap-10">
           <div>
             <span className="text-[10px] font-normal leading-5 text-default">
               Unique Visits
@@ -69,9 +69,10 @@ export default function OverviewCards() {
               10.24% <ChevronDown className="pl-1 w-4 h-4" />
             </span>
           </div>
+
           <OverviewChart chartData={chart_1} activeBarIndex={3} />
         </div>
-        <div className="py-6 rounded-sm bg-white shadow-sm flex justify-center items-center gap-10">
+        <div className="p-4 rounded-md bg-white shadow-sm flex justify-between items-center relative gap-10">
           <div>
             <h4 className="mb-0">$10.540</h4>
             <span className="text-[10px] font-normal leading-5 text-default">
@@ -88,7 +89,7 @@ export default function OverviewCards() {
             nonActiveColor="#C4F8E2"
           />
         </div>
-        <div className="py-6 rounded-sm bg-white shadow-sm flex justify-center items-center gap-10">
+        <div className="p-4 rounded-md bg-white shadow-sm flex justify-between items-center relative gap-10">
           <div>
             <h4 className="mb-0">$10.540</h4>
             <span className="text-[10px] font-normal leading-5 text-default">

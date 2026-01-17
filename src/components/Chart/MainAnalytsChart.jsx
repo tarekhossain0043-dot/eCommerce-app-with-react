@@ -1,3 +1,4 @@
+import { RechartsDevtools } from "@recharts/devtools";
 import React from "react";
 import {
   CartesianGrid,
@@ -6,6 +7,7 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
+  Legend,
   YAxis,
 } from "recharts";
 
@@ -83,6 +85,7 @@ export default function MainAnalytsChart() {
     <div className="w-full h-80 mt-15 pb-5 bg-white">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
+          // layout="vertical"
           data={data}
           margin={{ top: 20, right: 30, left: 0, bottom: 2 }}
         >
@@ -111,7 +114,7 @@ export default function MainAnalytsChart() {
             // position={{ y: 50 }}
           />
           <Line
-            type="monotone"
+            type="linear"
             dataKey="previous"
             stroke="#e2e8f0"
             strokeWidth={3}
@@ -119,7 +122,7 @@ export default function MainAnalytsChart() {
           />
 
           <Line
-            type="monotone"
+            type="linear"
             dataKey="current"
             stroke="#2563eb"
             strokeWidth={3}
