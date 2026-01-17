@@ -22,7 +22,7 @@ export default function DashboardHome() {
             Manage
           </span>
         </div>
-      </button>
+      </button>,
     );
     return () => {
       setHeaderTitle("");
@@ -33,7 +33,7 @@ export default function DashboardHome() {
     <div className="mb-6">
       <OverviewCards />
       <div className="grid grid-cols-1 lg:grid-cols-[9fr_3fr] gap-7.5 mt-6">
-        <div className="bg-white shadow-sm h-full rounded-sm p-7.5">
+        <div className="bg-white shadow-sm h-full rounded-md p-7.5">
           <div className="flex items-center mb-6 justify-between">
             <span className="mb-0 font-bold text-[16px] leading-6 text-black">
               Orders Over Time
@@ -98,7 +98,7 @@ export default function DashboardHome() {
           <MainAnalytsChart />
         </div>
         {/* small green chart */}
-        <div className="bg-white rounded-sm shadow p-7 flex flex-col gap-6">
+        <div className="bg-white rounded-md shadow p-7 flex flex-col gap-6">
           <span className="mb-0 font-bold text-[16px] leading-6 text-black">
             Last 7 Days Sales
           </span>
@@ -118,14 +118,14 @@ export default function DashboardHome() {
       </div>
       {/* product details */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-7.5 mt-6">
-        <div className="bg-white shadow-sm rounded-sm cursor-pointer p-7 border border-slate-300 transition-all duration-300 ease-in-out">
+        <div className="bg-white shadow-sm rounded-md cursor-pointer p-7 border border-slate-300 transition-all duration-300 ease-in-out">
           <span className="mb-5 font-bold text-[16px] leading-6 text-black">
             Recent Transactions
           </span>
           <Transactions />
         </div>
         {/*top sold product details */}
-        <div className="bg-white shadow-sm rounded-sm cursor-pointer p-7 border border-slate-300 transition-all duration-300 ease-in-out">
+        <div className="bg-white shadow-sm rounded-md cursor-pointer p-7 border border-slate-300 transition-all duration-300 ease-in-out">
           <span className="mb-5 font-bold text-[16px] leading-6 text-black">
             Top Products by Units Sold
           </span>
