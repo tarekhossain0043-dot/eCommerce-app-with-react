@@ -1,7 +1,10 @@
 import { X } from "lucide-react";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteSelected } from "../features/add-product-slice/addProductSlice";
+import {
+  clearSelection,
+  deleteSelected,
+} from "../features/add-product-slice/addProductSlice";
 import { closeModal, openModal } from "../features/CustomModal/modalSlice";
 
 export default function Modal_delete_toast({ count }) {
@@ -13,12 +16,16 @@ export default function Modal_delete_toast({ count }) {
       openModal({
         type: "Delete_Confirm_Message",
         props: { message: "product deleted successfully!" },
-      })
+      }),
     );
     // dispatch(openModal({
     // //   type : "Delete_Confirm_Message",
 
     // // }))
+  };
+  const handleCancel = () => {
+    dispatch(closeModal());
+    dispatch(clearSelection());
   };
 
   return (
@@ -35,7 +42,7 @@ export default function Modal_delete_toast({ count }) {
       </span>
       <div className="flex items-center justify-end gap-2">
         <button
-          onClick={() => dispatch(closeModal())}
+          onClick={handleCancel}
           className="px-6.5 py-2 ruonded-sm cursor-pointer transition-all duration-300 ease-in-out font-normal capitalize rounded-sm text-[16px] leading-6 text-[#F0142F] hover:bg-[#F0142F] hover:text-white"
         >
           cancel

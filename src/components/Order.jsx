@@ -8,6 +8,7 @@ import {
   setSearchTerm,
   toggleSelect,
   selectFilterRecords,
+  editingProduct,
 } from "../features/add-product-slice/addProductSlice";
 import Pagination from "./Pagination";
 // import { toast } from "react-toastify";
@@ -25,6 +26,9 @@ export default function Order() {
   // };
   // const { selectedIds } = useSelector((state) => state.products);
   const selectedIds = useSelector((state) => state.records.selectedIds || []);
+
+  // edit btn disable when user select multiple item
+  const isEditEnabled = selectedIds.length === 1;
 
   // const confirmMessage = `Are you sure you want to delete these ${selectedIds.length} item(s)?`;
 
@@ -65,7 +69,7 @@ export default function Order() {
           <Plus className="w-4 h-4 text-white" />
           Add Order
         </button>
-      </div>
+      </div>,
     );
     return () => {
       setHeaderTitle("");
@@ -84,7 +88,13 @@ export default function Order() {
 
   const dispatch = useDispatch();
   const filterRecords = useSelector(selectFilterRecords);
-  const filterProductData = filterRecords.filter((filterPro) => {
+
+  const searchTerms = useSelector((state) => state.products.searchTerms);
+  console.log(searchTerms);
+  const [searchField, setSearchField] = useState("");
+
+  const storeRecords = [...filterRecords].sort((a, b) => b.id - a.id);
+  const filterProductData = storeRecords.filter((filterPro) => {
     if (filter_category === "Filter") return filterRecords;
     return (
       // filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase(),
@@ -94,11 +104,20 @@ export default function Order() {
       filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase()
     );
   });
-  const searchTerms = useSelector((state) => state.products.searchTerms);
 
-  const storeRecords = [...filterRecords].sort((a, b) => b.id - a.id);
+  // isEditEnabled
+  const editEnable = () => {
+    const editProdcut = filterProductData.find(
+      (clickedPro) => clickedPro.id === selectedIds[0],
+    );
+    dispatch(editingProduct(editProdcut));
+    navigate("/order-modal");
+  };
   // console.log(selectedId);
-
+  const searchFieldData = (e) => {
+    setSearchField(e.target.value);
+    dispatch(setSearchTerm(searchField));
+  };
   // delete
   // const handleDelete = (id) => {
   //   dispatch(deleteRecord(id));
@@ -140,8 +159,9 @@ export default function Order() {
               <input
                 type="text"
                 name="search"
-                value={searchTerms}
-                onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+                // value={searchTerms}
+                // onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+                onChange={(e) => searchFieldData(e)}
                 placeholder="search anything.."
                 id="search"
                 className="px-4 text-sm pl-12 w-full py-3 bg-transparent text-default cursor-pointer outline-none ring-1 ring-slate-100 rounded-sm focus:blue-clrrounded-sm transition-all duration-300 ease-in-out"
@@ -153,19 +173,20 @@ export default function Order() {
         {/* {storeRecords.map((record) => ( */}
         <div className="flex items-center gap-3">
           <button
-            disabled={selectedIds.length !== 1} // only 1 item selectable
-            onClick={() => {
-              const itemId = selectedIds[0];
-              dispatch(
-                openModal({
-                  type: "Edit_Item",
-                  props: { id: itemId },
-                })
-              );
-            }}
-            className={`w-10 h-10 rounded-sm ${
-              selectedIds.length !== 1 ? "cursor-not-allowed" : "cursor-pointer"
-            } border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold`}
+            disabled={!isEditEnabled} // only 1 item selectable
+            // onClick={() => {
+            //   const itemId = selectedIds[0];
+            //   dispatch(
+            //     openModal({
+            //       type: "Edit_Item",
+            //       props: { id: itemId },
+            //     }),
+            //   );
+            // }}
+            onClick={editEnable}
+            className={`w-10 h-10 rounded-sm 
+             
+            border-slate-200 border disabled:bg-slate-300 disabled:cursor-not-allowed hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold`}
           >
             <Edit className="w-6 h-6" />
           </button>
@@ -176,7 +197,7 @@ export default function Order() {
                 openModal({
                   type: "Delete_Confirm",
                   props: { count: selectedIds.length },
-                })
+                }),
               )
             }
             className={`w-10 h-10
@@ -253,7 +274,7 @@ export default function Order() {
                 </div>
                 <div
                   className={`${getStatusColor(
-                    record?.orderStatus
+                    record?.orderStatus,
                   )} col-span-1 md:col-span-2 text-white px-2 py-1 font-semibold rounded w-fit`}
                 >
                   {record?.orderStatus}
@@ -268,7 +289,7 @@ export default function Order() {
           })}
         </div>
       )}
-      <Pagination orderNumbers={storeRecords} />
+      <Pagination orderNumbers={filterProductData} />
     </div>
   );
 }

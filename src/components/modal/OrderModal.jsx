@@ -1,16 +1,19 @@
 import { ArrowLeft, ChevronDown } from "lucide-react";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Link, useNavigate } from "react-router-dom";
 import {
   addRecord,
+  clearEditingPro,
+  clearSelection,
+  updateRecords,
   // updateRecords,
 } from "../../features/add-product-slice/addProductSlice";
 // import { closeModal } from "../../features/CustomModal/modalSlice";
 // import { addOrders } from "../../features/add-product-slice/addProductSlice";
 export default function OrderModal() {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   // const dispatch = useDispatch();
 
   // if have the product id then work on the edit mode
@@ -52,16 +55,27 @@ export default function OrderModal() {
     minute: "2-digit",
     hour12: true,
   });
+  // product edit enabled
+  const editingProduct = useSelector((state) => state.records.editingProduct);
+  const [formData, setFormData] = useState(() => ({
+    dates: editingProduct?.dates || formattedTime,
+    customer: editingProduct?.customer || "",
+    paymentStatus: editingProduct?.paymentStatus || "",
+    orderStatus: editingProduct?.orderStatus || "",
+    price: editingProduct?.price || "",
+  }));
   // const today = new Date().toISOString().split("T")[0];
 
   // order from data data
-  const [formData, setFormData] = useState({
-    dates: formattedTime,
-    customer: "",
-    paymentStatus: "",
-    orderStatus: "",
-    price: "",
-  });
+  // const [formData, setFormData] = useState({
+  //   dates: formattedTime,
+  //   customer: "",
+  //   paymentStatus: "",
+  //   orderStatus: "",
+  //   price: "",
+  // });
+
+  // }, [editingProduct]);
   // console.log(typeof formData);
   // const handleInputChange = (e) => {
   //   setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -71,8 +85,28 @@ export default function OrderModal() {
   // //   dispatch(addOrders(formData));
   // // }, [dispatch, formData]);
   const handleSubmit = () => {
-    dispatch(addRecord(formData));
-    setIsLoading((prev) => !prev);
+    if (editingProduct) {
+      dispatch(
+        updateRecords({
+          ...editingProduct,
+          ...formData,
+        }),
+      );
+
+      navigete("/orders");
+    } else {
+      dispatch(addRecord(formData));
+
+      navigete("/orders");
+    }
+    // dispatch(addRecord(formData));
+    // setIsLoading((prev) => !prev);
+    // navigete("/orders");
+  };
+
+  const clearEditPro = () => {
+    dispatch(clearEditingPro());
+    dispatch(clearSelection());
     navigete("/orders");
   };
 
@@ -91,18 +125,20 @@ export default function OrderModal() {
         </div>
         <div className="flex items-center justify-between">
           <span className="text-[24px] font-bold leading-9 text-black">
-            Add Orders
+            {editingProduct ? "Update Record" : " Add Orders"}
           </span>
           <div className="flex items-center gap-3">
-            <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
+            <button
+              onClick={clearEditPro}
+              className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white"
+            >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
-              disabled={isLoading}
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
-              {!isLoading ? "save" : "saving ...."}
+              {editingProduct ? "Update" : "Save"}
             </button>
           </div>
         </div>
@@ -271,15 +307,17 @@ export default function OrderModal() {
         <hr className="h-px w-full bg-default my-7" />
         <div className="flex items-center justify-end">
           <div className="flex items-center gap-3">
-            <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
+            <button
+              onClick={clearEditPro}
+              className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white"
+            >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
-              disabled={isLoading}
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
-              {!isLoading ? "save" : "saving ...."}
+              {editingProduct ? "Update" : "Save"}
             </button>
           </div>
         </div>

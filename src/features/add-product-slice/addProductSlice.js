@@ -49,6 +49,7 @@ const recordSlice = createSlice({
     items: loadRecordFromStorage(),
     searchTerms: "",
     selectedIds: [],
+    editingProduct: null,
     nextId: calculateNextId(loadRecordFromStorage()),
   },
   reducers: {
@@ -61,13 +62,23 @@ const recordSlice = createSlice({
       state.nextId = calculateNextId(state.items);
     },
     // update records
+    // updateRecords: (state, action) => {
+    //   const { id, data } = action.payload;
+    //   const index = state.items.find((r) => r.id === id);
+    //   if (index !== -1) {
+    //     state.items[index] = { ...state.items[index], ...data };
+    //     localStorage.setItem("employeeRecords", JSON.stringify(state.items));
+    //   }
+    // },
     updateRecords: (state, action) => {
-      const { id, data } = action.payload;
-      const index = state.items.find((r) => r.id === id);
+      const updated = action.payload;
+      const index = state.items.findIndex((p) => p.id === updated.id);
       if (index !== -1) {
-        state.items[index] = { ...state.items[index], ...data };
+        state.items[index] = updated;
         localStorage.setItem("employeeRecords", JSON.stringify(state.items));
       }
+      state.editingProduct = null;
+      state.selectedIds = [];
     },
 
     setSearchTerm: (state, action) => {
@@ -91,9 +102,15 @@ const recordSlice = createSlice({
     clearSelection: (state) => {
       state.selectedIds = [];
     },
+    editingProduct: (state, action) => {
+      state.editingProduct = action.payload;
+    },
+    clearEditingPro: (state) => {
+      state.editingProduct = null;
+    },
     deleteSelected: (state) => {
       state.items = state.items.filter(
-        (p) => !state.selectedIds.includes(p.id)
+        (p) => !state.selectedIds.includes(p.id),
       );
       state.selectedIds = [];
     },
@@ -105,6 +122,9 @@ export const {
   deleteSelected,
   toggleSelect,
   setSearchTerm,
+  clearSelection,
+  editingProduct,
+  clearEditingPro,
   resetAllRecords,
 } = recordSlice.actions;
 
@@ -117,7 +137,7 @@ export const selectFilterRecords = (state) => {
       r.customer?.toLowerCase().includes(term) ||
       r.paymentStatus?.toLowerCase().includes(term) ||
       r.orderStatus?.toLowerCase().includes(term) ||
-      r.price?.toLowerCase().includes(term)
+      r.price?.toLowerCase().includes(term),
   );
 };
 
