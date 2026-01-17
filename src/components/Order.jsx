@@ -9,6 +9,7 @@ import {
   toggleSelect,
   selectFilterRecords,
   editingProduct,
+  getTotalPage,
 } from "../features/add-product-slice/addProductSlice";
 import Pagination from "./Pagination";
 // import { toast } from "react-toastify";
@@ -110,6 +111,15 @@ export default function Order() {
       filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase()
     );
   });
+
+  // pagination
+  const { currentPage, itemsPerPage } = useSelector((state) => state.records);
+  const paginationStart = (currentPage - 1) * itemsPerPage;
+  const paginationNext = paginationStart + itemsPerPage;
+  const paginationFilteredProduct = filterProductData.slice(
+    paginationStart,
+    paginationNext,
+  );
 
   // isEditEnabled
   const editEnable = () => {
@@ -238,7 +248,7 @@ export default function Order() {
             <div className="md:col-span-2 col-span-1">Total</div>
           </div>
           {/* order body */}
-          {filterProductData.map((record) => {
+          {paginationFilteredProduct.map((record) => {
             return (
               <div
                 key={record.id}
@@ -295,7 +305,7 @@ export default function Order() {
           })}
         </div>
       )}
-      <Pagination orderNumbers={filterProductData} />
+      {getTotalPage > 1 && <Pagination orderNumbers={filterProductData} />}
     </div>
   );
 }

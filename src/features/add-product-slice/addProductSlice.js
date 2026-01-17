@@ -46,10 +46,18 @@ const loadRecordFromStorage = () => {
 const recordSlice = createSlice({
   name: "record",
   initialState: {
+    //total order items
     items: loadRecordFromStorage(),
+    // product filtering by search-field
     searchTerms: "",
+    // selecting products id by checkbox
     selectedIds: [],
+    // updating
     editingProduct: null,
+    // pagination
+    currentPage: 1,
+    itemsPerPage: 5,
+    // create next id
     nextId: calculateNextId(loadRecordFromStorage()),
   },
   reducers: {
@@ -114,6 +122,10 @@ const recordSlice = createSlice({
       );
       state.selectedIds = [];
     },
+    // pagination
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
   },
 });
 export const {
@@ -126,6 +138,7 @@ export const {
   editingProduct,
   clearEditingPro,
   resetAllRecords,
+  setCurrentPage,
 } = recordSlice.actions;
 
 // selectors
@@ -139,6 +152,10 @@ export const selectFilterRecords = (state) => {
       r.orderStatus?.toLowerCase().includes(term) ||
       r.price?.toLowerCase().includes(term),
   );
+};
+// pagination
+export const getTotalPage = (state) => {
+  Math.ceil(state.records.items.length / state.records.itemsPerPage);
 };
 
 export default recordSlice.reducer;
