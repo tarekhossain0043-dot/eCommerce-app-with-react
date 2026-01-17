@@ -4,6 +4,7 @@ import { closeModal } from "../../features/CustomModal/modalSlice";
 import ModalDeleteToast from "../Modal_delete_toast";
 import OrderDeleteSuccessMsg from "../modal/OrderDeleteSuccessMsg";
 import AddCategory from "../category/AddCategory";
+import Export_modal from "../modal/Export_modal";
 
 export default function GlobalModal() {
   const {
@@ -36,6 +37,9 @@ export default function GlobalModal() {
   }
   if (modalType === "Delete_Confirm_Message") {
     content = <OrderDeleteSuccessMsg {...modalProps} />;
+  }
+  if (modalType === "Export_Success") {
+    content = <Export_modal {...modalProps} />;
   }
   return (
     <div className="fixed top-0 left-0 w-full h-screen flex items-center justify-center backdrop-blur-sm inset-1 z-99999">

@@ -25,10 +25,13 @@ export default function Order() {
   //   }
   // };
   // const { selectedIds } = useSelector((state) => state.products);
+  const dispatch = useDispatch();
   const selectedIds = useSelector((state) => state.records.selectedIds || []);
 
   // edit btn disable when user select multiple item
   const isEditEnabled = selectedIds.length === 1;
+
+  const isExportPermission = selectedIds.length === 1;
 
   // const confirmMessage = `Are you sure you want to delete these ${selectedIds.length} item(s)?`;
 
@@ -59,7 +62,11 @@ export default function Order() {
     setHeaderTitle("Orders");
     setHeaderBtns(
       <div className="flex items-center gap-3">
-        <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
+        <button
+          disabled={!isExportPermission}
+          onClick={() => dispatch(openModal({ type: "Export_Success" }))}
+          className="text-blue-clr px-5 py-2.5 leading-6 disabled:cursor-not-allowed capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white"
+        >
           Export
         </button>
         <button
@@ -75,7 +82,7 @@ export default function Order() {
       setHeaderTitle("");
       setHeaderBtns(null);
     };
-  }, [setHeaderTitle, setHeaderBtns, navigate]);
+  }, [setHeaderTitle, setHeaderBtns, navigate, dispatch, isExportPermission]);
 
   const [filter_category, setFilter_category] = useState("Filter");
   console.log(filter_category);
@@ -86,7 +93,6 @@ export default function Order() {
 
   // order conditional rendering
 
-  const dispatch = useDispatch();
   const filterRecords = useSelector(selectFilterRecords);
 
   const searchTerms = useSelector((state) => state.products.searchTerms);
