@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 import img_1 from "../../assets/products/Image-1.png";
 import img_2 from "../../assets/products/Image-2.png";
@@ -9,7 +9,7 @@ export const productData = [
     name: "shoe",
     desc: "winter special for men",
     image: img_1,
-    invent: 96,
+    invent: "out stock",
     clr: "Black",
     price: 980,
     rating: 60,
@@ -20,7 +20,7 @@ export const productData = [
     name: "Jacket",
     desc: "winter special for All",
     image: img_2,
-    invent: 46,
+    invent: "In stock",
     clr: "white",
     price: 580,
     rating: 30,
@@ -41,7 +41,7 @@ const calculateNextId = (record) => {
 // load record from local storeage
 const loadRecordFromStorage = () => {
   try {
-    const saveRecords = localStorage.getItem("Products");
+    const saveRecords = localStorage.getItem("productRecord");
     return saveRecords ? JSON.parse(saveRecords) : productData;
   } catch (error) {
     console.error("Error loading record", error);
@@ -53,13 +53,16 @@ const productSlice = createSlice({
     items: loadRecordFromStorage(),
     searchTerms: "",
     selectedIds: [],
+    // pagination
+    currentPage: 1,
+    itemsPerPage: 5,
     // nextId: calculateNextId(loadRecordFromStorage()),
   },
   reducers: {
     // add records
     addProduct: (state, action) => {
-      const newRecord = { id: state.nextId, ...action.payload };
-      state.items.push(newRecord);
+      const newProduct = { id: state.nextId, ...action.payload };
+      state.items.push(newProduct);
 
       localStorage.setItem("productRecord", JSON.stringify(state.items));
       state.nextId = calculateNextId(state.items);
@@ -82,7 +85,7 @@ const productSlice = createSlice({
     },
     deleteSelected: (state) => {
       state.items = state.items.filter(
-        (p) => !state.selectedIds.includes(p.id)
+        (p) => !state.selectedIds.includes(p.id),
       );
       state.selectedIds = [];
     },
@@ -90,7 +93,7 @@ const productSlice = createSlice({
     deleteProduct: (state, action) => {
       const id = action.payload;
       state.items = state.items.filter((newProduct) =>
-        id.includes(newProduct.id)
+        id.includes(newProduct.id),
       );
       localStorage.setItem("productRecord", JSON.stringify(state.items));
       //   state.items = state.items.filter(
@@ -113,6 +116,11 @@ const productSlice = createSlice({
       // state.nextId = calculateNextId(productData);
       localStorage.setItem("productRecord", JSON.stringify(productData));
     },
+    // pagination
+    setCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+      localStorage.setItem("productRecord", JSON.stringify(state.items));
+    },
   },
 });
 export const {
@@ -121,20 +129,45 @@ export const {
   deleteSelected,
   toggleSelect,
   setSearchTerm,
+  setCurrentPage,
 } = productSlice.actions;
 
 // selectors
-export const selectFilterRecords = (state) => {
-  const term = state.products.searchTerms.toLowerCase();
-  return state.products.items.filter(
-    (r) =>
-      r.date?.toLowerCase().includes(term) ||
-      r.customer?.toLowerCase().includes(term) ||
-      r.paymentStatus?.toLowerCase().includes(term) ||
-      r.orderStatus?.toLowerCase().includes(term) ||
-      r.price?.toLowerCase().includes(term)
-  );
+// export const selectFilterProducts = (state) => {
+//   const term = state.products.searchTerms.toLowerCase();
+//   return state.products.items.filter(
+//     (r) =>
+//       r.name?.toLowerCase().includes(term) ||
+//       r.desc?.toLowerCase().includes(term) ||
+//       r.image?.toLowerCase().includes(term) ||
+//       r.invent?.toLowerCase().includes(term) ||
+//       r.clr?.toLowerCase().includes(term) ||
+//       r.price?.toLowerCase().includes(term) ||
+//       r.rating?.toLowerCase().includes(term),
+//   );
+// };
+const selectItems = (state) => state.products.items;
+const selectSearchTerm = (state) => state.products.searchTerms.toLowerCase();
+export const selectFilterProducts = createSelector(
+  [selectItems, selectSearchTerm],
+  (items, term) => {
+    if (!term) return items;
+
+    return items.filter(
+      (r) =>
+        r.name?.toLowerCase().includes(term) ||
+        r.desc?.toLowerCase().includes(term) ||
+        r.image?.toLowerCase().includes(term) ||
+        r.invent?.toLowerCase().includes(term) ||
+        r.clr?.toLowerCase().includes(term) ||
+        String(r.price)?.toLowerCase().includes(term) ||
+        r.rating?.toLowerCase().includes(term),
+    );
+  },
+);
+// pagination
+export const getTotalPage = (state) => {
+  Math.ceil(state.products.items.length / state.products.itemsPerPage);
 };
 export const selectAllProducts = (state) => state.products.items;
-
 export default productSlice.reducer;

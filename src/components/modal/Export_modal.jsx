@@ -24,7 +24,7 @@ export default function Export_modal() {
         <span className="block text-20 leading-7 text-black">
           Export Successfull
         </span>
-        <button className="block w-fit py-2 px-4 bg-blue-clr text-white font-normal capitalize cursor-pointer transition-all duration-300 ease-in-out hover:text-primary hover:shadow-sm">
+        <button className="block w-fit py-2 px-4 rounded-sm cursor-pointer bg-blue-clr text-white font-normal capitalize cursor-pointer transition-all duration-300 ease-in-out hover:text-primary hover:shadow-sm">
           Continue
         </button>
       </div>

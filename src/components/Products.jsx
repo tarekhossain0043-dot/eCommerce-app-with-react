@@ -6,23 +6,33 @@ import { useDispatch, useSelector } from "react-redux";
 import AddProductModal from "./modal/AddProductModal";
 
 import {
-  // deleteProduct,
-  // selectAllProducts,
+  getTotalPage,
+  selectFilterProducts,
+  setCurrentPage,
   setSearchTerm,
-  toggleSelect,
+  toggleSelect, // deleteProduct,
+  // selectAllProducts,
+  // setSearchTerm,
+  // toggleSelect,
 } from "../features/product-slice/productSlice";
 import { PiRocket } from "react-icons/pi";
 import { useNavigate, useOutletContext } from "react-router-dom";
 // import { toast } from "react-toastify";
 import Product_not_found from "./product-not-found-comopo/Product_not_found";
 import { openModal } from "../features/CustomModal/modalSlice";
-import { selectFilterRecords } from "../features/add-product-slice/addProductSlice";
+// import { selectFilterRecords } from "../features/add-product-slice/addProductSlice";
+// import Order_not_found from "./product-not-found-comopo/Order_not_found";
 
 // import pro_1 from "../assets/products/Image-1.png";
 // import { useSelector } from "react-redux";
 
 export default function Products() {
   const selectedIds = useSelector((state) => state.products.selectedIds || []);
+  // const { items } = useSelector((state) => state.products);
+  // pagination
+  const { currentPage, itemsPerPage, items } = useSelector(
+    (state) => state.products,
+  );
 
   // const confirmMessage = `Are you sure you want to delete these ${selectedIds.length} item(s)?`;
 
@@ -81,20 +91,20 @@ export default function Products() {
   // order conditional rendering
 
   const dispatch = useDispatch();
-  const filterRecords = useSelector(selectFilterRecords);
-  const filterProductData = filterRecords.filter((filterPro) => {
-    if (filter_category === "Filter") return filterRecords;
+  const filterProducts = useSelector(selectFilterProducts);
+  const storeProductRecord = [...filterProducts].sort((a, b) => b.id - a.id);
+  const filterProductData = storeProductRecord.filter((filterPro) => {
+    if (filter_category === "Filter") return filterProducts;
     return (
       // filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase(),
       // filterPro.orderStatus.toLowerCase() &&
       // filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase()
-      filterPro.orderStatus.toLowerCase() === filter_category.toLowerCase() ||
-      filterPro.paymentStatus.toLowerCase() === filter_category.toLowerCase()
+      filterPro.invent.toLowerCase() === filter_category.toLowerCase() ||
+      filterPro.clr.toLowerCase() === filter_category.toLowerCase()
     );
   });
   const searchTerms = useSelector((state) => state.products.searchTerms);
 
-  const storeRecords = [...filterRecords].sort((a, b) => b.id - a.id);
   // console.log(selectedId);
 
   // delete
@@ -102,16 +112,16 @@ export default function Products() {
   //   dispatch(deleteRecord(id));
   // };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "Shipped":
-        return "bg-[#5A607F]";
-      case "Received":
-        return "bg-[#1E5EFF]";
-      default:
-        return "bg-[#F99600]";
-    }
-  };
+  // const getStatusColor = (status) => {
+  //   switch (status) {
+  //     case "Shipped":
+  //       return "bg-[#5A607F]";
+  //     case "Received":
+  //       return "bg-[#1E5EFF]";
+  //     default:
+  //       return "bg-[#F99600]";
+  //   }
+  // };
 
   // -----------x---------------------------
   // const [isModal, setIsModal] = useState(false);
@@ -259,14 +269,15 @@ export default function Products() {
             id="category"
             value={filter_category}
             onChange={(e) => setFilter_category(e.target.value)}
-            className="max-w-45 w-full px-2 rounded-sm py-3 ring-slate-100 ring-1 text-slate-400 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:ring-blue-clr"
+            className="max-w-45 w-full px-2 rounded-sm py-3 ring-slate-100 ring-1 cursor-pointer text-slate-400 cursor-pointer transition-all duration-500 ease-in-out outline-none focus:ring-blue-clr"
           >
             <option value="Filter">Filter</option>
-            <option value="Paid">Paid</option>
-            <option value="Pending">Pending</option>
-            <option value="Ready">Ready</option>
-            <option value="Shipped">Shipped</option>
-            <option value="Received">Received</option>
+            <option value="in stock">In Stock</option>
+            <option value="Out Stock">Out Stock</option>
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Gray">Gray</option>
+            <option value="Purple">Purple</option>
           </select>
           <div className="max-w-87.5 flex-1 w-full hidden md:block">
             <form className="relative">
@@ -328,29 +339,28 @@ export default function Products() {
         <div className="w-full mt-3">
           {/* order head */}
           <div className="grid md:grid-cols-12 grid-cols-1 gap-4 border-b py-3 font-semibold text-gray-600">
-            <div className="col-span-1 md:col-span-2">
+            <div className="col-span-1 md:col-span-4">
               <input
                 type="checkbox"
                 name="checkbox-label"
                 id="checkbox-label"
                 className="w-3 h-3 mr-4 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
               />
-              <label htmlFor="checkbox-label">Order</label>
+              <label htmlFor="checkbox-label">Product</label>
             </div>
-            <div className="md:col-span-2 col-span-1">Date</div>
-            <div className="md:col-span-2 col-span-1">Customer</div>
-            <div className="md:col-span-2 col-span-1">Payment status</div>
-            <div className="md:col-span-2 col-span-1">Order Status</div>
-            <div className="md:col-span-2 col-span-1">Total</div>
+            <div className="md:col-span-2 col-span-1">Inventory</div>
+            <div className="md:col-span-2 col-span-1">Color</div>
+            <div className="md:col-span-2 col-span-1">Price</div>
+            <div className="md:col-span-2 col-span-1">Rating</div>
           </div>
           {/* order body */}
-          {filterProductData.map((record) => {
+          {filterProductData.map((record, index) => {
             return (
               <div
-                key={record.id}
+                key={index}
                 className="grid md:grid-cols-12 cursor-pointer transition-all duration-500 ease-in-out col-span-1 gap-4 last-of-type:border-none py-4 items-center"
               >
-                <div className="flex items-center gap-2 md:col-span-2 col-span-1">
+                <div className="flex items-center gap-2 md:col-span-4 col-span-1">
                   <div className="flex items-center gap-2 justify-start cursor-pointer transition-all duration-500 ease-in-out hover:text-primary">
                     <input
                       type="checkbox"
@@ -358,42 +368,61 @@ export default function Products() {
                       onChange={() => dispatch(toggleSelect(record.id))}
                       className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
                     />
-                    <span className="font-semibold text-default mb-0 transition-all duration-300 ease-in-out hover:text-primary">
-                      {record.id}
-                    </span>
+                    <div className="w-20 h-20 rounded-md object-cover">
+                      <img src={record.image} alt="" />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <span className="font-semibold text-black mb-1 transition-all duration-300 ease-in-out ">
+                        {record.name}
+                      </span>
+                      <span
+                        className="text-default capitalize text-[14px] block
+                    "
+                      >
+                        {record.desc}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 <div className="md:col-span-2 col-span-1">
                   <span className="text-default font-semibold capitalize  font-normal text-[14px] leading-5">
-                    {record.dates}
+                    {record.invent}
                   </span>
                 </div>
                 <div className="md:col-span-2 col-span-1">
                   <span className="text-default font-semibold capitalize  font-normal text-[14px] leading-5">
-                    {record.customer}
+                    {record.clr}
+                    {/* Black */}
                   </span>
                 </div>
 
-                <div
-                  className={`${
-                    record.paymentStatus === "Pending"
-                      ? "bg-[#E6E9F4] text-[#5A607F]"
-                      : "bg-green-100 text-green-700"
-                  } >  font-semibold col-span-1 md:col-span-2  px-2 py-1 rounded w-fit`}
-                >
-                  {record?.paymentStatus}
-                </div>
-                <div
-                  className={`${getStatusColor(
-                    record?.orderStatus,
-                  )} col-span-1 md:col-span-2 text-white px-2 py-1 font-semibold rounded w-fit`}
-                >
-                  {record?.orderStatus}
-                </div>
-                <div>
+                {/* <div
+                className={`${
+                  record.paymentStatus === "Pending"
+                    ? "bg-[#E6E9F4] text-[#5A607F]"
+                    : "bg-green-100 text-green-700"
+                } >  font-semibold col-span-1 md:col-span-2  px-2 py-1 rounded w-fit`}
+              >
+                {record?.paymentStatus}
+              </div>
+              <div
+                className={`${getStatusColor(
+                  record?.orderStatus,
+                )} col-span-1 md:col-span-2 text-white px-2 py-1 font-semibold rounded w-fit`}
+              >
+                {record?.orderStatus}
+              </div> */}
+                <div className="md:col-span-2 col-span-1">
                   <span className="text-default font-bold capitalize  font-semibold text-[14px] leading-5">
                     {record.price}
+                    {/* $49.90 */}
+                  </span>
+                </div>
+                <div className="md:col-span-2 col-span-1">
+                  <span className="text-default font-bold capitalize  font-semibold text-[14px] leading-5">
+                    {/* {record.price} */}
+                    5.0 ({record.rating} Votes)
                   </span>
                 </div>
               </div>
@@ -401,7 +430,15 @@ export default function Products() {
           })}
         </div>
       )}
-      <Pagination orderNumbers={storeRecords} />
+      {getTotalPage > 1 && (
+        <Pagination
+          pagination_num={items}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
+      {/* <Pagination orderNumbers={storeRecords} /> */}
     </div>
   );
 }

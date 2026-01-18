@@ -1,8 +1,10 @@
 import React from "react";
 import notFoundProImg from "../../assets/not-found-product/product-not-found-image.png";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Plus } from "lucide-react";
+
 export default function Product_not_found() {
-  const navigate = Navigate();
+  const navigate = useNavigate();
   return (
     <div className="bg-white flex items-center justify-center py-4 text-center font-normal capitalize">
       <div className="flex max-w-100 m-auto flex-col gap-6 text-center m-auto">

@@ -15,6 +15,7 @@ import Pagination from "./Pagination";
 // import { toast } from "react-toastify";
 import Order_not_found from "./product-not-found-comopo/Order_not_found";
 import { openModal } from "../features/CustomModal/modalSlice";
+import { setCurrentPage } from "../features/add-product-slice/addProductSlice";
 
 export default function Order() {
   // const [selectedOrderId, setSelectedOrderId] = useState([]);
@@ -113,7 +114,9 @@ export default function Order() {
   });
 
   // pagination
-  const { currentPage, itemsPerPage } = useSelector((state) => state.records);
+  const { currentPage, itemsPerPage, items } = useSelector(
+    (state) => state.records,
+  );
   const paginationStart = (currentPage - 1) * itemsPerPage;
   const paginationNext = paginationStart + itemsPerPage;
   const paginationFilteredProduct = filterProductData.slice(
@@ -305,7 +308,14 @@ export default function Order() {
           })}
         </div>
       )}
-      {getTotalPage > 1 && <Pagination orderNumbers={filterProductData} />}
+      {getTotalPage > 1 && (
+        <Pagination
+          pagination_num={items}
+          currentPage={currentPage}
+          itemsPerPage={itemsPerPage}
+          setCurrentPage={setCurrentPage}
+        />
+      )}
     </div>
   );
 }

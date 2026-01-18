@@ -112,6 +112,7 @@ const recordSlice = createSlice({
     },
     editingProduct: (state, action) => {
       state.editingProduct = action.payload;
+      localStorage.setItem("employeeRecords", JSON.stringify(state.items));
     },
     clearEditingPro: (state) => {
       state.editingProduct = null;
@@ -120,11 +121,13 @@ const recordSlice = createSlice({
       state.items = state.items.filter(
         (p) => !state.selectedIds.includes(p.id),
       );
+      localStorage.setItem("employeeRecords", JSON.stringify(state.items));
       state.selectedIds = [];
     },
     // pagination
     setCurrentPage: (state, action) => {
       state.currentPage = action.payload;
+      localStorage.setItem("employeeRecords", JSON.stringify(state.items));
     },
   },
 });

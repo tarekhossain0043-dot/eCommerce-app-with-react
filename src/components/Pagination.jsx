@@ -1,12 +1,18 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage } from "../features/add-product-slice/addProductSlice";
+import { useDispatch } from "react-redux";
+// import { setCurrentPage } from "../features/add-product-slice/addProductSlice";
 
-export default function Pagination({ orderNumbers }) {
+export default function Pagination({
+  items,
+  currentPage,
+  itemsPerPage,
+  setCurrentPage,
+}) {
   const dispatch = useDispatch();
-  const { currentPage, itemsPerPage } = useSelector((state) => state.records);
-  const totalPage = Math.ceil(itemsPerPage.length / 5);
+  // const { currentPage, itemsPerPage } = useSelector((state) => state.records);
+  // const { currentPage, itemsPerPage } = useSelector((state) => state.products);
+  const totalPage = Math.ceil(items.length / itemsPerPage);
   return (
     <div className="flex items-center justify-between gap-5 text-default">
       <div className="flex items-center gap-1 mt-6">
@@ -15,7 +21,7 @@ export default function Pagination({ orderNumbers }) {
           onClick={() => dispatch(setCurrentPage(currentPage - 1))}
           className=" hover:bg-[#ECF2FF] disabled:cursor-not-allowed disabled:bg-gray-100 hover:text-blue-clr transition-all w-9 h-9 flex items-center justify-center rounded-sm cursor-pointer duration-300 ease-in-out hover:text-black"
         >
-          <ArrowRight className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4" />
         </button>
         {Array.from({ length: totalPage }, (_, i) => i + 1).map((page) => (
           <button
@@ -34,7 +40,7 @@ export default function Pagination({ orderNumbers }) {
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>
-      <span className="mb-0 block">{orderNumbers.length} Results</span>
+      <span className="mb-0 block">{items.length} Results</span>
     </div>
   );
 }

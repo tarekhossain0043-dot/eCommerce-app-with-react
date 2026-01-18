@@ -6,7 +6,8 @@ import CustomCheckbox from "./CustomCheckbox";
 import Tags from "./Tags";
 import Seo_settings from "./Seo_settings";
 import { useDispatch } from "react-redux";
-import { addRecord } from "../features/add-product-slice/addProductSlice";
+
+import { addProduct } from "../features/product-slice/productSlice";
 
 export default function AddProduct() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,19 +41,19 @@ export default function AddProduct() {
 
   const [productData, setProductData] = useState({
     name: "",
-    description: "",
-    productImg: "",
-    discountPrice: "",
-    size: "",
-    category: "",
-    country: "",
-    weight: "",
+    desc: "",
+    image: "",
+    invent: "",
+    clr: "",
+    price: "",
+    rating: "",
   });
+
   console.log(productData);
 
   const dispatch = useDispatch();
   const handleSubmit = () => {
-    dispatch(addRecord(productData));
+    dispatch(addProduct(productData));
     setIsLoading((prev) => !prev);
     navigate("/products");
   };
@@ -136,7 +137,7 @@ export default function AddProduct() {
                 <input
                   type="text"
                   name="name"
-                  id="product_name"
+                  id="name"
                   value={productData.name}
                   onChange={(e) =>
                     setProductData({ ...productData, name: e.target.value })
@@ -151,12 +152,12 @@ export default function AddProduct() {
                 </label>
                 <textarea
                   placeholder="Product description"
-                  name="description"
-                  value={productData.description}
+                  name="product-desc"
+                  value={productData.desc}
                   onChange={(e) =>
                     setProductData({
                       ...productData,
-                      description: e.target.value,
+                      desc: e.target.value,
                     })
                   }
                   className="w-full max-h-24 h-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
@@ -171,17 +172,59 @@ export default function AddProduct() {
                 <input
                   type="file"
                   name="productImg"
-                  value={productData.productImg}
+                  value={productData.image}
                   onChange={(e) =>
                     setProductData({
                       ...productData,
-                      productImg: e.target.files[0],
+                      image: e.target.files[0],
                     })
                   }
                   id="productImg"
                 />
               </div>
               <hr className=" mb-7 block" />
+              <div className="flex flex-col gap-2 px-2 w-full">
+                <label
+                  htmlFor="Inventory"
+                  className="font-bold block text-[16px] leading-6 capitalize text-black"
+                >
+                  Inventory
+                </label>
+                <input
+                  type="number"
+                  name="invent"
+                  value={productData.invent}
+                  onChange={(e) =>
+                    setProductData({ ...productData, invent: e.target.value })
+                  }
+                  placeholder="Enter Inventory"
+                  // onChange={handlePriceChange}
+                  // onChange={(e) => handleInputChange(e)}
+                  id="Inventory"
+                  className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
+                />
+              </div>
+              <div className="flex flex-col gap-2 px-2 w-full">
+                <label
+                  htmlFor="Color"
+                  className="font-bold block text-[16px] leading-6 capitalize text-black"
+                >
+                  Color
+                </label>
+                <select
+                  name="clr"
+                  value={productData.clr}
+                  onChange={(e) =>
+                    setProductData({ ...productData, clr: e.target.value })
+                  }
+                  id="color"
+                  className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
+                >
+                  <option value="bl">Black</option>
+                  <option value="gray">Gray</option>
+                  <option value="Purple">Purple</option>
+                </select>
+              </div>
               {/* price tab */}
               <div className="mb-6">
                 <span className="mb-6 font-bold block text-[16px] leading-6 capitalize text-black">
@@ -196,8 +239,13 @@ export default function AddProduct() {
                       // value={discountPrice.price}
                       // value={productData.discountPrice}
                       placeholder="Enter price"
-                      // onChange={handlePriceChange}
-                      // onChange={(e) => setProductData({...productData, name : e.target.value})}
+                      value={productData.price}
+                      onChange={(e) =>
+                        setProductData({
+                          ...productData,
+                          price: e.target.value,
+                        })
+                      }
                       id="price"
                       className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                     />
@@ -214,6 +262,30 @@ export default function AddProduct() {
                       className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
                     />
                     {/* <span>{discount_price}</span> */}
+                  </div>
+                  <div className="flex flex-col gap-2 px-2 w-full">
+                    <label
+                      htmlFor="Rating"
+                      className="font-bold block text-[16px] leading-6 capitalize text-black"
+                    >
+                      Rating
+                    </label>
+                    <input
+                      type="number"
+                      name="rating"
+                      value={productData.rating}
+                      onChange={(e) =>
+                        setProductData({
+                          ...productData,
+                          rating: e.target.value,
+                        })
+                      }
+                      placeholder="Enter Customer rating.."
+                      // onChange={handlePriceChange}
+                      // onChange={(e) => handleInputChange(e)}
+                      id="Rating"
+                      className="w-full rounded-sm border px-4 py-3 border-slate-100 transition-all duration-500 ease-in-out outline-none focus:ring-1 focus:ring-blue-clr text-default"
+                    />
                   </div>
                 </div>
               </div>
