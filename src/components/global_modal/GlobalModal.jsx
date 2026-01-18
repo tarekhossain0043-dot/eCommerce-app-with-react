@@ -5,6 +5,8 @@ import ModalDeleteToast from "../Modal_delete_toast";
 import OrderDeleteSuccessMsg from "../modal/OrderDeleteSuccessMsg";
 import AddCategory from "../category/AddCategory";
 import Export_modal from "../modal/Export_modal";
+import DeleteProducts from "../modal/DeleteProducts";
+import { X } from "lucide-react";
 
 export default function GlobalModal() {
   const {
@@ -41,14 +43,17 @@ export default function GlobalModal() {
   if (modalType === "Export_Success") {
     content = <Export_modal {...modalProps} />;
   }
+  if (modalType === "Product_Delete_Confirm") {
+    content = <DeleteProducts {...modalProps} />;
+  }
   return (
     <div className="fixed top-0 left-0 w-full h-screen flex items-center justify-center backdrop-blur-sm inset-1 z-99999">
       {content}
       <button
-        className="mt-4 text-sm text-gray-500"
+        className="text-sm text-gray-500 absolute top-5 right-5"
         onClick={() => dispatch(closeModal())}
       >
-        Close
+        <X className="w-8 h-8 cursor-pointer transition-all duration-300 ease-in-out" />
       </button>
     </div>
   );

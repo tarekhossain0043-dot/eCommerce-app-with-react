@@ -11,6 +11,7 @@ export default function Sidebar({ isCollapsed, setIsCollapsed }) {
     setCurrentMenu(id);
   };
   const orderNum = useSelector((state) => state.records.items);
+  console.log(orderNum);
 
   useEffect(() => {
     const handleResize = () => {

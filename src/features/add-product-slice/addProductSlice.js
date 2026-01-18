@@ -158,7 +158,9 @@ export const selectFilterRecords = (state) => {
 };
 // pagination
 export const getTotalPage = (state) => {
-  Math.ceil(state.records.items.length / state.records.itemsPerPage);
+  const items = state.records?.items ?? [];
+  const perPage = state.records?.itemsPerPage ?? 1;
+  return Math.ceil(items.length / perPage);
 };
 
 export default recordSlice.reducer;

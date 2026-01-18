@@ -53,6 +53,8 @@ const productSlice = createSlice({
     items: loadRecordFromStorage(),
     searchTerms: "",
     selectedIds: [],
+    // updating
+    editingProduct: null,
     // pagination
     currentPage: 1,
     itemsPerPage: 5,
@@ -102,12 +104,22 @@ const productSlice = createSlice({
     },
 
     updateProduct: (state, action) => {
-      const updatedId = action.payload;
-      const currentId = state.items.find((item) => item.id === updatedId);
-      if (currentId !== -1) {
-        state.items[currentId] = { ...state.items[currentId], ...updatedId };
+      const updated = action.payload;
+      const index = state.items.findIndex((p) => p.id === updated.id);
+      if (index !== -1) {
+        state.items[index] = updated;
+        localStorage.setItem("productRecord", JSON.stringify(state.items));
       }
+      state.editingProduct = null;
+      state.selectedIds = [];
+    },
+    // product editing
+    editingProduct: (state, action) => {
+      state.editingProduct = action.payload;
       localStorage.setItem("productRecord", JSON.stringify(state.items));
+    },
+    clearEditingPro: (state) => {
+      state.editingProduct = null;
     },
 
     // reset all records
@@ -128,6 +140,9 @@ export const {
   updateProduct,
   deleteSelected,
   toggleSelect,
+  editingProduct,
+  clearEditingPro,
+  clearSelection,
   setSearchTerm,
   setCurrentPage,
 } = productSlice.actions;
@@ -167,7 +182,9 @@ export const selectFilterProducts = createSelector(
 );
 // pagination
 export const getTotalPage = (state) => {
-  Math.ceil(state.products.items.length / state.products.itemsPerPage);
+  const items = state.products?.items ?? [];
+  const perPage = state.products?.itemsPerPage ?? 1;
+  return Math.ceil(items.length / perPage);
 };
 export const selectAllProducts = (state) => state.products.items;
 export default productSlice.reducer;

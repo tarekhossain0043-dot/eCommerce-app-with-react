@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 // import { setCurrentPage } from "../features/add-product-slice/addProductSlice";
 
 export default function Pagination({
-  items,
+  pagination_num,
   currentPage,
   itemsPerPage,
   setCurrentPage,
@@ -12,7 +12,7 @@ export default function Pagination({
   const dispatch = useDispatch();
   // const { currentPage, itemsPerPage } = useSelector((state) => state.records);
   // const { currentPage, itemsPerPage } = useSelector((state) => state.products);
-  const totalPage = Math.ceil(items.length / itemsPerPage);
+  const totalPage = Math.ceil(pagination_num.length / itemsPerPage);
   return (
     <div className="flex items-center justify-between gap-5 text-default">
       <div className="flex items-center gap-1 mt-6">
@@ -40,7 +40,7 @@ export default function Pagination({
           <ArrowRight className="w-4 h-4" />
         </button>
       </div>
-      <span className="mb-0 block">{items.length} Results</span>
+      <span className="mb-0 block">{pagination_num.length} Results</span>
     </div>
   );
 }

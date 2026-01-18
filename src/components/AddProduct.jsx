@@ -5,9 +5,14 @@ import FileDropCompo from "./FileDropCompo";
 import CustomCheckbox from "./CustomCheckbox";
 import Tags from "./Tags";
 import Seo_settings from "./Seo_settings";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { addProduct } from "../features/product-slice/productSlice";
+import {
+  addProduct,
+  clearEditingPro,
+  clearSelection,
+  updateProduct,
+} from "../features/product-slice/productSlice";
 
 export default function AddProduct() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -20,7 +25,7 @@ export default function AddProduct() {
     price: 0,
     discount: 40,
   });
-  const [isLoading, setIsLoading] = useState(false);
+
   // product add,edit,delete,update,filtering,sorting and more
 
   // new category
@@ -39,24 +44,70 @@ export default function AddProduct() {
   //   }
   // };
 
-  const [productData, setProductData] = useState({
-    name: "",
-    desc: "",
-    image: "",
-    invent: "",
-    clr: "",
-    price: "",
-    rating: "",
-  });
+  // const [productData, setProductData] = useState({
+  //   name: "",
+  //   desc: "",
+  //   image: "",
+  //   invent: "",
+  //   clr: "",
+  //   price: "",
+  //   rating: "",
+  // });
+
+  const editingProduct = useSelector((state) => state.products.editingProduct);
+  const [productData, setProductData] = useState(() => ({
+    name: editingProduct?.name || "",
+    desc: editingProduct?.desc || "",
+    // image: editingProduct?.image || "",
+    image: null,
+    invent: editingProduct?.invent || "",
+    clr: editingProduct?.clr || "",
+    price: editingProduct?.price || "",
+    rating: editingProduct?.rating || "",
+  }));
 
   console.log(productData);
 
   const dispatch = useDispatch();
+  // const handleSubmit = () => {
+  //   if (editingProduct) {
+  //     dispatch(
+  //       updateProduct({
+  //         ...editingProduct,
+  //         ...productData,
+  //       }),
+  //     );
+  //     navigate("/products");
+  //   } else {
+  //     dispatch(addProduct(productData));
+  //     setIsLoading((prev) => !prev);
+  //     navigate("/products");
+  //   }
+  // };
   const handleSubmit = () => {
-    dispatch(addProduct(productData));
-    setIsLoading((prev) => !prev);
+    const finalProduct = {
+      ...editingProduct,
+      ...productData,
+      image: productData.image
+        ? productData.image // new File
+        : editingProduct?.image, // old string
+    };
+
+    if (editingProduct) {
+      dispatch(updateProduct(finalProduct));
+    } else {
+      dispatch(addProduct(productData));
+    }
+
     navigate("/products");
   };
+
+  const clearEditPro = () => {
+    dispatch(clearEditingPro());
+    dispatch(clearSelection());
+    navigate("/orders");
+  };
+
   // const imgUrl = URL.createObjectURL(productData.productImg);
   // console.log(imgUrl);
   // console.log(productData);
@@ -111,16 +162,17 @@ export default function AddProduct() {
         <div className="flex items-center justify-between">
           <h3>Add Product</h3>
           <div className="flex items-center gap-3">
-            <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
+            <button
+              onClick={clearEditPro}
+              className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white"
+            >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
-              disabled={isLoading}
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
-              {/* {!isLoading ? "save" : "saving ...."} */}
-              save
+              {editingProduct ? "Update" : "Save"}
             </button>
           </div>
         </div>
@@ -169,16 +221,21 @@ export default function AddProduct() {
                   Images
                 </span>
                 <FileDropCompo files="image" />
+                {editingProduct?.image && !productData.image && (
+                  <img src={editingProduct.image} alt="old" width={120} />
+                )}
                 <input
                   type="file"
+                  accept="image/*"
                   name="productImg"
-                  value={productData.image}
-                  onChange={(e) =>
+                  onChange={(e) => {
+                    const file = e.target.files[0];
+
                     setProductData({
                       ...productData,
-                      image: e.target.files[0],
-                    })
-                  }
+                      image: file,
+                    });
+                  }}
                   id="productImg"
                 />
               </div>
@@ -430,14 +487,17 @@ export default function AddProduct() {
         <hr className="h-px w-full bg-default my-7" />
         <div className="flex items-center justify-end">
           <div className="flex items-center gap-3">
-            <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
+            <button
+              onClick={clearEditPro}
+              className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white"
+            >
               Cancel
             </button>
             <button
-              onClick={() => navigate("/add-poroduct")}
+              onClick={handleSubmit}
               className="text-white px-5 py-2.5 text-[16px] leading-6 font-normal rounded-sm bg-blue-2 border border-transparent hover:border-slate-100 capitalize cursor-pointer transition-all duration-300 ease-in-out hover:bg-white hover:text-blue-2 text-[16px] font-normal leading-6"
             >
-              Save
+              {editingProduct ? "Update" : "Save"}
             </button>
           </div>
         </div>

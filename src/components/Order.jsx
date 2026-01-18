@@ -34,6 +34,7 @@ export default function Order() {
   const isEditEnabled = selectedIds.length === 1;
 
   const isExportPermission = selectedIds.length === 1;
+  const totalPage = useSelector(getTotalPage);
 
   // const confirmMessage = `Are you sure you want to delete these ${selectedIds.length} item(s)?`;
 
@@ -308,11 +309,12 @@ export default function Order() {
           })}
         </div>
       )}
-      {getTotalPage > 1 && (
+      {totalPage > 1 && (
         <Pagination
           pagination_num={items}
           currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
+          itemsPerPage={totalPage}
+          // totalPage={totalPage}
           setCurrentPage={setCurrentPage}
         />
       )}

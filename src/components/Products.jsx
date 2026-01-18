@@ -9,6 +9,7 @@ import {
   getTotalPage,
   selectFilterProducts,
   setCurrentPage,
+  editingProduct,
   setSearchTerm,
   toggleSelect, // deleteProduct,
   // selectAllProducts,
@@ -23,16 +24,30 @@ import { openModal } from "../features/CustomModal/modalSlice";
 // import { selectFilterRecords } from "../features/add-product-slice/addProductSlice";
 // import Order_not_found from "./product-not-found-comopo/Order_not_found";
 
-// import pro_1 from "../assets/products/Image-1.png";
+import pro_1 from "../assets/products/Image-1.png";
 // import { useSelector } from "react-redux";
 
 export default function Products() {
   const selectedIds = useSelector((state) => state.products.selectedIds || []);
+  const dispatch = useDispatch();
   // const { items } = useSelector((state) => state.products);
   // pagination
-  const { currentPage, itemsPerPage, items } = useSelector(
-    (state) => state.products,
-  );
+  const { currentPage, items } = useSelector((state) => state.products);
+
+  const totalPage = useSelector(getTotalPage);
+
+  // editing prodcut
+  const isEditEnabled = selectedIds.length === 1;
+
+  const isExportPermission = selectedIds.length === 1;
+  // isEditEnabled
+  const editEnable = () => {
+    const editProdcut = filterProductData.find(
+      (clickedPro) => clickedPro.id === selectedIds[0],
+    );
+    dispatch(editingProduct(editProdcut));
+    navigate("/add-poroduct");
+  };
 
   // const confirmMessage = `Are you sure you want to delete these ${selectedIds.length} item(s)?`;
 
@@ -63,7 +78,11 @@ export default function Products() {
     setHeaderTitle("Products");
     setHeaderBtns(
       <div className="flex items-center gap-3">
-        <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
+        <button
+          disabled={!isExportPermission}
+          onClick={() => dispatch(openModal({ type: "Export_Success" }))}
+          className="text-blue-clr px-5 py-2.5 leading-6 disabled:cursor-not-allowed capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white"
+        >
           Export
         </button>
         <button
@@ -79,7 +98,7 @@ export default function Products() {
       setHeaderTitle("");
       setHeaderBtns(null);
     };
-  }, [setHeaderTitle, setHeaderBtns, navigate]);
+  }, [setHeaderTitle, setHeaderBtns, navigate, dispatch, isExportPermission]);
 
   const [filter_category, setFilter_category] = useState("Filter");
   console.log(filter_category);
@@ -89,8 +108,6 @@ export default function Products() {
   // };
 
   // order conditional rendering
-
-  const dispatch = useDispatch();
   const filterProducts = useSelector(selectFilterProducts);
   const storeProductRecord = [...filterProducts].sort((a, b) => b.id - a.id);
   const filterProductData = storeProductRecord.filter((filterPro) => {
@@ -297,19 +314,20 @@ export default function Products() {
         {/* {storeRecords.map((record) => ( */}
         <div className="flex items-center gap-3">
           <button
-            disabled={selectedIds.length !== 1} // only 1 item selectable
-            onClick={() => {
-              const itemId = selectedIds[0];
-              dispatch(
-                openModal({
-                  type: "Edit_Item",
-                  props: { id: itemId },
-                }),
-              );
-            }}
-            className={`w-10 h-10 rounded-sm ${
-              selectedIds.length !== 1 ? "cursor-not-allowed" : "cursor-pointer"
-            } border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold`}
+            disabled={!isEditEnabled} // only 1 item selectable
+            // onClick={() => {
+            //   const itemId = selectedIds[0];
+            //   dispatch(
+            //     openModal({
+            //       type: "Edit_Item",
+            //       props: { id: itemId },
+            //     }),
+            //   );
+            // }}
+            onClick={editEnable}
+            className={`w-10 h-10 rounded-sm 
+                       
+                      border-slate-200 border disabled:bg-slate-300 disabled:cursor-not-allowed hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold`}
           >
             <Edit className="w-6 h-6" />
           </button>
@@ -318,7 +336,7 @@ export default function Products() {
             onClick={() =>
               dispatch(
                 openModal({
-                  type: "Delete_Confirm",
+                  type: "Product_Delete_Confirm",
                   props: { count: selectedIds.length },
                 }),
               )
@@ -368,8 +386,20 @@ export default function Products() {
                       onChange={() => dispatch(toggleSelect(record.id))}
                       className="w-3 h-3 rounded cursor-pointer transition-all duration-300 ease-in-out accent-blue-2 text-white font-medium focus:ring-1 focus:ring-offset-1 focus:ring-purple-500 outline-none"
                     />
-                    <div className="w-20 h-20 rounded-md object-cover">
-                      <img src={record.image} alt="" />
+                    <div className="w-10 h-10 rounded-md object-cover">
+                      {record?.image ? (
+                        <img
+                          src={
+                            record.image instanceof File
+                              ? URL.createObjectURL(record.image)
+                              : record.image
+                          }
+                          className="w-full h-full rounded-md"
+                          alt="product"
+                        />
+                      ) : (
+                        <img src={pro_1} alt="default" className="w-full" />
+                      )}
                     </div>
                     <div className="flex flex-col gap-2">
                       <span className="font-semibold text-black mb-1 transition-all duration-300 ease-in-out ">
@@ -430,11 +460,11 @@ export default function Products() {
           })}
         </div>
       )}
-      {getTotalPage > 1 && (
+      {totalPage > 1 && (
         <Pagination
           pagination_num={items}
           currentPage={currentPage}
-          itemsPerPage={itemsPerPage}
+          itemsPerPage={totalPage}
           setCurrentPage={setCurrentPage}
         />
       )}
