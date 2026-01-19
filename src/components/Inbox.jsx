@@ -15,8 +15,10 @@ export default function Inbox() {
   return (
     <div>
       <div className="flex items-center justify-between px-3">
-        <h4 className="mb-0">Inbox</h4>
-        <button className="bg-blue-2 px-4 py-2 rounded-sm flex items-center gap-1 cursor-pointer w-fit transition-all duration-300 ease-in-out text-white">
+        <span className="mb-0 block pr-3 lg:pr-0 text-xl lg:text-3xl font-bold">
+          Inbox
+        </span>
+        <button className="bg-blue-2 px-4 py-2 truncate rounded-sm flex items-center gap-1 cursor-pointer w-fit transition-all duration-300 ease-in-out text-white">
           <Plus className="w-4 h-4" />
           <span className="font-light text-white">New Message</span>
         </button>

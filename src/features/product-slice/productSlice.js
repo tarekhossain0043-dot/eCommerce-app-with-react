@@ -84,11 +84,14 @@ const productSlice = createSlice({
     },
     clearSelection: (state) => {
       state.selectedIds = [];
+      localStorage.setItem("productRecord", JSON.stringify(state.items));
     },
+
     deleteSelected: (state) => {
       state.items = state.items.filter(
         (p) => !state.selectedIds.includes(p.id),
       );
+      localStorage.setItem("productRecord", JSON.stringify(state.items));
       state.selectedIds = [];
     },
 

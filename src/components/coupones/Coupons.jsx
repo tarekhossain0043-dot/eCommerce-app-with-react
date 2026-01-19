@@ -29,7 +29,7 @@ export default function Coupons() {
           <Plus className="w-4 h-4 text-white" />
           create
         </button>
-      </div>
+      </div>,
     );
     return () => {
       setHeaderTitle("");
@@ -40,7 +40,7 @@ export default function Coupons() {
     <div className="mt-8">
       {" "}
       <div className="bg-white p-7.5 rounded-sm">
-        <div className="py-2 bg-white rounded-sm bg-white flex items-center gap-6 mb-3">
+        <div className="py-2 bg-white rounded-sm bg-white flex flex-col items-start lg:items-center lg:flex-row gap-6 mb-3">
           <button className="inline-block relative after after:absolute after:-bottom-5.25 after:transition-all after:duration-300 after:ease-in-out after:left-0 after:w-0 after:content-[''] after:h-px after:bg-primary transition-all duration-300 ease-in-out hover:after:w-full cursor-pointer transition-all duration-300 ease-in-out hover:text-primary transition-all duration-300 ease-in-out hover:text-primary capitalize text-default">
             All Customers
           </button>
@@ -133,7 +133,7 @@ export default function Coupons() {
               <Search className="w-4 h-4 absolute top-1/2 left-5 text-slate-400 transform -translate-y-1/2 cursor-pointer" />
             </form>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 pl-4 lg:pl-2">
             <span className="w-10 h-10 rounded-sm bg- border-slate-200 border hover:bg-blue-clr hover:text-white cursor-pointer flex items-center justify-center text-blue-clr font-bold">
               <Edit className="w-6 h-6" />
             </span>
