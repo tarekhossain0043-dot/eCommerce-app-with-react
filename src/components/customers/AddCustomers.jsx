@@ -1,9 +1,21 @@
 import { ArrowLeft } from "lucide-react";
+import { useState } from "react";
 // import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function AddCustomers() {
-  // const [isLoading, setIsLoading] = useState(true);
+  // const [customer, setCustomer] = useState({
+  //   customerName: "",
+  //   customerLastName: "",
+  //   email: "",
+  //   phoneNumber: "",
+  //   address: "",
+  //   apartment: "",
+  //   city: "",
+  //   postCode: "",
+  //   country: "",
+  //   notes: "",
+  // });
   const navigate = useNavigate();
   return (
     <div>
