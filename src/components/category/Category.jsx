@@ -41,7 +41,7 @@ export default function Category() {
     <div>
       <div className="mt-7">
         {product_Category.length > 0 ? (
-          <div className="grid grid-cols-3 gap-7.5 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-7.5 w-full">
             {product_Category.map((category, index) => {
               const { image, title, desc } = category;
 
