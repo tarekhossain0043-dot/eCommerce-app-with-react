@@ -35,6 +35,8 @@ import EditCategory from "./components/modal/EditCategory";
 import Default_profile from "./components/settings/Default_profile";
 import CustomToast from "./components/CustomToast";
 import DeleteSuccess from "./components/DeleteSuccess";
+// import Category_details from "./components/category/Category_details";
+import AddCategory from "./components/category/AddCategory";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -48,7 +50,7 @@ export default function App() {
             email: currentUser.email,
             displayName: currentUser.displayName,
             photoUrl: currentUser.photoURL,
-          })
+          }),
         );
       } else {
         dispatch(setUser(null));
@@ -80,6 +82,8 @@ export default function App() {
             <Route path="/products/:id" element={<ProductDetails />} />
             <Route path="/add-poroduct" element={<AddProduct />} />
             <Route path="/categories" element={<Category />} />
+            <Route path="/add_category" element={<AddCategory />} />
+            <Route path="/categories/:id" element={<CreateCategory />} />
             <Route path="/customers" element={<Customers />} />
             <Route path="/customerInfo" element={<CustomerInfo />} />
             <Route path="/add_customers" element={<AddCustomers />} />

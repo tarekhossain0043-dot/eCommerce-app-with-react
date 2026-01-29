@@ -1,11 +1,17 @@
 import { ArrowLeft, Edit, EllipsisVertical, Plus, Trash2 } from "lucide-react";
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import product_img from "../../assets/features/image-1.png";
 import CustomCheckbox from "../CustomCheckbox";
 import FileDropCompo from "../FileDropCompo";
+import { product_Category } from "../../assets/assets";
 
 export default function CreateCategory() {
+  const { id } = useParams();
+  const current_category = product_Category.find(
+    (category) => category.id.toString() === id,
+  );
+  console.log(current_category);
   const navigate = useNavigate();
   return (
     <div>
@@ -18,7 +24,11 @@ export default function CreateCategory() {
         </Link>
       </div>
       <div className="flex items-center justify-between">
-        <h3>Women Clothes</h3>
+        <h3>
+          {current_category?.title
+            ? current_category.title
+            : "Category not found!"}
+        </h3>
         <div className="flex items-center gap-3">
           <button className="text-blue-clr px-5 py-2.5 leading-6 capitalize border border-slate-100 text-center rounded-sm cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-clr px-3 hover:text-white">
             Cancel
@@ -135,7 +145,7 @@ export default function CreateCategory() {
               </div>
             </li>
           </ul>
-          <button className="w-full py-2 mt-4 cursor-pointer transition-all duration-300 hover:text-primary rounded-sm border-slate-100 border text-center text-primary capitalize transition-all duration-300 ease-in-out hover:shadow-sm flex items-center justify-center gap-1">
+          <button className="w-full py-2 mt-4 cursor-pointer transition-all duration-300 hover:text-[#1E5EFF] rounded-sm border-slate-100 border text-center text-primary capitalize transition-all duration-300 ease-in-out hover:shadow-sm flex items-center justify-center gap-1">
             <Plus className="w-4 h-4" />
             add product
           </button>
@@ -168,7 +178,7 @@ export default function CreateCategory() {
               />
               {/* <span>{discount_price}</span> */}
             </div>
-            <div className="flex flex-col gap-1 mb-6">
+            <div className="flex flex-col gap-1">
               <span className="mb-6 font-bold block text-[16px] leading-6 capitalize text-black">
                 Images
               </span>
